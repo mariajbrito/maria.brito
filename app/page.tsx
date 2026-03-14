@@ -657,7 +657,7 @@ export default function Home() {
                   <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="#4BAF7E" strokeWidth="1.5"/><path d="M8 4c-1 1.5-1 5 0 8M8 4c1 1.5 1 5 0 8M4 8h8" stroke="#4BAF7E" strokeWidth="1.3" strokeLinecap="round"/></svg>
                   floresabeirario.pt
                 </a>
-                <a href="https://status.floresabeirario.pt/?id=N3F8L2Q7T5R9X1KP" target="_blank" rel="noreferrer" className="site-link">
+                <a href="https://status.floresabeirario.pt/N3F8L2Q7T5R9X1KP" target="_blank" rel="noreferrer" className="site-link">
                   <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="#4BAF7E" strokeWidth="1.5"/><path d="M5 8h6M5 5.5h6M5 10.5h3" stroke="#4BAF7E" strokeWidth="1.3" strokeLinecap="round"/></svg>
                   Order Tracking Portal
                 </a>
