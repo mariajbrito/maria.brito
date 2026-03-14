@@ -39,116 +39,96 @@ const SKILL_SECTIONS = [
   },
 ];
 
-/* ── DIVERSE FLOWER TYPES ── */
-// Each flower type produces a different SVG shape
-function FlowerSVG({ type, r, color }: { type: number; r: number; color: string }) {
-  const c = color;
-  const r2 = r * 0.85;
+/* ── SOLID FLOWER SVGs — zero transparency ── */
+function FlowerSVG({ type, r, color, center }: { type: number; r: number; color: string; center: string }) {
+  const vb = `${-r} ${-r} ${r*2} ${r*2}`;
+  const s = { overflow: "visible" as const };
 
   if (type === 0) {
-    // Rose-style: many overlapping rounded petals, tight cluster
-    const petals = 7;
-    const pr = r * 0.48; const pc = r * 0.22;
+    // Daisy — 12 long thin petals, solid
+    const petals = 12;
     return (
-      <svg viewBox={`${-r} ${-r} ${r*2} ${r*2}`} width={r*2} height={r*2} style={{overflow:"visible"}}>
-        <g>
-          {Array.from({length:petals}).map((_,i) => {
-            const a = (i/petals)*Math.PI*2;
-            const ox = Math.cos(a)*pc; const oy = Math.sin(a)*pc;
-            const rot = (a*180/Math.PI);
-            return <ellipse key={i} cx={ox} cy={oy} rx={pr} ry={pr*0.52} fill={c} opacity=".88" transform={`rotate(${rot} ${ox} ${oy})`}/>;
-          })}
-          <circle cx="0" cy="0" r={r*0.22} fill="white" opacity=".7"/>
-          <circle cx="0" cy="0" r={r*0.11} fill={c} opacity=".6"/>
-        </g>
+      <svg viewBox={vb} width={r*2} height={r*2} style={s}>
+        {Array.from({length:petals}).map((_,i) => (
+          <ellipse key={i} cx="0" cy={-(r*0.32+r*0.36)} rx={r*0.13} ry={r*0.38}
+            fill={color} transform={`rotate(${(i/petals)*360})`}/>
+        ))}
+        <circle cx="0" cy="0" r={r*0.3} fill={center}/>
+        <circle cx="0" cy="0" r={r*0.17} fill={color}/>
       </svg>
     );
   }
 
   if (type === 1) {
-    // Tulip-style: 3 large cupped petals, pointed tips
+    // Poppy — 4 big overlapping round petals, solid
+    const offsets = [
+      [r*0.18, 0], [-r*0.18, 0], [0, r*0.18], [0, -r*0.18]
+    ];
     return (
-      <svg viewBox={`${-r} ${-r} ${r*2} ${r*2}`} width={r*2} height={r*2} style={{overflow:"visible"}}>
-        <g>
-          <path d={`M 0 ${-r*0.9} C ${r*0.45} ${-r*0.6} ${r*0.8} ${-r*0.1} ${r*0.5} ${r*0.6} C ${r*0.2} ${r*0.9} ${-r*0.2} ${r*0.9} ${-r*0.5} ${r*0.6} C ${-r*0.8} ${-r*0.1} ${-r*0.45} ${-r*0.6} 0 ${-r*0.9} Z`} fill={c} opacity=".85"/>
-          <path d={`M 0 ${-r*0.9} C ${r*0.45} ${-r*0.6} ${r*0.8} ${-r*0.1} ${r*0.5} ${r*0.6} C ${r*0.2} ${r*0.9} 0 ${r*0.7} 0 ${r*0.9} Z`} fill={c} opacity=".65"/>
-          <path d={`M 0 ${-r*0.9} C ${-r*0.45} ${-r*0.6} ${-r*0.8} ${-r*0.1} ${-r*0.5} ${r*0.6} C ${-r*0.2} ${r*0.9} 0 ${r*0.7} 0 ${r*0.9} Z`} fill={c} opacity=".65"/>
-          <ellipse cx="0" cy={-r*0.05} rx={r*0.3} ry={r*0.38} fill="white" opacity=".2"/>
-        </g>
+      <svg viewBox={vb} width={r*2} height={r*2} style={s}>
+        {offsets.map(([ox,oy],i) => (
+          <circle key={i} cx={ox} cy={oy} r={r*0.62} fill={color}/>
+        ))}
+        <circle cx="0" cy="0" r={r*0.22} fill="#1A1410"/>
+        <circle cx="0" cy="0" r={r*0.1}  fill="white"/>
       </svg>
     );
   }
 
   if (type === 2) {
-    // Daisy/sunflower: long thin petals radiating from centre
-    const petals = 12;
-    const pl = r * 0.75; const pw = r * 0.14;
+    // Rose — 7 fat overlapping petals, solid
+    const petals = 7;
     return (
-      <svg viewBox={`${-r} ${-r} ${r*2} ${r*2}`} width={r*2} height={r*2} style={{overflow:"visible"}}>
-        <g>
-          {Array.from({length:petals}).map((_,i) => {
-            const a = (i/petals)*360;
-            return <ellipse key={i} cx="0" cy={-(r*0.3+pl/2)} rx={pw} ry={pl/2} fill={c} opacity=".82" transform={`rotate(${a})`}/>;
-          })}
-          <circle cx="0" cy="0" r={r*0.28} fill="#F5C430" opacity=".95"/>
-          <circle cx="0" cy="0" r={r*0.16} fill="#c8900a" opacity=".7"/>
-        </g>
+      <svg viewBox={vb} width={r*2} height={r*2} style={s}>
+        {Array.from({length:petals}).map((_,i) => {
+          const a = (i/petals)*Math.PI*2;
+          const ox = Math.cos(a)*r*0.22; const oy = Math.sin(a)*r*0.22;
+          return <ellipse key={i} cx={ox} cy={oy} rx={r*0.48} ry={r*0.28}
+            fill={color} transform={`rotate(${(a*180/Math.PI)} ${ox} ${oy})`}/>;
+        })}
+        <circle cx="0" cy="0" r={r*0.24} fill={center}/>
       </svg>
     );
   }
 
   if (type === 3) {
-    // Poppy-style: 4 large round overlapping petals
-    const petals = 4;
-    const pr = r * 0.62; const pc = r * 0.2;
+    // Hibiscus — 5 fan petals, solid
     return (
-      <svg viewBox={`${-r} ${-r} ${r*2} ${r*2}`} width={r*2} height={r*2} style={{overflow:"visible"}}>
-        <g>
-          {Array.from({length:petals}).map((_,i) => {
-            const a = (i/petals)*Math.PI*2 + Math.PI/4;
-            const ox = Math.cos(a)*pc; const oy = Math.sin(a)*pc;
-            return <circle key={i} cx={ox} cy={oy} r={pr} fill={c} opacity=".78"/>;
-          })}
-          <circle cx="0" cy="0" r={r*0.18} fill="#1a1410" opacity=".6"/>
-          <circle cx="0" cy="0" r={r*0.09} fill="white" opacity=".5"/>
-        </g>
+      <svg viewBox={vb} width={r*2} height={r*2} style={s}>
+        {Array.from({length:5}).map((_,i) => (
+          <ellipse key={i} cx="0" cy={-r*0.44} rx={r*0.37} ry={r*0.56}
+            fill={color} transform={`rotate(${(i/5)*360})`}/>
+        ))}
+        <circle cx="0" cy="0" r={r*0.18} fill={center}/>
       </svg>
     );
   }
 
   if (type === 4) {
-    // Hibiscus-style: 5 wide fan petals with curved edges
-    const petals = 5;
+    // Tulip — solid blob silhouette
     return (
-      <svg viewBox={`${-r} ${-r} ${r*2} ${r*2}`} width={r*2} height={r*2} style={{overflow:"visible"}}>
-        <g>
-          {Array.from({length:petals}).map((_,i) => {
-            const a = (i/petals)*360;
-            return (
-              <ellipse key={i} cx="0" cy={-r*0.42} rx={r*0.38} ry={r*0.55} fill={c} opacity=".8" transform={`rotate(${a})`}/>
-            );
-          })}
-          <circle cx="0" cy="0" r={r*0.15} fill="white" opacity=".8"/>
-        </g>
+      <svg viewBox={vb} width={r*2} height={r*2} style={s}>
+        <path d={`M 0 ${-r*0.92}
+          C ${r*0.5} ${-r*0.55} ${r*0.85} ${-r*0.05} ${r*0.52} ${r*0.62}
+          C ${r*0.22} ${r*0.92} ${-r*0.22} ${r*0.92} ${-r*0.52} ${r*0.62}
+          C ${-r*0.85} ${-r*0.05} ${-r*0.5} ${-r*0.55} 0 ${-r*0.92} Z`}
+          fill={color}/>
+        <ellipse cx="0" cy={r*0.1} rx={r*0.28} ry={r*0.35} fill={center}/>
       </svg>
     );
   }
 
-  // type 5: Cherry blossom — 5 notched petals
-  const petals = 5;
-  const pr5 = r * 0.44; const pc5 = r * 0.26;
+  // type 5: Cherry blossom — 5 round notched petals, solid
   return (
-    <svg viewBox={`${-r} ${-r} ${r*2} ${r*2}`} width={r*2} height={r*2} style={{overflow:"visible"}}>
-      <g>
-        {Array.from({length:petals}).map((_,i) => {
-          const a = (i/petals)*Math.PI*2;
-          const ox = Math.cos(a)*pc5; const oy = Math.sin(a)*pc5;
-          const rot = (a*180/Math.PI);
-          return <ellipse key={i} cx={ox} cy={oy} rx={pr5*0.7} ry={pr5} fill={c} opacity=".82" transform={`rotate(${rot} ${ox} ${oy})`}/>;
-        })}
-        <circle cx="0" cy="0" r={r*0.2} fill="white" opacity=".8"/>
-        <circle cx="0" cy="0" r={r*0.08} fill={c} opacity=".5"/>
-      </g>
+    <svg viewBox={vb} width={r*2} height={r*2} style={s}>
+      {Array.from({length:5}).map((_,i) => {
+        const a = (i/5)*Math.PI*2;
+        const ox = Math.cos(a)*r*0.28; const oy = Math.sin(a)*r*0.28;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*0.32} ry={r*0.46}
+          fill={color} transform={`rotate(${(a*180/Math.PI)} ${ox} ${oy})`}/>;
+      })}
+      <circle cx="0" cy="0" r={r*0.22} fill={center}/>
+      <circle cx="0" cy="0" r={r*0.1}  fill={color}/>
     </svg>
   );
 }
@@ -159,37 +139,56 @@ function FlowerBg({ mx, my }: { mx: number; my: number }) {
   const pxN = mx / W - 0.5;
   const pyN = my / H - 0.5;
 
-  // Big overlapping flowers — large radii, touching each other
+  /*
+    Layers:
+    - BACK (far, small, slow parallax): tiny flowers scattered, lighter colours
+    - MID: medium flowers
+    - FRONT (close, huge, fast parallax): large bold flowers bleeding off edges
+    Each layer has its own parallax depth and size.
+  */
   const flowers = [
-    { cx:0.03, cy:0.05, r:300, color:"#F9C846", type:2, rot:0,   dur:"70s",  delay:"0s"   },
-    { cx:0.82, cy:0.02, r:280, color:"#4BAF7E", type:4, rot:15,  dur:"90s",  delay:"-8s"  },
-    { cx:-0.05,cy:0.55, r:320, color:"#E8435A", type:0, rot:35,  dur:"60s",  delay:"-14s" },
-    { cx:0.95, cy:0.60, r:290, color:"#8B6EE8", type:3, rot:20,  dur:"80s",  delay:"-5s"  },
-    { cx:0.42, cy:1.0,  r:340, color:"#F07048", type:1, rot:55,  dur:"65s",  delay:"-10s" },
-    { cx:0.62, cy:0.30, r:240, color:"#2EBFAC", type:5, rot:10,  dur:"85s",  delay:"-3s"  },
-    { cx:0.20, cy:0.82, r:260, color:"#F9C846", type:4, rot:40,  dur:"95s",  delay:"-18s" },
-    { cx:0.75, cy:0.85, r:220, color:"#E8435A", type:2, rot:0,   dur:"55s",  delay:"-7s"  },
-    { cx:0.30, cy:-0.05,r:250, color:"#8B6EE8", type:1, rot:30,  dur:"100s", delay:"-12s" },
+    // ── BACK LAYER — small, slow, scattered ──────────────────────────────
+    { cx:0.25, cy:0.18, r:55,  color:"#F9C846", center:"#c8900a", type:0, rot:12,  dur:"120s", delay:"0s",    depth:0.008 },
+    { cx:0.60, cy:0.08, r:48,  color:"#4BAF7E", center:"#2c7a50", type:3, rot:30,  dur:"140s", delay:"-20s",  depth:0.006 },
+    { cx:0.72, cy:0.45, r:60,  color:"#4B9FE0", center:"#1558a0", type:5, rot:0,   dur:"130s", delay:"-35s",  depth:0.007 },
+    { cx:0.38, cy:0.55, r:44,  color:"#F07048", center:"#c0400a", type:2, rot:20,  dur:"150s", delay:"-10s",  depth:0.009 },
+    { cx:0.50, cy:0.28, r:50,  color:"#8B6EE8", center:"#5230c8", type:0, rot:45,  dur:"110s", delay:"-45s",  depth:0.006 },
+    { cx:0.15, cy:0.42, r:42,  color:"#2EBFAC", center:"#1a7a6e", type:3, rot:60,  dur:"160s", delay:"-60s",  depth:0.008 },
+    { cx:0.85, cy:0.72, r:52,  color:"#E8435A", center:"#b82040", type:5, rot:15,  dur:"125s", delay:"-80s",  depth:0.007 },
+    { cx:0.42, cy:0.82, r:46,  color:"#F9C846", center:"#c8900a", type:1, rot:0,   dur:"145s", delay:"-30s",  depth:0.009 },
+    // ── MID LAYER — medium ────────────────────────────────────────────────
+    { cx:0.78, cy:0.20, r:130, color:"#F9C846", center:"#c8900a", type:2, rot:10,  dur:"90s",  delay:"-15s",  depth:0.022 },
+    { cx:0.10, cy:0.70, r:120, color:"#4BAF7E", center:"#2c7a50", type:5, rot:40,  dur:"100s", delay:"-55s",  depth:0.018 },
+    { cx:0.55, cy:0.65, r:110, color:"#8B6EE8", center:"#5230c8", type:3, rot:25,  dur:"110s", delay:"-40s",  depth:0.020 },
+    { cx:0.30, cy:0.10, r:105, color:"#F07048", center:"#c0400a", type:4, rot:55,  dur:"95s",  delay:"-70s",  depth:0.019 },
+    { cx:0.88, cy:0.50, r:115, color:"#2EBFAC", center:"#1a7a6e", type:0, rot:0,   dur:"105s", delay:"-25s",  depth:0.021 },
+    // ── FRONT LAYER — huge, bleeding off edges, fastest parallax ─────────
+    { cx:0.0,  cy:0.08, r:280, color:"#F9C846", center:"#c8900a", type:2, rot:0,   dur:"75s",  delay:"0s",    depth:0.055 },
+    { cx:1.0,  cy:0.05, r:260, color:"#4BAF7E", center:"#2c7a50", type:3, rot:20,  dur:"88s",  delay:"-12s",  depth:0.048 },
+    { cx:-0.02,cy:0.65, r:300, color:"#E8435A", center:"#b82040", type:1, rot:35,  dur:"70s",  delay:"-25s",  depth:0.060 },
+    { cx:1.02, cy:0.68, r:270, color:"#8B6EE8", center:"#5230c8", type:4, rot:15,  dur:"82s",  delay:"-40s",  depth:0.052 },
+    { cx:0.48, cy:1.02, r:320, color:"#F07048", center:"#c0400a", type:0, rot:55,  dur:"78s",  delay:"-18s",  depth:0.058 },
+    { cx:0.20, cy:0.95, r:240, color:"#2EBFAC", center:"#1a7a6e", type:5, rot:70,  dur:"92s",  delay:"-55s",  depth:0.045 },
+    { cx:0.80, cy:0.92, r:255, color:"#F9C846", center:"#c8900a", type:3, rot:40,  dur:"85s",  delay:"-30s",  depth:0.050 },
   ];
 
   return (
     <div style={{position:"fixed",inset:0,zIndex:0,pointerEvents:"none",overflow:"hidden"}}>
       {flowers.map((f,i) => {
-        const depth = 0.03 + (i % 4) * 0.015;
-        const x = f.cx * 100 + pxN * 100 * depth * (i%2===0 ? 1 : -1);
-        const y = f.cy * 100 + pyN * 100 * depth * (i%3===0 ? 1 : -0.8);
+        const x = f.cx * 100 + pxN * 100 * f.depth * (i%2===0 ? 1 : -1);
+        const y = f.cy * 100 + pyN * 100 * f.depth * (i%3===0 ? 1 : -0.9);
         return (
           <div key={i} style={{
             position:"absolute",
             left:`${x}%`, top:`${y}%`,
             transform:"translate(-50%,-50%)",
             width:f.r*2, height:f.r*2,
-            opacity:0.68,
+            opacity:1,           /* FULLY OPAQUE */
             animation:`frot ${f.dur} linear infinite`,
             animationDelay:f.delay,
-            transition:"left .4s ease-out, top .4s ease-out",
+            transition:"left .5s ease-out, top .5s ease-out",
           }}>
-            <FlowerSVG type={f.type} r={f.r} color={f.color} />
+            <FlowerSVG type={f.type} r={f.r} color={f.color} center={f.center}/>
           </div>
         );
       })}
@@ -295,7 +294,14 @@ export default function Home() {
         display:grid; grid-template-columns:1fr 1fr;
         align-items:center; padding:80px 72px; gap:48px; overflow:hidden;
       }
-      .hero-left { position:relative; z-index:10; }
+      .hero-left {
+        position:relative; z-index:10;
+        background:rgba(250,246,239,.82);
+        backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+        border-radius:28px; padding:44px 52px;
+        border:1.5px solid rgba(255,255,255,.75);
+        box-shadow:0 8px 40px rgba(0,0,0,.07);
+      }
 
       .status {
         display:inline-flex;align-items:center;gap:8px;
@@ -380,7 +386,7 @@ export default function Home() {
       /* SECTIONS */
       .sec{padding:100px 72px;max-width:1240px;margin:0 auto;position:relative;z-index:2;}
       .div-wrap{padding:80px 72px 40px;max-width:1240px;margin:0 auto;position:relative;z-index:2;}
-      .div-word{font-family:'Boldonse',cursive;font-size:clamp(52px,8vw,110px);line-height:.95;letter-spacing:-3px;color:var(--text);user-select:none;}
+      .div-word{font-family:'Boldonse',cursive;font-size:clamp(52px,8vw,110px);line-height:.95;letter-spacing:-3px;color:var(--ink);user-select:none;text-shadow:0 0 50px rgba(250,246,239,.95),0 0 100px rgba(250,246,239,.8);}
       .div-word.rev{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
       .div-word.rev.in{opacity:1;transform:translateY(0);}
       .sec-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--rose);text-transform:uppercase;letter-spacing:3px;margin-bottom:12px;}
@@ -390,15 +396,16 @@ export default function Home() {
       /* CARDS */
       .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
       .card{
-        background:var(--surface);
-        border:1.5px solid var(--border);border-radius:24px;padding:32px;
+        background:rgba(255,255,255,.82);
+        backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+        border:1.5px solid rgba(255,255,255,.6);border-radius:24px;padding:32px;
         position:relative;overflow:hidden;
-        box-shadow:0 2px 16px rgba(0,0,0,.05);
+        box-shadow:0 2px 20px rgba(0,0,0,.08);
         opacity:0;transform:translateY(28px);
         transition:border-color .25s,box-shadow .25s,transform .25s;
       }
       .card.in{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease,border-color .25s,box-shadow .25s;}
-      .card:hover{transform:translateY(-6px)!important;box-shadow:0 20px 50px rgba(0,0,0,.1);border-color:rgba(0,0,0,.14);}
+      .card:hover{transform:translateY(-6px)!important;box-shadow:0 20px 50px rgba(0,0,0,.12);border-color:rgba(255,255,255,.85);}
       .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .25s;border-radius:24px 24px 0 0;}
       .card:hover::before{opacity:1;}
       .cr::before{background:linear-gradient(90deg,var(--rose),var(--peach));}
@@ -412,12 +419,17 @@ export default function Home() {
       .card-full{grid-column:1/-1;}
 
       .card-flores{
-        background:linear-gradient(135deg,#f0eeff,#e8e2ff);
-        border-color:rgba(139,110,232,.22);
+        background:rgba(240,236,255,.88);
+        backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+        border-color:rgba(139,110,232,.28);
       }
-      .card-flores .feat-badge{ background:rgba(139,110,232,.12);border:1.5px solid rgba(139,110,232,.28);color:#5230c8; }
+      .card-flores .feat-badge{ background:rgba(139,110,232,.14);border:1.5px solid rgba(139,110,232,.28);color:#5230c8; }
       .card-flores .bdot{ background:var(--lav); }
-      .card-gold{background:linear-gradient(135deg,#fffaeb,#fff5d4);border-color:rgba(245,196,48,.28);}
+      .card-gold{
+        background:rgba(255,250,235,.88);
+        backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+        border-color:rgba(200,144,10,.22);
+      }
 
       .feat-badge{display:inline-flex;align-items:center;gap:7px;border-radius:100px;padding:5px 14px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:14px;}
       .bdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
@@ -481,16 +493,16 @@ export default function Home() {
       .skill-section-label.rev{opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s;}
       .skill-section-label.rev.in{opacity:1;transform:translateX(0);}
       .chips-row{display:flex;flex-wrap:wrap;gap:12px;}
-      .chip{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:16px 14px;display:flex;align-items:center;gap:12px;cursor:default;opacity:0;transform:translateY(18px) scale(.93);box-shadow:0 2px 10px rgba(0,0,0,.04);transition:border-color .2s,box-shadow .2s,transform .2s,opacity .4s ease;min-width:fit-content;}
+      .chip{background:rgba(255,255,255,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1.5px solid rgba(255,255,255,.6);border-radius:16px;padding:16px 14px;display:flex;align-items:center;gap:12px;cursor:default;opacity:0;transform:translateY(18px) scale(.93);box-shadow:0 2px 12px rgba(0,0,0,.07);transition:border-color .2s,box-shadow .2s,transform .2s,opacity .4s ease;min-width:fit-content;}
       .chip.in{opacity:1;transform:translateY(0) scale(1);}
-      .chip:hover{transform:scale(1.05) translateY(-2px)!important;box-shadow:0 10px 26px rgba(0,0,0,.1);border-color:rgba(232,67,90,.25);}
+      .chip:hover{transform:scale(1.05) translateY(-2px)!important;box-shadow:0 10px 26px rgba(0,0,0,.12);border-color:rgba(255,255,255,.9);}
       .chip-logo{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Boldonse',cursive;font-size:12px;color:white;flex-shrink:0;letter-spacing:0;}
       .chip-name{font-size:13px;font-family:'DM Mono',monospace;color:var(--ink);font-weight:500;}
 
       .lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
-      .lang-card{background:var(--surface);border:1.5px solid var(--border);border-radius:22px;padding:30px 26px;text-align:center;opacity:0;transform:translateY(20px);box-shadow:0 2px 12px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;}
+      .lang-card{background:rgba(255,255,255,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,.6);border-radius:22px;padding:30px 26px;text-align:center;opacity:0;transform:translateY(20px);box-shadow:0 2px 14px rgba(0,0,0,.07);transition:transform .2s,box-shadow .2s;}
       .lang-card.in{opacity:1;transform:translateY(0);transition:opacity .55s ease,transform .55s ease,box-shadow .2s;}
-      .lang-card:hover{transform:translateY(-5px)!important;box-shadow:0 14px 36px rgba(0,0,0,.1);}
+      .lang-card:hover{transform:translateY(-5px)!important;box-shadow:0 14px 36px rgba(0,0,0,.12);}
       .llevel{font-family:'Boldonse',cursive;font-size:48px;margin-bottom:3px;}
       .lname{font-size:15px;color:var(--ink);font-weight:600;margin-bottom:2px;}
       .lcert{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:14px;}
