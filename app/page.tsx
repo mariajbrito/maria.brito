@@ -161,15 +161,15 @@ function FlowerBg({ mx, my }: { mx: number; my: number }) {
 
   // Big overlapping flowers — large radii, touching each other
   const flowers = [
-    { cx:0.03, cy:0.05, r:300, color:"#F9C846", type:2, rot:0,   dur:"22s", delay:"0s"   },
-    { cx:0.82, cy:0.02, r:280, color:"#4BAF7E", type:4, rot:15,  dur:"28s", delay:"-8s"  },
-    { cx:-0.05,cy:0.55, r:320, color:"#E8435A", type:0, rot:35,  dur:"18s", delay:"-14s" },
-    { cx:0.95, cy:0.60, r:290, color:"#8B6EE8", type:3, rot:20,  dur:"24s", delay:"-5s"  },
-    { cx:0.42, cy:1.0,  r:340, color:"#F07048", type:1, rot:55,  dur:"20s", delay:"-10s" },
-    { cx:0.62, cy:0.30, r:240, color:"#2EBFAC", type:5, rot:10,  dur:"26s", delay:"-3s"  },
-    { cx:0.20, cy:0.82, r:260, color:"#F9C846", type:4, rot:40,  dur:"30s", delay:"-18s" },
-    { cx:0.75, cy:0.85, r:220, color:"#E8435A", type:2, rot:0,   dur:"16s", delay:"-7s"  },
-    { cx:0.30, cy:-0.05,r:250, color:"#8B6EE8", type:1, rot:30,  dur:"32s", delay:"-12s" },
+    { cx:0.03, cy:0.05, r:300, color:"#F9C846", type:2, rot:0,   dur:"70s",  delay:"0s"   },
+    { cx:0.82, cy:0.02, r:280, color:"#4BAF7E", type:4, rot:15,  dur:"90s",  delay:"-8s"  },
+    { cx:-0.05,cy:0.55, r:320, color:"#E8435A", type:0, rot:35,  dur:"60s",  delay:"-14s" },
+    { cx:0.95, cy:0.60, r:290, color:"#8B6EE8", type:3, rot:20,  dur:"80s",  delay:"-5s"  },
+    { cx:0.42, cy:1.0,  r:340, color:"#F07048", type:1, rot:55,  dur:"65s",  delay:"-10s" },
+    { cx:0.62, cy:0.30, r:240, color:"#2EBFAC", type:5, rot:10,  dur:"85s",  delay:"-3s"  },
+    { cx:0.20, cy:0.82, r:260, color:"#F9C846", type:4, rot:40,  dur:"95s",  delay:"-18s" },
+    { cx:0.75, cy:0.85, r:220, color:"#E8435A", type:2, rot:0,   dur:"55s",  delay:"-7s"  },
+    { cx:0.30, cy:-0.05,r:250, color:"#8B6EE8", type:1, rot:30,  dur:"100s", delay:"-12s" },
   ];
 
   return (
@@ -263,10 +263,10 @@ export default function Home() {
       @import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
 
       :root {
-        --ink:    #0F0E14;
-        --page:   #141320;
-        --surface:#1E1C2E;
-        --border: rgba(255,255,255,.1);
+        --ink:    #1A1410;
+        --page:   #FAF6EF;
+        --surface:#FFFFFF;
+        --border: rgba(0,0,0,.08);
         --rose:   #E8435A;
         --peach:  #F07048;
         --sun:    #F5C430;
@@ -274,9 +274,9 @@ export default function Home() {
         --teal:   #2EBFAC;
         --sky:    #4B9FE0;
         --lav:    #8B6EE8;
-        --muted:  rgba(255,255,255,.45);
-        --text:   rgba(255,255,255,.9);
-        --textd:  rgba(255,255,255,.7);
+        --muted:  #9A8C88;
+        --text:   #1A1410;
+        --textd:  rgba(26,20,16,.72);
       }
 
       * { margin:0; padding:0; box-sizing:border-box; }
@@ -284,8 +284,9 @@ export default function Home() {
       body { background:var(--page); color:var(--text); font-family:'Plus Jakarta Sans',sans-serif; overflow-x:hidden; cursor:none; }
 
       .cur      { width:10px;height:10px;background:var(--rose);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s; }
-      .cur-ring { width:32px;height:32px;border:1.5px solid var(--rose);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .18s,height .18s;opacity:.4; }
+      .cur-ring { width:32px;height:32px;border:1.5px solid var(--rose);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .18s,height .18s;opacity:.45; }
 
+      /* Slower flower rotation */
       @keyframes frot { from{transform:translate(-50%,-50%) rotate(0deg)} to{transform:translate(-50%,-50%) rotate(360deg)} }
 
       /* ════ HERO ════ */
@@ -298,7 +299,7 @@ export default function Home() {
 
       .status {
         display:inline-flex;align-items:center;gap:8px;
-        background:rgba(75,175,126,.18);border:1.5px solid rgba(75,175,126,.4);
+        background:rgba(75,175,126,.12);border:1.5px solid rgba(75,175,126,.32);
         border-radius:100px;padding:7px 18px;
         font-size:12px;font-family:'DM Mono',monospace;color:var(--sage);
         margin-bottom:28px;animation:fadeUp .8s ease .2s both;
@@ -325,8 +326,8 @@ export default function Home() {
       .hl { display:inline-flex;align-items:center;gap:7px;padding:11px 22px;border-radius:100px;font-size:13px;font-family:'DM Mono',monospace;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .2s; }
       .hl:hover { transform:translateY(-3px);box-shadow:0 10px 24px rgba(0,0,0,.3); }
       .hl-email  { background:var(--rose);color:white; }
-      .hl-li     { background:rgba(75,159,224,.18);border:1.5px solid rgba(75,159,224,.4);color:var(--sky); }
-      .hl-flores { background:rgba(75,175,126,.15);border:1.5px solid rgba(75,175,126,.38);color:var(--sage); }
+      .hl-li     { background:rgba(75,159,224,.12);border:1.5px solid rgba(75,159,224,.32);color:#1558a0; }
+      .hl-flores { background:rgba(75,175,126,.1);border:1.5px solid rgba(75,175,126,.32);color:#2c7a50; }
       .ico { width:14px;height:14px;flex-shrink:0;display:block; }
 
       /* ORBIT */
@@ -346,12 +347,12 @@ export default function Home() {
       }
       .opill {
         position:absolute;
-        background:rgba(20,19,32,.9);
-        backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-        border:1.5px solid rgba(255,255,255,.15);
+        background:rgba(255,255,255,.95);
+        backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+        border:1.5px solid rgba(0,0,0,.1);
         border-radius:100px;padding:9px 18px;
         font-size:12px;font-family:'DM Mono',monospace;
-        box-shadow:0 4px 18px rgba(0,0,0,.4);
+        box-shadow:0 4px 18px rgba(0,0,0,.12);
         white-space:nowrap;pointer-events:all;
       }
       .opill:nth-child(1){top:-20px;left:50%;transform:translateX(-50%);animation:counterN 22s linear infinite;color:var(--rose);border-color:rgba(232,67,90,.4);}
@@ -364,15 +365,15 @@ export default function Home() {
       .orbit-photo { position:absolute;top:50%;left:50%;transform:translate(-50%,-56%);width:230px;height:270px;z-index:10; }
       .photo-ring { position:absolute;inset:0;border-radius:115px 115px 32px 32px;padding:3px;background:conic-gradient(var(--rose),var(--sun),var(--teal),var(--lav),var(--rose));animation:hshift 10s linear infinite;-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude; }
       @keyframes hshift{from{filter:hue-rotate(0)}to{filter:hue-rotate(360deg)}}
-      .photo-inner { position:absolute;inset:7px;border-radius:107px 107px 26px 26px;overflow:hidden;background:#2a1f3d;display:flex;align-items:center;justify-content:center; }
+      .photo-inner { position:absolute;inset:7px;border-radius:107px 107px 26px 26px;overflow:hidden;background:#f7e8d8;display:flex;align-items:center;justify-content:center; }
       .photo-inner img { width:100%;height:100%;object-fit:cover;object-position:center top; }
       .photo-ph { display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted); }
       .photo-ini { font-family:'Boldonse',cursive;font-size:48px;background:linear-gradient(135deg,var(--rose),var(--sun));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
 
       /* MARQUEE */
-      .mq{overflow:hidden;padding:22px 0;background:#0a0912;position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06);}
+      .mq{overflow:hidden;padding:22px 0;background:var(--ink);position:relative;z-index:2;}
       .mq-track{display:flex;gap:0;animation:mqscroll 26s linear infinite;width:max-content;}
-      .mq-item{font-family:'Boldonse',cursive;font-size:22px;color:rgba(255,255,255,.85);white-space:nowrap;padding:0 44px;display:flex;align-items:center;gap:44px;}
+      .mq-item{font-family:'Boldonse',cursive;font-size:22px;color:rgba(255,255,255,.9);white-space:nowrap;padding:0 44px;display:flex;align-items:center;gap:44px;}
       .mq-item::after{content:'';display:block;width:8px;height:8px;border-radius:50%;background:var(--rose);}
       @keyframes mqscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
@@ -392,12 +393,12 @@ export default function Home() {
         background:var(--surface);
         border:1.5px solid var(--border);border-radius:24px;padding:32px;
         position:relative;overflow:hidden;
-        box-shadow:0 4px 24px rgba(0,0,0,.3);
+        box-shadow:0 2px 16px rgba(0,0,0,.05);
         opacity:0;transform:translateY(28px);
         transition:border-color .25s,box-shadow .25s,transform .25s;
       }
       .card.in{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease,border-color .25s,box-shadow .25s;}
-      .card:hover{transform:translateY(-6px)!important;box-shadow:0 20px 50px rgba(0,0,0,.5);border-color:rgba(255,255,255,.2);}
+      .card:hover{transform:translateY(-6px)!important;box-shadow:0 20px 50px rgba(0,0,0,.1);border-color:rgba(0,0,0,.14);}
       .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .25s;border-radius:24px 24px 0 0;}
       .card:hover::before{opacity:1;}
       .cr::before{background:linear-gradient(90deg,var(--rose),var(--peach));}
@@ -410,15 +411,13 @@ export default function Home() {
 
       .card-full{grid-column:1/-1;}
 
-      /* Flores card — neutral dark, NOT green */
       .card-flores{
-        background:linear-gradient(135deg,#1a1830,#221e38);
-        border-color:rgba(139,110,232,.25);
+        background:linear-gradient(135deg,#f0eeff,#e8e2ff);
+        border-color:rgba(139,110,232,.22);
       }
-      .card-flores .feat-badge{ background:rgba(139,110,232,.18);border:1.5px solid rgba(139,110,232,.3);color:var(--lav); }
+      .card-flores .feat-badge{ background:rgba(139,110,232,.12);border:1.5px solid rgba(139,110,232,.28);color:#5230c8; }
       .card-flores .bdot{ background:var(--lav); }
-
-      .card-gold{background:linear-gradient(135deg,#221a08,#2a2010);border-color:rgba(245,196,48,.2);}
+      .card-gold{background:linear-gradient(135deg,#fffaeb,#fff5d4);border-color:rgba(245,196,48,.28);}
 
       .feat-badge{display:inline-flex;align-items:center;gap:7px;border-radius:100px;padding:5px 14px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:14px;}
       .bdot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
@@ -426,39 +425,39 @@ export default function Home() {
 
       /* Site links */
       .site-links{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
-      .site-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-family:'DM Mono',monospace;color:var(--lav);background:rgba(139,110,232,.12);border:1.5px solid rgba(139,110,232,.28);border-radius:100px;padding:5px 12px;text-decoration:none;transition:transform .2s,background .2s;}
-      .site-link:hover{transform:translateY(-2px);background:rgba(139,110,232,.22);}
+      .site-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-family:'DM Mono',monospace;color:#5230c8;background:rgba(139,110,232,.1);border:1.5px solid rgba(139,110,232,.25);border-radius:100px;padding:5px 12px;text-decoration:none;transition:transform .2s,background .2s;}
+      .site-link:hover{transform:translateY(-2px);background:rgba(139,110,232,.18);}
 
       /* Flores animated flower */
-      .flores-vis{width:100px;height:100px;border-radius:20px;background:linear-gradient(135deg,#1d2d40,#162535);border:1.5px solid rgba(139,110,232,.3);display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:fbounce 5s ease-in-out infinite;}
+      .flores-vis{width:100px;height:100px;border-radius:20px;background:linear-gradient(135deg,#eceaff,#ddd8ff);border:1.5px solid rgba(139,110,232,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:fbounce 5s ease-in-out infinite;}
       @keyframes fbounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-9px) rotate(4deg)}}
 
       /* Tech bullet list */
       .tech-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:7px;}
-      .tech-list li{font-size:13px;line-height:1.6;color:var(--textd);padding-left:16px;position:relative;font-weight:600;}
+      .tech-list li{font-size:13px;line-height:1.6;color:var(--textd);padding-left:16px;position:relative;font-weight:400;}
       .tech-list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--lav);}
 
       /* Vol thumb */
-      .vol-thumb{width:176px;height:176px;flex-shrink:0;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#2a1f0a,#3a2c10);display:flex;align-items:center;justify-content:center;}
+      .vol-thumb{width:176px;height:176px;flex-shrink:0;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#fdecc8,#fce4b0);display:flex;align-items:center;justify-content:center;}
       .vol-thumb img{width:100%;height:100%;object-fit:cover;}
       .vol-ph{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px;text-align:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
 
-      /* Card text */
       .wy  {font-family:'DM Mono',monospace;font-size:11px;color:var(--rose);margin-bottom:7px;display:flex;align-items:center;gap:7px;}
       .wdot{width:6px;height:6px;border-radius:50%;background:var(--rose);flex-shrink:0;}
-      .wrole{font-family:'Boldonse',cursive;font-size:18px;margin-bottom:3px;color:var(--text);line-height:1.2;}
+      .wrole{font-family:'Boldonse',cursive;font-size:18px;margin-bottom:3px;color:var(--ink);line-height:1.2;}
       .worg{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:12px;}
-      /* BOLD descriptions */
-      .wdesc{font-size:14px;line-height:1.74;color:var(--textd);font-weight:600;}
+      /* Normal weight base — bold only via <b> inside */
+      .wdesc{font-size:14px;line-height:1.74;color:var(--textd);font-weight:400;}
+      .wdesc b{font-weight:700;color:var(--ink);}
       .wtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
       .tag{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:100px;border:1.5px solid;font-weight:500;}
-      .tr{color:#f07080;border-color:rgba(232,67,90,.4);background:rgba(232,67,90,.1);}
-      .tp{color:#f0a080;border-color:rgba(240,112,72,.4);background:rgba(240,112,72,.1);}
-      .ty{color:#f0c860;border-color:rgba(245,196,48,.4);background:rgba(245,196,48,.1);}
-      .tg{color:#6dcf9e;border-color:rgba(75,175,126,.4);background:rgba(75,175,126,.1);}
-      .tt{color:#60d8c8;border-color:rgba(46,191,172,.4);background:rgba(46,191,172,.1);}
-      .ts{color:#80c0f0;border-color:rgba(75,159,224,.4);background:rgba(75,159,224,.1);}
-      .tl{color:#b090f8;border-color:rgba(139,110,232,.4);background:rgba(139,110,232,.1);}
+      .tr{color:#b82040;border-color:rgba(232,67,90,.3);background:rgba(232,67,90,.07);}
+      .tp{color:#bf5020;border-color:rgba(240,112,72,.3);background:rgba(240,112,72,.07);}
+      .ty{color:#8a6000;border-color:rgba(245,196,48,.45);background:rgba(245,196,48,.09);}
+      .tg{color:#2c7a50;border-color:rgba(75,175,126,.3);background:rgba(75,175,126,.07);}
+      .tt{color:#1a7a6e;border-color:rgba(46,191,172,.3);background:rgba(46,191,172,.07);}
+      .ts{color:#1a5a9a;border-color:rgba(75,159,224,.3);background:rgba(75,159,224,.07);}
+      .tl{color:#5230c8;border-color:rgba(139,110,232,.3);background:rgba(139,110,232,.07);}
 
       /* EDUCATION */
       .edu-tl{position:relative;padding-left:40px;}
@@ -482,27 +481,34 @@ export default function Home() {
       .skill-section-label.rev{opacity:0;transform:translateX(-20px);transition:opacity .6s,transform .6s;}
       .skill-section-label.rev.in{opacity:1;transform:translateX(0);}
       .chips-row{display:flex;flex-wrap:wrap;gap:12px;}
-      .chip{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:16px 14px;display:flex;align-items:center;gap:12px;cursor:default;opacity:0;transform:translateY(18px) scale(.93);box-shadow:0 4px 14px rgba(0,0,0,.2);transition:border-color .2s,box-shadow .2s,transform .2s,opacity .4s ease;min-width:fit-content;}
+      .chip{background:var(--surface);border:1.5px solid var(--border);border-radius:16px;padding:16px 14px;display:flex;align-items:center;gap:12px;cursor:default;opacity:0;transform:translateY(18px) scale(.93);box-shadow:0 2px 10px rgba(0,0,0,.04);transition:border-color .2s,box-shadow .2s,transform .2s,opacity .4s ease;min-width:fit-content;}
       .chip.in{opacity:1;transform:translateY(0) scale(1);}
-      .chip:hover{transform:scale(1.05) translateY(-2px)!important;box-shadow:0 10px 26px rgba(0,0,0,.4);border-color:rgba(255,255,255,.25);}
+      .chip:hover{transform:scale(1.05) translateY(-2px)!important;box-shadow:0 10px 26px rgba(0,0,0,.1);border-color:rgba(232,67,90,.25);}
       .chip-logo{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Boldonse',cursive;font-size:12px;color:white;flex-shrink:0;letter-spacing:0;}
-      .chip-name{font-size:13px;font-family:'DM Mono',monospace;color:var(--text);font-weight:500;}
+      .chip-name{font-size:13px;font-family:'DM Mono',monospace;color:var(--ink);font-weight:500;}
 
-      /* LANGUAGES */
       .lang-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;}
-      .lang-card{background:var(--surface);border:1.5px solid var(--border);border-radius:22px;padding:30px 26px;text-align:center;opacity:0;transform:translateY(20px);box-shadow:0 4px 18px rgba(0,0,0,.2);transition:transform .2s,box-shadow .2s;}
+      .lang-card{background:var(--surface);border:1.5px solid var(--border);border-radius:22px;padding:30px 26px;text-align:center;opacity:0;transform:translateY(20px);box-shadow:0 2px 12px rgba(0,0,0,.05);transition:transform .2s,box-shadow .2s;}
       .lang-card.in{opacity:1;transform:translateY(0);transition:opacity .55s ease,transform .55s ease,box-shadow .2s;}
-      .lang-card:hover{transform:translateY(-5px)!important;box-shadow:0 14px 36px rgba(0,0,0,.4);}
+      .lang-card:hover{transform:translateY(-5px)!important;box-shadow:0 14px 36px rgba(0,0,0,.1);}
       .llevel{font-family:'Boldonse',cursive;font-size:48px;margin-bottom:3px;}
-      .lname{font-size:15px;color:var(--text);font-weight:600;margin-bottom:2px;}
+      .lname{font-size:15px;color:var(--ink);font-weight:600;margin-bottom:2px;}
       .lcert{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:14px;}
-      .lbar{height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden;}
+      .lbar{height:5px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden;}
       .lf{height:100%;border-radius:3px;width:0%;transition:width 1.1s ease .3s;}
 
-      /* CONTACT — colourful per-word */
-      .contact{background:#0a0912;padding:100px 72px;text-align:center;position:relative;overflow:hidden;z-index:2;border-top:1px solid rgba(255,255,255,.06);}
+      /* CONTACT — dark bg, gradient behind text, colourful per-word */
+      .contact{background:#0a0912;padding:100px 72px;text-align:center;position:relative;overflow:hidden;z-index:2;}
       .contact::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--rose),var(--peach),var(--sun),var(--teal),var(--lav));}
-      .contact::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 10% 50%,rgba(232,67,90,.1) 0%,transparent 70%),radial-gradient(ellipse 50% 70% at 90% 50%,rgba(139,110,232,.1) 0%,transparent 70%);pointer-events:none;}
+      /* Gradient blob behind the text — the "back gradient" */
+      .contact::after{content:'';position:absolute;inset:0;
+        background:
+          radial-gradient(ellipse 55% 70% at 15% 50%,rgba(232,67,90,.22) 0%,transparent 65%),
+          radial-gradient(ellipse 50% 65% at 85% 50%,rgba(139,110,232,.22) 0%,transparent 65%),
+          radial-gradient(ellipse 45% 55% at 50% 20%,rgba(245,196,48,.15) 0%,transparent 60%),
+          radial-gradient(ellipse 40% 50% at 50% 85%,rgba(46,191,172,.15) 0%,transparent 60%);
+        pointer-events:none;
+      }
 
       /* Multi-colour phrase — each word on same line, wraps only between words */
       .c-big{
@@ -631,12 +637,12 @@ export default function Home() {
                   Order Tracking Portal
                 </a>
               </div>
-              <p className="wdesc">Co-founded a flower preservation company and built its entire digital presence from scratch. Leads creative direction, branding, and all technical development.</p>
+              <p className="wdesc">Co-founded a flower preservation company and <b>built its entire digital presence from scratch</b>. Leads creative direction, branding, and all technical development.</p>
               <ul className="tech-list">
-                <li>Built and deployed the brand website and a custom real-time order tracking portal, managing the full development lifecycle end to end.</li>
-                <li>Designed backend logic using Google Sheets as a dynamic CMS for unique client IDs, private routing, and order statuses.</li>
-                <li>Leveraged LLMs (Claude, ChatGPT, Gemini) with advanced prompting techniques to accelerate development and build production-ready features rapidly.</li>
-                <li>Manages version control with GitHub and automated deployments via Vercel CI/CD.</li>
+                <li><b>Built and deployed</b> the brand website and a custom real-time order tracking portal, managing the full development lifecycle end to end.</li>
+                <li>Designed <b>backend logic using Google Sheets as a dynamic CMS</b> for unique client IDs, private routing, and order statuses.</li>
+                <li>Leveraged <b>LLMs (Claude, ChatGPT, Gemini)</b> with advanced prompting techniques to accelerate development and build production-ready features rapidly.</li>
+                <li>Manages version control with <b>GitHub</b> and automated deployments via <b>Vercel CI/CD</b>.</li>
               </ul>
               <div className="wtags">
                 <span className="tag tl">Entrepreneurship</span>
@@ -664,7 +670,7 @@ export default function Home() {
           <div className="wy"><div className="wdot"/>2023 to Present</div>
           <div className="wrole">Learning Coach</div>
           <div className="worg">TUMO Coimbra</div>
-          <p className="wdesc">Supports teens 12 to 18 in self-directed learning across animation, filmmaking, music, and more. Guides, motivates, and tracks student progress.</p>
+          <p className="wdesc">Supports <b>teens 12 to 18</b> in self-directed learning across animation, filmmaking, music, and more. Guides, motivates, and tracks student progress.</p>
           <div className="wtags"><span className="tag tr">Youth Tech</span><span className="tag tp">Coaching</span></div>
         </div>
 
@@ -672,7 +678,7 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--peach)"}}/><span style={{color:"var(--peach)"}}>2023 to 2025</span></div>
           <div className="wrole">Info Desk</div>
           <div className="worg">TUMO Coimbra</div>
-          <p className="wdesc">Manages student enquiries, check-in and check-out, registration and enrolment, database upkeep, and parent communication.</p>
+          <p className="wdesc">Manages student enquiries, <b>check-in and check-out, registration and enrolment</b>, database upkeep, and parent communication.</p>
           <div className="wtags"><span className="tag tp">Operations</span><span className="tag ty">Administration</span></div>
         </div>
 
@@ -680,7 +686,7 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--lav)"}}/><span style={{color:"var(--lav)"}}>2023 to 2025</span></div>
           <div className="wrole">Middle School Teacher</div>
           <div className="worg">Colégio de São José · Clonlara Program</div>
-          <p className="wdesc">Teaches Mathematics and ICT within a personalised learning programme that fosters authenticity, autonomy, and joy in learning.</p>
+          <p className="wdesc">Teaches <b>Mathematics and ICT</b> within a personalised learning programme that fosters authenticity, autonomy, and joy in learning.</p>
           <div className="wtags"><span className="tag tl">Mathematics</span><span className="tag ts">ICT</span><span className="tag tl">Personalised Learning</span></div>
         </div>
 
@@ -688,7 +694,7 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--teal)"}}/><span style={{color:"var(--teal)"}}>2022 to 2024</span></div>
           <div className="wrole">Middle School Teacher</div>
           <div className="worg">Escola Tenente Valadim · ages 11 to 16</div>
-          <p className="wdesc">Teaches Visual Education, Technology Education, and Design in Interactive Media to homeschooled students. Develops creative expression and aesthetic understanding through art and technology.</p>
+          <p className="wdesc">Teaches <b>Visual Education, Technology Education, and Design in Interactive Media</b> to homeschooled students. Develops creative expression and aesthetic understanding through art and technology.</p>
           <div className="wtags"><span className="tag tt">Visual Education</span><span className="tag ts">Interactive Design</span></div>
         </div>
 
@@ -696,15 +702,15 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--sky)"}}/><span style={{color:"var(--sky)"}}>2022 to 2023</span></div>
           <div className="wrole">Middle School Teacher</div>
           <div className="worg">Agrupamento de Escolas Dr. Bissaya Barreto</div>
-          <p className="wdesc">Teaches Information and Communication Technologies in a public school environment.</p>
+          <p className="wdesc">Teaches <b>Information and Communication Technologies</b> in a public school environment.</p>
           <div className="wtags"><span className="tag ts">ICT</span></div>
         </div>
 
         <div className="card cy card-full" data-d="380">
-          <div className="wy"><div className="wdot" style={{background:"var(--sun)"}}/><span style={{color:"var(--sun)"}}>2017 to 2018</span></div>
+          <div className="wy"><div className="wdot" style={{background:"var(--sun)"}}/><span style={{color:"#8a6000"}}>2017 to 2018</span></div>
           <div className="wrole">Monitor</div>
           <div className="worg">Universidade de Coimbra</div>
-          <p className="wdesc">Serves as team monitor for a class of 20 students attending a Design and Multimedia summer course. Responsible for schedules, meals, attendance, and providing support throughout the classes.</p>
+          <p className="wdesc">Serves as team monitor for <b>a class of 20 students</b> attending a Design and Multimedia summer course. Responsible for schedules, meals, attendance, and providing support throughout the classes.</p>
           <div className="wtags"><span className="tag ty">Mentoring</span><span className="tag tp">Design and Multimedia</span></div>
         </div>
       </div>
@@ -719,14 +725,14 @@ export default function Home() {
           <div className="wy"><div className="wdot"/>2021 to 2022 · Paris, France</div>
           <div className="wrole">Production and Creative Direction</div>
           <div className="worg">Julien Tavel, Fashion Photographer</div>
-          <p className="wdesc">Works as production and photo crew assistant to an internationally recognised fashion photographer. Researches visual subjects, generates mood boards and conceptual ideas, and manages all supplies and equipment for set.</p>
+          <p className="wdesc">Works as <b>production and photo crew assistant</b> to an internationally recognised fashion photographer. Researches visual subjects, generates <b>mood boards and conceptual ideas</b>, and manages all supplies and equipment for set.</p>
           <div className="wtags"><span className="tag tr">Fashion Photography</span><span className="tag tp">Creative Research</span><span className="tag ty">Set Management</span></div>
         </div>
         <div className="card cs" data-d="140">
           <div className="wy"><div className="wdot" style={{background:"var(--sky)"}}/><span style={{color:"var(--sky)"}}>2021 · Athens, Greece</span></div>
           <div className="wrole">Graphic and Email Designer</div>
           <div className="worg">ShipLemon · DeliverBack</div>
-          <p className="wdesc">Designs web graphics, email templates, and newsletter layouts for two tech startups. Builds mobile-friendly campaigns and collaborates across teams on marketing materials.</p>
+          <p className="wdesc">Designs <b>web graphics, email templates, and newsletter layouts</b> for two tech startups. Builds mobile-friendly campaigns and collaborates across teams on marketing materials.</p>
           <div className="wtags"><span className="tag ts">Web Design</span><span className="tag tt">Email Design</span><span className="tag tp">Graphic Design</span></div>
         </div>
       </div>
@@ -738,13 +744,13 @@ export default function Home() {
       <div className="sec-label rev">giving back</div>
       <div className="grid2">
         <div className="card card-full card-gold cy" data-d="0">
-          <div className="feat-badge" style={{background:"rgba(245,196,48,.14)",border:"1.5px solid rgba(245,196,48,.3)",color:"var(--sun)"}}><div className="bdot" style={{background:"var(--sun)"}}/>Volunteer</div>
+          <div className="feat-badge" style={{background:"rgba(200,144,10,.12)",border:"1.5px solid rgba(200,144,10,.3)",color:"#8a6000"}}><div className="bdot" style={{background:"#c8900a"}}/>Volunteer</div>
           <div className="feat-inner">
             <div>
-              <div className="wy"><div className="wdot" style={{background:"var(--sun)"}}/><span style={{color:"var(--sun)"}}>2024 · Bulgaria</span></div>
+              <div className="wy"><div className="wdot" style={{background:"#c8900a"}}/><span style={{color:"#8a6000"}}>2024 · Bulgaria</span></div>
               <div className="wrole">Summer Activities Creator</div>
               <div className="worg">SOS Children's Villages · Future World Association</div>
-              <p className="wdesc">Creates and leads summer activities for children at SOS Children's Villages, bringing creativity, play, and warmth through hands-on projects and joyful learning.</p>
+              <p className="wdesc">Creates and leads <b>summer activities for children</b> at SOS Children's Villages, bringing creativity, play, and warmth through hands-on projects and joyful learning.</p>
               <div className="wtags"><span className="tag ty">Children's Activities</span><span className="tag tp">Community Care</span><span className="tag tr">Creative Workshops</span></div>
             </div>
             <div className="vol-thumb">
