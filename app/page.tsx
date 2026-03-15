@@ -47,10 +47,12 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
 }
 
 const HERO_DEF=[
-  {type:1,r:290,color:"#F9C846",center:"#c8900a",cx:-0.02,cy:0.00,dx:-1,dy:-1,dur:"80s", delay:"0s",   depth:.055,linger:false},
-  {type:3,r:115,color:"#F07048",center:"#c0400a",cx:0.35, cy:-0.05,dx:0, dy:-1,dur:"95s", delay:"-18s", depth:.022,linger:false},
-  {type:2,r:265,color:"#4BAF7E",center:"#2c7a50",cx:1.02, cy:0.04, dx:1, dy:-1,dur:"88s", delay:"-8s",  depth:.048,linger:false},
-  {type:0,r: 58,color:"#2EBFAC",center:"#1a7a6e",cx:0.72, cy:0.12, dx:1, dy:-1,dur:"130s",delay:"-40s", depth:.006,linger:true},
+  // top band — moved cy down so flowers actually show on screen
+  {type:1,r:290,color:"#F9C846",center:"#c8900a",cx:-0.02,cy:0.08, dx:-1,dy:-1,dur:"80s", delay:"0s",   depth:.055,linger:false},
+  {type:3,r:115,color:"#F07048",center:"#c0400a",cx:0.38, cy:0.08, dx:0, dy:-1,dur:"95s", delay:"-18s", depth:.022,linger:false},
+  {type:2,r:265,color:"#4BAF7E",center:"#2c7a50",cx:1.02, cy:0.08, dx:1, dy:-1,dur:"88s", delay:"-8s",  depth:.048,linger:false},
+  {type:0,r: 72,color:"#2EBFAC",center:"#1a7a6e",cx:0.72, cy:0.12, dx:1, dy:-1,dur:"130s",delay:"-40s", depth:.010,linger:true},
+  {type:1,r: 90,color:"#E8435A",center:"#b82040",cx:0.22, cy:0.08, dx:-1,dy:-1,dur:"115s",delay:"-28s", depth:.014,linger:false},
   {type:0,r:310,color:"#E8435A",center:"#b82040",cx:-0.04,cy:0.55, dx:-1,dy:0, dur:"72s", delay:"-22s", depth:.058,linger:false},
   {type:3,r: 62,color:"#8B6EE8",center:"#5230c8",cx:0.18, cy:0.38, dx:-1,dy:0, dur:"140s",delay:"-55s", depth:.007,linger:true},
   {type:1,r:125,color:"#4BAF7E",center:"#2c7a50",cx:0.52, cy:0.48, dx:0, dy:1, dur:"105s",delay:"-35s", depth:.020,linger:true},
@@ -229,7 +231,7 @@ export default function Home(){
       @import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
       :root{--rose:#E8435A;--peach:#F07048;--sun:#F5C430;--sage:#4BAF7E;--teal:#2EBFAC;--sky:#4B9FE0;--lav:#8B6EE8;--ink:#1A1410;--muted:#9A8C88;--textd:rgba(26,20,16,.72);}
       *{margin:0;padding:0;box-sizing:border-box;}
-      html{scroll-behavior:smooth;}
+      html{scroll-behavior:smooth;overflow-x:hidden;}
       body{background:#0a0912;color:#1A1410;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;}
       @media(pointer:fine){
         body{cursor:none;}
@@ -245,7 +247,7 @@ export default function Home(){
       .hero-left{position:relative;z-index:10;}
       .status{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(75,175,126,.5);border-radius:100px;padding:7px 18px;font-size:12px;font-family:'DM Mono',monospace;color:#6dcf9e;background:rgba(75,175,126,.15);margin-bottom:24px;animation:fadeUp .8s ease .2s both;}
       .sdot{width:7px;height:7px;background:#6dcf9e;border-radius:50%;animation:blink 2s ease infinite;flex-shrink:0;}
-      .hero-name{font-family:'Boldonse',cursive;font-size:clamp(48px,7.5vw,108px);line-height:1.15;letter-spacing:-2px;color:white;margin-bottom:32px;word-break:break-word;}
+      .hero-name{font-family:'Boldonse',cursive;font-size:clamp(48px,7.5vw,108px);line-height:1.18;letter-spacing:-2px;color:white;margin-bottom:32px;white-space:nowrap;}
       .cursor-blink{display:inline-block;width:.07em;height:.85em;background:var(--rose);margin-left:3px;vertical-align:-.04em;animation:cblink .75s step-end infinite;}
       .cursor-blink.done{animation:none;opacity:0;}
 
@@ -328,11 +330,11 @@ export default function Home(){
       .wtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
       .tag{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:100px;border:1.5px solid;font-weight:500;}
       .tr{color:#b82040;border-color:rgba(232,67,90,.3);background:rgba(232,67,90,.07);} .tp{color:#bf5020;border-color:rgba(240,112,72,.3);background:rgba(240,112,72,.07);} .ty{color:#8a6000;border-color:rgba(245,196,48,.45);background:rgba(245,196,48,.09);} .tg{color:#2c7a50;border-color:rgba(75,175,126,.3);background:rgba(75,175,126,.07);} .tt{color:#1a7a6e;border-color:rgba(46,191,172,.3);background:rgba(46,191,172,.07);} .ts{color:#1a5a9a;border-color:rgba(75,159,224,.3);background:rgba(75,159,224,.07);} .tl{color:#5230c8;border-color:rgba(139,110,232,.3);background:rgba(139,110,232,.07);}
-      .edu-tl{position:relative;padding-left:40px;}
-      .edu-tl::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--rose),var(--sun),var(--teal),var(--lav),var(--peach));border-radius:2px;}
+      .edu-tl{position:relative;padding-left:44px;}
+      .edu-tl::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--rose),var(--sun),var(--teal),var(--lav),var(--peach));border-radius:2px;}
       .edu-item{position:relative;margin-bottom:40px;opacity:0;transform:translateX(-18px);transition:opacity .55s,transform .55s;}
       .edu-item.in{opacity:1;transform:translateX(0);}
-      .edu-item::before{content:'';position:absolute;left:-46px;top:7px;width:12px;height:12px;border-radius:50%;background:white;border:2.5px solid var(--rose);transition:background .25s;}
+      .edu-item::before{content:'';position:absolute;left:-33px;top:7px;width:12px;height:12px;border-radius:50%;background:white;border:2.5px solid var(--rose);transition:background .25s;}
       .edu-item:nth-child(2)::before{border-color:var(--sun);} .edu-item:nth-child(3)::before{border-color:var(--teal);} .edu-item:nth-child(4)::before{border-color:var(--lav);} .edu-item:nth-child(5)::before{border-color:var(--peach);}
       .edu-yr{font-family:'DM Mono',monospace;font-size:11px;color:var(--rose);margin-bottom:5px;}
       .edu-deg{font-family:'Boldonse',cursive;font-size:18px;margin-bottom:3px;color:#1A1410;line-height:1.15;}
@@ -374,14 +376,9 @@ export default function Home(){
 
       /* TABLET */
       @media(max-width:960px){
-        .hero{
-          grid-template-columns:1fr;
-          min-height:100vh;min-height:100dvh;
-          padding:0 40px;gap:0;
-          display:flex;flex-direction:column;justify-content:center;
-        }
+        .hero{grid-template-columns:1fr;min-height:100vh;min-height:100dvh;padding:0 40px;gap:0;display:flex;flex-direction:column;justify-content:center;}
         .hero-right{display:none;}
-        .hero-name{font-size:clamp(44px,9vw,78px);line-height:1.15;margin-bottom:24px;}
+        .hero-name{font-size:clamp(44px,9vw,78px);white-space:nowrap;margin-bottom:24px;}
         .hero-links{gap:8px;}
         .hl{font-size:12px;padding:9px 16px;}
         .sec,.div-wrap{padding:60px 32px;}
@@ -394,14 +391,11 @@ export default function Home(){
       }
       /* MOBILE */
       @media(max-width:600px){
-        .hero{
-          padding:0 24px;
-          min-height:100vh;min-height:100dvh;
-        }
+        .hero{padding:0 22px;min-height:100vh;min-height:100dvh;}
         .status{font-size:11px;padding:6px 14px;margin-bottom:18px;}
-        .hero-name{font-size:clamp(40px,11.5vw,62px);line-height:1.15;letter-spacing:-1.5px;margin-bottom:22px;}
-        .hero-links{gap:8px;}
-        .hl{font-size:11px;padding:8px 14px;}
+        .hero-name{font-size:clamp(36px,10.5vw,54px);white-space:normal;line-height:1.2;letter-spacing:-1px;margin-bottom:20px;}
+        .hero-links{gap:7px;}
+        .hl{font-size:11px;padding:8px 13px;}
         .hl-email{display:none;}
         .mq-item{font-size:16px;padding:0 28px;}
         .sec,.div-wrap{padding:40px 20px;}
@@ -420,13 +414,18 @@ export default function Home(){
         .lang-card{padding:20px 16px;}
         .llevel{font-size:36px;}
         .edu-deg{font-size:15px!important;}
-        .edu-tl{padding-left:28px;}
-        .edu-item::before{left:-34px;width:10px;height:10px;}
+        .edu-tl{padding-left:32px;}
+        .edu-tl::before{left:4px;}
+        .edu-item::before{left:-24px;width:10px;height:10px;top:8px;}
         .vol-thumb{width:100px;height:100px;}
         .contact{padding:52px 20px;}
         .cbtn{padding:14px 28px;font-size:14px;}
         .c-links{font-size:11px;}
         .skill-section-label{font-size:18px;}
+      }
+      @media(max-width:380px){
+        .hero-name{font-size:32px;}
+        .hl-li{display:none;}
       }
       @media(max-width:380px){
         .hero-name{font-size:clamp(36px,10.5vw,52px);}
@@ -438,7 +437,7 @@ export default function Home(){
     <div ref={ringRef} className="cur-ring"/>
     <HeroFlowers scrollPct={scrollPct}/>
 
-    <div style={{position:"relative"}}>
+    <div style={{position:"relative",overflowX:"hidden"}}>
       <AmbientFlowers/>
 
       <div className="hero">
@@ -549,7 +548,7 @@ export default function Home(){
             <div className="wtags"><span className="tag ts">ICT</span></div>
           </div>
 
-          <div className="card cy card-full" data-d="380">
+          <div className="card cy" data-d="380">
             <div className="wy"><div className="wdot" style={{background:"var(--sun)"}}/><span style={{color:"#8a6000"}}>2017 to 2018</span></div>
             <div className="wrole">Monitor</div><div className="worg">Universidade de Coimbra</div>
             <p className="wdesc">Served as team monitor for <b>a class of 20 students</b> attending a Design and Multimedia summer course. Responsible for schedules, meals, attendance, and providing support throughout the classes.</p>
@@ -656,16 +655,21 @@ export default function Home(){
 
     <div className="contact">
       <div className="c-big rev"><span className="cw1">The</span><span className="cw2">best</span><span className="cw3">projects</span><span className="cw4">start</span><span className="cw5">with</span><span className="cw1">a</span><span className="cw6">conversation.</span></div>
-      <p className="c-sub-text rev">Let's make something you'll be proud of.</p>
       <a href="mailto:mariajgbrito@hotmail.com" className="cbtn rev">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="#0a0912" strokeWidth="1.5"/><path d="M1 5l7 5 7-5" stroke="#0a0912" strokeWidth="1.5"/></svg>
-        Get in touch
+        Let's talk
       </a>
       <div className="c-links">
         mariajgbrito@hotmail.com &nbsp;&middot;&nbsp;
         <a href="https://www.linkedin.com/in/mariajbrito/" target="_blank" rel="noreferrer" style={{color:"var(--sky)"}}>linkedin.com/in/mariajbrito</a>
         &nbsp;&middot;&nbsp;
         <a href="https://floresabeirario.pt" target="_blank" rel="noreferrer" style={{color:"var(--sage)"}}>floresabeirario.pt</a>
+      </div>
+      <div style={{marginTop:"48px",paddingTop:"24px",borderTop:"1px solid rgba(255,255,255,.08)",fontSize:"11px",fontFamily:"'DM Mono',monospace",color:"rgba(255,255,255,.22)",position:"relative",zIndex:1}}>
+        Designed &amp; vibe-coded by Maria Brito · Built with{" "}
+        <a href="https://claude.ai" target="_blank" rel="noreferrer" style={{color:"rgba(139,110,232,.6)",textDecoration:"none"}}>Claude</a>
+        {" "}· Deployed on{" "}
+        <a href="https://vercel.com" target="_blank" rel="noreferrer" style={{color:"rgba(255,255,255,.3)",textDecoration:"none"}}>Vercel</a>
       </div>
     </div>
   </>);
