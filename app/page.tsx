@@ -101,7 +101,7 @@ function HeroFlowers({scrollPct}:{scrollPct:number}) {
 
   return <div style={{position:"fixed",inset:0,zIndex:0,pointerEvents:"none",overflow:"hidden"}}>
     {HERO_DEF.map((f,i)=>(
-      <div key={i} ref={el=>{refs.current[i]=el;}} className={f.r>150?"hero-flower-lg":""} style={{
+      <div key={i} ref={el=>{refs.current[i]=el;}} style={{
         position:"absolute",left:`${f.cx*100}%`,top:`${f.cy*100}%`,
         transform:"translate(-50%,-50%)",width:f.r*2,height:f.r*2,
         animation:`frot ${f.dur} linear infinite`,animationDelay:f.delay,willChange:"left,top,opacity",
@@ -151,7 +151,7 @@ function AmbientFlowers(){
   ];
   return <div style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:0,overflow:"visible"}}>
     {smalls.map((f,i)=>(
-      <div key={i} className="amb-flower" style={{position:"absolute",left:f.left,top:f.top,transform:"translate(-50%,-50%)",width:f.r*2,height:f.r*2,opacity:.72,animation:`frot ${f.dur} linear infinite`,animationDelay:f.delay}}>
+      <div key={i} style={{position:"absolute",left:f.left,top:f.top,transform:"translate(-50%,-50%)",width:f.r*2,height:f.r*2,opacity:.72,animation:`frot ${f.dur} linear infinite`,animationDelay:f.delay}}>
         <FlowerSVG type={f.type} r={f.r} color={f.color} center={f.center}/>
       </div>
     ))}
@@ -330,15 +330,12 @@ export default function Home(){
       .wtags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px;}
       .tag{font-family:'DM Mono',monospace;font-size:11px;padding:4px 10px;border-radius:100px;border:1.5px solid;font-weight:500;}
       .tr{color:#b82040;border-color:rgba(232,67,90,.3);background:rgba(232,67,90,.07);} .tp{color:#bf5020;border-color:rgba(240,112,72,.3);background:rgba(240,112,72,.07);} .ty{color:#8a6000;border-color:rgba(245,196,48,.45);background:rgba(245,196,48,.09);} .tg{color:#2c7a50;border-color:rgba(75,175,126,.3);background:rgba(75,175,126,.07);} .tt{color:#1a7a6e;border-color:rgba(46,191,172,.3);background:rgba(46,191,172,.07);} .ts{color:#1a5a9a;border-color:rgba(75,159,224,.3);background:rgba(75,159,224,.07);} .tl{color:#5230c8;border-color:rgba(139,110,232,.3);background:rgba(139,110,232,.07);}
-      .edu-tl{position:relative;padding-left:36px;}
-      .edu-tl::before{content:'';position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--rose),var(--sun),var(--teal),var(--lav),var(--peach));border-radius:2px;}
-      .edu-item{position:relative;margin-bottom:36px;opacity:0;transform:translateX(-18px);transition:opacity .55s,transform .55s;}
+      .edu-tl{position:relative;padding-left:44px;}
+      .edu-tl::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--rose),var(--sun),var(--teal),var(--lav),var(--peach));border-radius:2px;}
+      .edu-item{position:relative;margin-bottom:40px;opacity:0;transform:translateX(-18px);transition:opacity .55s,transform .55s;}
       .edu-item.in{opacity:1;transform:translateX(0);}
-      .edu-item::before{content:'';position:absolute;left:-25px;top:6px;width:12px;height:12px;border-radius:50%;background:white;border:2.5px solid var(--rose);}
-      .edu-item:nth-child(2)::before{border-color:var(--sun);}
-      .edu-item:nth-child(3)::before{border-color:var(--teal);}
-      .edu-item:nth-child(4)::before{border-color:var(--lav);}
-      .edu-item:nth-child(5)::before{border-color:var(--peach);}
+      .edu-item::before{content:'';position:absolute;left:-33px;top:7px;width:12px;height:12px;border-radius:50%;background:white;border:2.5px solid var(--rose);transition:background .25s;}
+      .edu-item:nth-child(2)::before{border-color:var(--sun);} .edu-item:nth-child(3)::before{border-color:var(--teal);} .edu-item:nth-child(4)::before{border-color:var(--lav);} .edu-item:nth-child(5)::before{border-color:var(--peach);}
       .edu-yr{font-family:'DM Mono',monospace;font-size:11px;color:var(--rose);margin-bottom:5px;}
       .edu-deg{font-family:'Boldonse',cursive;font-size:18px;margin-bottom:3px;color:#1A1410;line-height:1.15;}
       .edu-sch{font-size:13px;color:var(--muted);}
@@ -417,15 +414,10 @@ export default function Home(){
         .lang-card{padding:20px 16px;}
         .llevel{font-size:36px;}
         .edu-deg{font-size:15px!important;}
-        .edu-tl{padding-left:28px;}
+        .edu-tl{padding-left:32px;}
         .edu-tl::before{left:4px;}
-        .edu-item::before{left:-20px;width:10px;height:10px;top:7px;}
+        .edu-item::before{left:-24px;width:10px;height:10px;top:8px;}
         .vol-thumb{width:100px;height:100px;}
-        /* Hide most ambient flowers on mobile — keep only every 3rd */
-        .amb-flower:nth-child(3n+1){display:none;}
-        .amb-flower:nth-child(3n+2){display:none;}
-        /* Hide large hero flowers on mobile */
-        .hero-flower-lg{display:none;}
         .contact{padding:52px 20px;}
         .cbtn{padding:14px 28px;font-size:14px;}
         .c-links{font-size:11px;}
@@ -487,7 +479,6 @@ export default function Home(){
         </div>
       </div>
 
-      <div style={{background:"#FAF6EF",position:"relative",zIndex:2}}>
       <div className="mq">
         <div className="mq-track">
           {["Educator","Designer","Co-founder","Tech Enthusiast","AI Enthusiast","Creative","Builder","Coimbra","Educator","Designer","Co-founder","Tech Enthusiast","AI Enthusiast","Creative","Builder","Coimbra"].map((t,i)=><div key={i} className="mq-item">{t}</div>)}
@@ -660,8 +651,7 @@ export default function Home(){
         </div>
       </section>
 
-      </div>{/* end light bg block */}
-    </div>{/* end outer wrapper */}
+    </div>
 
     <div className="contact">
       <div className="c-big rev"><span className="cw1">The</span><span className="cw2">best</span><span className="cw3">projects</span><span className="cw4">start</span><span className="cw5">with</span><span className="cw1">a</span><span className="cw6">conversation.</span></div>
