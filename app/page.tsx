@@ -445,7 +445,7 @@ export default function Home(){
     <div ref={ringRef} className="cur-ring"/>
     <HeroFlowers scrollPct={scrollPct}/>
 
-    <div style={{position:"relative",overflowX:"hidden",background:"#FAF6EF"}}>
+    <div style={{position:"relative",overflowX:"hidden"}}>
       <AmbientFlowers/>
 
       <div className="hero">
@@ -487,6 +487,7 @@ export default function Home(){
         </div>
       </div>
 
+      <div style={{background:"#FAF6EF",position:"relative",zIndex:2}}>
       <div className="mq">
         <div className="mq-track">
           {["Educator","Designer","Co-founder","Tech Enthusiast","AI Enthusiast","Creative","Builder","Coimbra","Educator","Designer","Co-founder","Tech Enthusiast","AI Enthusiast","Creative","Builder","Coimbra"].map((t,i)=><div key={i} className="mq-item">{t}</div>)}
@@ -659,7 +660,8 @@ export default function Home(){
         </div>
       </section>
 
-    </div>
+      </div>{/* end light bg block */}
+    </div>{/* end outer wrapper */}
 
     <div className="contact">
       <div className="c-big rev"><span className="cw1">The</span><span className="cw2">best</span><span className="cw3">projects</span><span className="cw4">start</span><span className="cw5">with</span><span className="cw1">a</span><span className="cw6">conversation.</span></div>
