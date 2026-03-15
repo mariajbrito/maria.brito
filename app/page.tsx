@@ -39,72 +39,81 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
   const vb=`${-r} ${-r} ${r*2} ${r*2}`;
   const S={overflow:"visible" as const};
 
-  if(type===0) { // daisy — 12 thin petals
+  if(type===0) { // daisy — 12 thin petals, very small centre dot
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:12}).map((_,i)=>
-        <ellipse key={i} cx="0" cy={-(r*.32+r*.36)} rx={r*.12} ry={r*.38}
+        <ellipse key={i} cx="0" cy={-(r*.38+r*.28)} rx={r*.11} ry={r*.32}
           fill={color} transform={`rotate(${(i/12)*360})`}/>)}
-      <circle cx="0" cy="0" r={r*.28} fill={center}/>
-      <circle cx="0" cy="0" r={r*.15} fill={color}/>
+      <circle cx="0" cy="0" r={r*.16} fill={center}/>
     </svg>;
   }
 
-  if(type===1) { // sunflower — 16 pointed petals
+  if(type===1) { // sunflower — 16 petals, solid centre no inner ring
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:16}).map((_,i)=>{
         const a=(i/16)*Math.PI*2;
-        const ox=Math.cos(a)*r*.5, oy=Math.sin(a)*r*.5;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.16} ry={r*.36}
+        const ox=Math.cos(a)*r*.52, oy=Math.sin(a)*r*.52;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.14} ry={r*.34}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.3} fill={center}/>
-      <circle cx="0" cy="0" r={r*.18} fill="#1a0a00"/>
+      <circle cx="0" cy="0" r={r*.26} fill={center}/>
     </svg>;
   }
 
-  if(type===2) { // rose — 7 fat overlapping petals
+  if(type===2) { // rose — 7 overlapping petals, small dot centre
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:7}).map((_,i)=>{
         const a=(i/7)*Math.PI*2;
-        const ox=Math.cos(a)*r*.22,oy=Math.sin(a)*r*.22;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.48} ry={r*.28}
+        const ox=Math.cos(a)*r*.25, oy=Math.sin(a)*r*.25;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.46} ry={r*.26}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.24} fill={center}/>
+      <circle cx="0" cy="0" r={r*.14} fill={center}/>
     </svg>;
   }
 
-  if(type===3) { // hibiscus — 5 fan petals
+  if(type===3) { // hibiscus — 5 fan petals, tiny centre
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:5}).map((_,i)=>
-        <ellipse key={i} cx="0" cy={-r*.44} rx={r*.37} ry={r*.56}
+        <ellipse key={i} cx="0" cy={-r*.46} rx={r*.36} ry={r*.54}
           fill={color} transform={`rotate(${(i/5)*360})`}/>)}
-      <circle cx="0" cy="0" r={r*.18} fill={center}/>
+      <circle cx="0" cy="0" r={r*.12} fill={center}/>
     </svg>;
   }
 
-  if(type===4) { // cosmos — 8 pointed star petals
+  if(type===4) { // cosmos — 8 pointed petals clearly radiating
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:8}).map((_,i)=>{
         const a=(i/8)*Math.PI*2;
-        const ox=Math.cos(a)*r*.38, oy=Math.sin(a)*r*.38;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.2} ry={r*.42}
+        const ox=Math.cos(a)*r*.44, oy=Math.sin(a)*r*.44;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.17} ry={r*.44}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.22} fill={center}/>
+      <circle cx="0" cy="0" r={r*.16} fill={center}/>
     </svg>;
   }
 
-  // type 5: cherry blossom — 5 rounded petals offset from centre
+  if(type===5) { // cherry blossom — 5 rounded offset petals
+    return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
+      {Array.from({length:5}).map((_,i)=>{
+        const a=(i/5)*Math.PI*2;
+        const ox=Math.cos(a)*r*.32, oy=Math.sin(a)*r*.32;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.30} ry={r*.44}
+          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
+      })}
+      <circle cx="0" cy="0" r={r*.16} fill={center}/>
+    </svg>;
+  }
+
+  // type 6: anemone — 6 wide petals, very clear flower shape
   return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-    {Array.from({length:5}).map((_,i)=>{
-      const a=(i/5)*Math.PI*2;
+    {Array.from({length:6}).map((_,i)=>{
+      const a=(i/6)*Math.PI*2;
       const ox=Math.cos(a)*r*.28, oy=Math.sin(a)*r*.28;
-      return <ellipse key={i} cx={ox} cy={oy} rx={r*.32} ry={r*.46}
+      return <ellipse key={i} cx={ox} cy={oy} rx={r*.36} ry={r*.52}
         fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
     })}
-    <circle cx="0" cy="0" r={r*.22} fill={center}/>
-    <circle cx="0" cy="0" r={r*.1}  fill={color}/>
+    <circle cx="0" cy="0" r={r*.18} fill={center}/>
   </svg>;
 }
 
@@ -119,20 +128,20 @@ function HeroFlowers({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
 
   // Each hero flower has a "direction" it flies toward when scrolling
   const heroFlowers = [
-    // type, r, color, center, start cx/cy (0–1), disperse direction dx/dy (-1 or 1), dur, delay, depth
-    {type:2, r:280, color:"#F9C846", center:"#c8900a", cx:0.0,  cy:0.08, dx:-1,  dy:-1, dur:"75s",  delay:"0s",   depth:.055},
+    // FRONT large
+    {type:0, r:280, color:"#F9C846", center:"#c8900a", cx:0.0,  cy:0.08, dx:-1,  dy:-1, dur:"75s",  delay:"0s",   depth:.055},
     {type:3, r:260, color:"#4BAF7E", center:"#2c7a50", cx:1.0,  cy:0.05, dx:1,   dy:-1, dur:"88s",  delay:"-12s", depth:.048},
     {type:5, r:300, color:"#E8435A", center:"#b82040", cx:-0.02,cy:0.65, dx:-1,  dy:0,  dur:"70s",  delay:"-25s", depth:.060},
     {type:4, r:270, color:"#8B6EE8", center:"#5230c8", cx:1.02, cy:0.68, dx:1,   dy:0,  dur:"82s",  delay:"-40s", depth:.052},
-    {type:0, r:320, color:"#F07048", center:"#c0400a", cx:0.48, cy:1.02, dx:0,   dy:1,  dur:"78s",  delay:"-18s", depth:.058},
-    {type:5, r:240, color:"#2EBFAC", center:"#1a7a6e", cx:0.20, cy:0.95, dx:-1,  dy:1,  dur:"92s",  delay:"-55s", depth:.045},
-    {type:2, r:255, color:"#F9C846", center:"#c8900a", cx:0.80, cy:0.92, dx:1,   dy:1,  dur:"85s",  delay:"-30s", depth:.050},
-    // mid
-    {type:0, r:130, color:"#F9C846", center:"#c8900a", cx:0.78, cy:0.20, dx:1,   dy:-1, dur:"90s",  delay:"-15s", depth:.022},
-    {type:5, r:120, color:"#4BAF7E", center:"#2c7a50", cx:0.10, cy:0.70, dx:-1,  dy:1,  dur:"100s", delay:"-55s", depth:.018},
+    {type:6, r:320, color:"#F07048", center:"#c0400a", cx:0.48, cy:1.02, dx:0,   dy:1,  dur:"78s",  delay:"-18s", depth:.058},
+    {type:1, r:240, color:"#2EBFAC", center:"#1a7a6e", cx:0.20, cy:0.95, dx:-1,  dy:1,  dur:"92s",  delay:"-55s", depth:.045},
+    {type:5, r:255, color:"#F9C846", center:"#c8900a", cx:0.80, cy:0.92, dx:1,   dy:1,  dur:"85s",  delay:"-30s", depth:.050},
+    // MID
+    {type:4, r:130, color:"#F9C846", center:"#c8900a", cx:0.78, cy:0.20, dx:1,   dy:-1, dur:"90s",  delay:"-15s", depth:.022},
+    {type:6, r:120, color:"#4BAF7E", center:"#2c7a50", cx:0.10, cy:0.70, dx:-1,  dy:1,  dur:"100s", delay:"-55s", depth:.018},
     {type:3, r:110, color:"#8B6EE8", center:"#5230c8", cx:0.55, cy:0.65, dx:0,   dy:1,  dur:"110s", delay:"-40s", depth:.020},
     {type:1, r:105, color:"#F07048", center:"#c0400a", cx:0.30, cy:0.10, dx:-1,  dy:-1, dur:"95s",  delay:"-70s", depth:.019},
-    {type:2, r:115, color:"#2EBFAC", center:"#1a7a6e", cx:0.88, cy:0.50, dx:1,   dy:0,  dur:"105s", delay:"-25s", depth:.021},
+    {type:0, r:115, color:"#2EBFAC", center:"#1a7a6e", cx:0.88, cy:0.50, dx:1,   dy:0,  dur:"105s", delay:"-25s", depth:.021},
   ];
 
   const DISPERSE_DIST = 80; // vw/vh units to fly off screen
@@ -179,21 +188,35 @@ function HeroFlowers({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
    (visible only after hero, faint on light bg)
 ───────────────────────────────────────── */
 function AmbientFlowers() {
-  // positions in document %, fixed left/right margins
-  // using position:absolute on a tall wrapper so they scroll with content
   const smalls = [
-    {type:0, r:38, color:"#F9C846",center:"#c8900a", left:"4%",  top:"140vh", dur:"100s",delay:"0s"},
-    {type:5, r:32, color:"#E8435A",center:"#b82040", left:"94%", top:"165vh", dur:"120s",delay:"-20s"},
-    {type:2, r:42, color:"#4BAF7E",center:"#2c7a50", left:"2%",  top:"220vh", dur:"90s", delay:"-35s"},
-    {type:3, r:36, color:"#8B6EE8",center:"#5230c8", left:"96%", top:"280vh", dur:"130s",delay:"-10s"},
-    {type:4, r:40, color:"#2EBFAC",center:"#1a7a6e", left:"3%",  top:"340vh", dur:"110s",delay:"-55s"},
-    {type:0, r:34, color:"#F07048",center:"#c0400a", left:"95%", top:"400vh", dur:"140s",delay:"-40s"},
-    {type:5, r:38, color:"#F9C846",center:"#c8900a", left:"5%",  top:"460vh", dur:"95s", delay:"-15s"},
-    {type:2, r:36, color:"#E8435A",center:"#b82040", left:"93%", top:"520vh", dur:"115s",delay:"-70s"},
-    {type:1, r:42, color:"#4BAF7E",center:"#2c7a50", left:"3%",  top:"580vh", dur:"105s",delay:"-30s"},
-    {type:3, r:34, color:"#F07048",center:"#c0400a", left:"96%", top:"640vh", dur:"125s",delay:"-50s"},
-    {type:4, r:40, color:"#8B6EE8",center:"#5230c8", left:"4%",  top:"700vh", dur:"88s", delay:"-8s"},
-    {type:0, r:36, color:"#2EBFAC",center:"#1a7a6e", left:"94%", top:"760vh", dur:"135s",delay:"-45s"},
+    // Work section area
+    {type:0, r:52, color:"#F9C846",center:"#c8900a", left:"2%",   top:"130vh", dur:"100s",delay:"0s"},
+    {type:5, r:44, color:"#E8435A",center:"#b82040", left:"97%",  top:"150vh", dur:"120s",delay:"-20s"},
+    {type:3, r:48, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"195vh", dur:"90s", delay:"-35s"},
+    {type:6, r:42, color:"#8B6EE8",center:"#5230c8", left:"98%",  top:"240vh", dur:"130s",delay:"-10s"},
+    {type:4, r:56, color:"#2EBFAC",center:"#1a7a6e", left:"2%",   top:"285vh", dur:"110s",delay:"-55s"},
+    {type:1, r:46, color:"#F07048",center:"#c0400a", left:"97%",  top:"330vh", dur:"140s",delay:"-40s"},
+    // Internships area
+    {type:5, r:50, color:"#F9C846",center:"#c8900a", left:"2%",   top:"375vh", dur:"95s", delay:"-15s"},
+    {type:0, r:44, color:"#E8435A",center:"#b82040", left:"97%",  top:"420vh", dur:"115s",delay:"-70s"},
+    {type:6, r:54, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"460vh", dur:"105s",delay:"-30s"},
+    {type:3, r:46, color:"#F07048",center:"#c0400a", left:"98%",  top:"505vh", dur:"125s",delay:"-50s"},
+    // Volunteering / Education area
+    {type:4, r:52, color:"#8B6EE8",center:"#5230c8", left:"2%",   top:"545vh", dur:"88s", delay:"-8s"},
+    {type:1, r:48, color:"#2EBFAC",center:"#1a7a6e", left:"97%",  top:"590vh", dur:"135s",delay:"-45s"},
+    {type:5, r:44, color:"#F9C846",center:"#c8900a", left:"2%",   top:"635vh", dur:"108s",delay:"-22s"},
+    {type:0, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"675vh", dur:"118s",delay:"-60s"},
+    // Skills / Languages area
+    {type:6, r:46, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"715vh", dur:"92s", delay:"-33s"},
+    {type:3, r:54, color:"#8B6EE8",center:"#5230c8", left:"97%",  top:"755vh", dur:"128s",delay:"-17s"},
+    {type:4, r:48, color:"#F07048",center:"#c0400a", left:"2%",   top:"795vh", dur:"102s",delay:"-48s"},
+    {type:1, r:52, color:"#2EBFAC",center:"#1a7a6e", left:"98%",  top:"835vh", dur:"138s",delay:"-28s"},
+    // Extra scatter in middle columns (not just edges)
+    {type:5, r:38, color:"#F9C846",center:"#c8900a", left:"88%",  top:"170vh", dur:"112s",delay:"-42s"},
+    {type:0, r:36, color:"#8B6EE8",center:"#5230c8", left:"10%",  top:"310vh", dur:"95s", delay:"-65s"},
+    {type:3, r:40, color:"#E8435A",center:"#b82040", left:"90%",  top:"490vh", dur:"122s",delay:"-18s"},
+    {type:6, r:36, color:"#2EBFAC",center:"#1a7a6e", left:"9%",   top:"620vh", dur:"108s",delay:"-38s"},
+    {type:4, r:38, color:"#F07048",center:"#c0400a", left:"89%",  top:"750vh", dur:"96s", delay:"-55s"},
   ];
 
   return (
@@ -204,7 +227,7 @@ function AmbientFlowers() {
           left:f.left, top:f.top,
           transform:"translate(-50%,-50%)",
           width:f.r*2, height:f.r*2,
-          opacity:0.65,
+          opacity:0.7,
           animation:`frot ${f.dur} linear infinite`,
           animationDelay:f.delay,
         }}>
@@ -645,7 +668,7 @@ export default function Home() {
     </div>
 
     {/* WORK */}
-    <div className="div-wrap"><div className="div-word rev">Work.</div></div>
+    <div className="div-wrap"><div className="div-word rev">Work</div></div>
     <section className="sec" style={{paddingTop:0}}>
       <div className="sec-label rev">career</div>
       <div className="grid2">
@@ -655,7 +678,7 @@ export default function Home() {
           <div className="feat-inner">
             <div>
               <div className="wy"><div className="wdot" style={{background:"var(--lav)"}}/><span style={{color:"var(--lav)"}}>2025 to Present</span></div>
-              <div className="wrole">Co-Founder and Freelance Web Developer</div>
+              <div className="wrole">Co-Founder</div>
               <div className="worg">Flores à Beira-Rio</div>
               <div className="site-links">
                 <a href="https://floresabeirario.pt" target="_blank" rel="noreferrer" className="site-link">
@@ -671,7 +694,7 @@ export default function Home() {
               <ul className="tech-list">
                 <li><b>Built and deployed</b> the brand website and a custom real-time order tracking portal, managing the full development lifecycle end to end.</li>
                 <li>Designed <b>backend logic using Google Sheets as a dynamic CMS</b> for unique client IDs, private routing, and order statuses.</li>
-                <li>Leveraged <b>LLMs (Claude, ChatGPT, Gemini)</b> with advanced prompting techniques to accelerate development and build production-ready features rapidly.</li>
+                <li>Uses <b>LLMs (Claude, ChatGPT, Gemini)</b> with advanced prompting techniques to accelerate development and ship production-ready features rapidly.</li>
                 <li>Manages version control with <b>GitHub</b> and automated deployments via <b>Vercel CI/CD</b>.</li>
               </ul>
               <div className="wtags">
@@ -708,7 +731,7 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--peach)"}}/><span style={{color:"var(--peach)"}}>2023 to 2025</span></div>
           <div className="wrole">Info Desk</div>
           <div className="worg">TUMO Coimbra</div>
-          <p className="wdesc">Manages student enquiries, <b>check-in and check-out, registration and enrolment</b>, database upkeep, and parent communication.</p>
+          <p className="wdesc">Managed student enquiries, <b>check-in and check-out, registration and enrolment</b>, database upkeep, and parent communication.</p>
           <div className="wtags"><span className="tag tp">Operations</span><span className="tag ty">Administration</span></div>
         </div>
 
@@ -716,7 +739,7 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--lav)"}}/><span style={{color:"var(--lav)"}}>2023 to 2025</span></div>
           <div className="wrole">Middle School Teacher</div>
           <div className="worg">Colégio de São José · Clonlara Program</div>
-          <p className="wdesc">Teaches <b>Mathematics and ICT</b> within a personalised learning programme that fosters authenticity, autonomy, and joy in learning.</p>
+          <p className="wdesc">Taught <b>Mathematics and ICT</b> within a personalised learning programme that fostered authenticity, autonomy, and joy in learning.</p>
           <div className="wtags"><span className="tag tl">Mathematics</span><span className="tag ts">ICT</span><span className="tag tl">Personalised Learning</span></div>
         </div>
 
@@ -724,7 +747,7 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--teal)"}}/><span style={{color:"var(--teal)"}}>2022 to 2024</span></div>
           <div className="wrole">Middle School Teacher</div>
           <div className="worg">Escola Tenente Valadim · ages 11 to 16</div>
-          <p className="wdesc">Teaches <b>Visual Education, Technology Education, and Design in Interactive Media</b> to homeschooled students. Develops creative expression and aesthetic understanding through art and technology.</p>
+          <p className="wdesc">Taught <b>Visual Education, Technology Education, and Design in Interactive Media</b> to homeschooled students. Developed creative expression and aesthetic understanding through art and technology.</p>
           <div className="wtags"><span className="tag tt">Visual Education</span><span className="tag ts">Interactive Design</span></div>
         </div>
 
@@ -732,7 +755,7 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--sky)"}}/><span style={{color:"var(--sky)"}}>2022 to 2023</span></div>
           <div className="wrole">Middle School Teacher</div>
           <div className="worg">Agrupamento de Escolas Dr. Bissaya Barreto</div>
-          <p className="wdesc">Teaches <b>Information and Communication Technologies</b> in a public school environment.</p>
+          <p className="wdesc">Taught <b>Information and Communication Technologies</b> in a public school environment.</p>
           <div className="wtags"><span className="tag ts">ICT</span></div>
         </div>
 
@@ -740,14 +763,14 @@ export default function Home() {
           <div className="wy"><div className="wdot" style={{background:"var(--sun)"}}/><span style={{color:"#8a6000"}}>2017 to 2018</span></div>
           <div className="wrole">Monitor</div>
           <div className="worg">Universidade de Coimbra</div>
-          <p className="wdesc">Serves as team monitor for <b>a class of 20 students</b> attending a Design and Multimedia summer course. Responsible for schedules, meals, attendance, and providing support throughout the classes.</p>
+          <p className="wdesc">Served as team monitor for <b>a class of 20 students</b> attending a Design and Multimedia summer course. Responsible for schedules, meals, attendance, and providing support throughout the classes.</p>
           <div className="wtags"><span className="tag ty">Mentoring</span><span className="tag tp">Design and Multimedia</span></div>
         </div>
       </div>
     </section>
 
     {/* INTERNSHIPS */}
-    <div className="div-wrap"><div className="div-word rev">Internships.</div></div>
+    <div className="div-wrap"><div className="div-word rev">Internships</div></div>
     <section className="sec" style={{paddingTop:0}}>
       <div className="sec-label rev">experience abroad</div>
       <div className="grid2">
@@ -755,21 +778,21 @@ export default function Home() {
           <div className="wy"><div className="wdot"/>2021 to 2022 · Paris, France</div>
           <div className="wrole">Production and Creative Direction</div>
           <div className="worg">Julien Tavel, Fashion Photographer</div>
-          <p className="wdesc">Works as <b>production and photo crew assistant</b> to an internationally recognised fashion photographer. Researches visual subjects, generates <b>mood boards and conceptual ideas</b>, and manages all supplies and equipment for set.</p>
+          <p className="wdesc">Worked as <b>production and photo crew assistant</b> to an internationally recognised fashion photographer. Researched visual subjects, generated <b>mood boards and conceptual ideas</b>, and managed all supplies and equipment for set.</p>
           <div className="wtags"><span className="tag tr">Fashion Photography</span><span className="tag tp">Creative Research</span><span className="tag ty">Set Management</span></div>
         </div>
         <div className="card cs" data-d="140">
           <div className="wy"><div className="wdot" style={{background:"var(--sky)"}}/><span style={{color:"var(--sky)"}}>2021 · Athens, Greece</span></div>
           <div className="wrole">Graphic and Email Designer</div>
           <div className="worg">ShipLemon · DeliverBack</div>
-          <p className="wdesc">Designs <b>web graphics, email templates, and newsletter layouts</b> for two tech startups. Builds mobile-friendly campaigns and collaborates across teams on marketing materials.</p>
+          <p className="wdesc">Designed <b>web graphics, email templates, and newsletter layouts</b> for two tech startups. Built mobile-friendly campaigns and collaborated across teams on marketing materials.</p>
           <div className="wtags"><span className="tag ts">Web Design</span><span className="tag tt">Email Design</span><span className="tag tp">Graphic Design</span></div>
         </div>
       </div>
     </section>
 
     {/* VOLUNTEERING */}
-    <div className="div-wrap"><div className="div-word rev">Volunteering.</div></div>
+    <div className="div-wrap"><div className="div-word rev">Volunteering</div></div>
     <section className="sec" style={{paddingTop:0}}>
       <div className="sec-label rev">giving back</div>
       <div className="grid2">
@@ -780,7 +803,7 @@ export default function Home() {
               <div className="wy"><div className="wdot" style={{background:"#c8900a"}}/><span style={{color:"#8a6000"}}>2024 · Bulgaria</span></div>
               <div className="wrole">Summer Activities Creator</div>
               <div className="worg">SOS Children's Villages · Future World Association</div>
-              <p className="wdesc">Creates and leads <b>summer activities for children</b> at SOS Children's Villages, bringing creativity, play, and warmth through hands-on projects and joyful learning.</p>
+              <p className="wdesc">Created and led <b>summer activities for children</b> at SOS Children's Villages, bringing creativity, play, and warmth through hands-on projects and joyful learning.</p>
               <div className="wtags"><span className="tag ty">Children's Activities</span><span className="tag tp">Community Care</span><span className="tag tr">Creative Workshops</span></div>
             </div>
             <div className="vol-thumb">
@@ -798,7 +821,7 @@ export default function Home() {
     </section>
 
     {/* EDUCATION */}
-    <div className="div-wrap"><div className="div-word rev">Education.</div></div>
+    <div className="div-wrap"><div className="div-word rev">Education</div></div>
     <section className="sec" style={{paddingTop:0}}>
       <div className="sec-label rev">academia</div>
       <div className="edu-tl">
@@ -819,7 +842,7 @@ export default function Home() {
     </section>
 
     {/* SKILLS */}
-    <div className="div-wrap"><div className="div-word rev">Skills.</div></div>
+    <div className="div-wrap"><div className="div-word rev">Skills</div></div>
     <section className="sec" style={{paddingTop:0}}>
       <div className="sec-label rev">toolkit</div>
       {SKILL_SECTIONS.map(section=>(
@@ -840,7 +863,7 @@ export default function Home() {
     {/* LANGUAGES */}
     <section className="sec">
       <div className="sec-label rev">communication</div>
-      <div className="div-word rev" style={{marginBottom:"40px"}}>Languages.</div>
+      <div className="div-word rev" style={{marginBottom:"40px"}}>Languages</div>
       <div className="lang-grid">
         {[
           {code:"PT",name:"Portuguese",cert:"Native",     w:100,color:"var(--rose)"},
