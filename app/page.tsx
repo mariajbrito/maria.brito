@@ -39,21 +39,19 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
   const vb=`${-r} ${-r} ${r*2} ${r*2}`;
   const S={overflow:"visible" as const};
 
-  if(type===0) { // starburst — 14 long thin pointed petals, NO centre fill, just petal tips
+  if(type===0) { // magnolia — 8 large rounded petals, single small centre, NO concentric rings
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-      {Array.from({length:14}).map((_,i)=>{
-        const a=(i/14)*Math.PI*2;
-        // petals as thin triangles radiating out — pointed, no blob
-        const tip=[Math.cos(a)*r*.95, Math.sin(a)*r*.95];
-        const l=[Math.cos(a+.18)*r*.28, Math.sin(a+.18)*r*.28];
-        const rr=[Math.cos(a-.18)*r*.28, Math.sin(a-.18)*r*.28];
-        return <polygon key={i} points={`${tip[0]},${tip[1]} ${l[0]},${l[1]} ${rr[0]},${rr[1]}`} fill={color}/>;
+      {Array.from({length:8}).map((_,i)=>{
+        const a=(i/8)*Math.PI*2;
+        const ox=Math.cos(a)*r*.32, oy=Math.sin(a)*r*.32;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.34} ry={r*.5}
+          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.2} fill={center}/>
+      <circle cx="0" cy="0" r={r*.18} fill={center}/>
     </svg>;
   }
 
-  if(type===1) { // sunflower — 16 petals, large coloured centre, dark inner
+  if(type===1) { // sunflower — 16 petals, ONE solid centre, NO dark inner ring
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:16}).map((_,i)=>{
         const a=(i/16)*Math.PI*2;
@@ -61,8 +59,7 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
         return <ellipse key={i} cx={ox} cy={oy} rx={r*.16} ry={r*.38}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.3} fill={center}/>
-      <circle cx="0" cy="0" r={r*.18} fill="#1a0a00"/>
+      <circle cx="0" cy="0" r={r*.28} fill={center}/>
     </svg>;
   }
 
@@ -99,7 +96,7 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
     </svg>;
   }
 
-  if(type===5) { // cherry blossom — 5 petals offset from centre
+  if(type===5) { // cherry blossom — 5 petals offset from centre, ONE centre circle
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:5}).map((_,i)=>{
         const a=(i/5)*Math.PI*2;
@@ -107,8 +104,7 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
         return <ellipse key={i} cx={ox} cy={oy} rx={r*.32} ry={r*.46}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.22} fill={center}/>
-      <circle cx="0" cy="0" r={r*.1}  fill={color}/>
+      <circle cx="0" cy="0" r={r*.2} fill={center}/>
     </svg>;
   }
 
