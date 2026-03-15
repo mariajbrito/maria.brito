@@ -31,81 +31,81 @@ const SKILL_SECTIONS = [
 ];
 
 /* ─────────────────────────────────────────
-   FLOWER SVGs — solid, no circles/ovals
-   Types kept: 0=daisy, 2=rose, 3=hibiscus, 5=cherry
-   New type 1=sunflower (thin petals), type 4=cosmos (8 pointed petals)
+   FLOWER SVGs — restored beloved version
+   0=daisy(overlapping), 1=sunflower, 2=rose,
+   3=hibiscus, 4=tulip, 5=cherry, 6=poppy
 ───────────────────────────────────────── */
 function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;center:string}) {
   const vb=`${-r} ${-r} ${r*2} ${r*2}`;
   const S={overflow:"visible" as const};
 
-  if(type===0) { // daisy — 12 thin petals, very small centre dot
+  if(type===0) { // daisy — 12 petals overlapping from near-centre, large centre
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:12}).map((_,i)=>
-        <ellipse key={i} cx="0" cy={-(r*.38+r*.28)} rx={r*.11} ry={r*.32}
+        <ellipse key={i} cx="0" cy={-(r*.32+r*.36)} rx={r*.13} ry={r*.4}
           fill={color} transform={`rotate(${(i/12)*360})`}/>)}
-      <circle cx="0" cy="0" r={r*.16} fill={center}/>
+      <circle cx="0" cy="0" r={r*.3} fill={center}/>
+      <circle cx="0" cy="0" r={r*.16} fill={color}/>
     </svg>;
   }
 
-  if(type===1) { // sunflower — 16 petals, solid centre no inner ring
+  if(type===1) { // sunflower — 16 petals, large coloured centre, dark inner
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:16}).map((_,i)=>{
         const a=(i/16)*Math.PI*2;
-        const ox=Math.cos(a)*r*.52, oy=Math.sin(a)*r*.52;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.14} ry={r*.34}
+        const ox=Math.cos(a)*r*.5, oy=Math.sin(a)*r*.5;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.16} ry={r*.38}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.26} fill={center}/>
+      <circle cx="0" cy="0" r={r*.3} fill={center}/>
+      <circle cx="0" cy="0" r={r*.18} fill="#1a0a00"/>
     </svg>;
   }
 
-  if(type===2) { // rose — 7 overlapping petals, small dot centre
+  if(type===2) { // rose — 7 fat overlapping petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:7}).map((_,i)=>{
         const a=(i/7)*Math.PI*2;
-        const ox=Math.cos(a)*r*.25, oy=Math.sin(a)*r*.25;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.46} ry={r*.26}
+        const ox=Math.cos(a)*r*.22, oy=Math.sin(a)*r*.22;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.48} ry={r*.28}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.14} fill={center}/>
+      <circle cx="0" cy="0" r={r*.24} fill={center}/>
     </svg>;
   }
 
-  if(type===3) { // hibiscus — 5 fan petals, tiny centre
+  if(type===3) { // hibiscus — 5 wide fan petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:5}).map((_,i)=>
-        <ellipse key={i} cx="0" cy={-r*.46} rx={r*.36} ry={r*.54}
+        <ellipse key={i} cx="0" cy={-r*.44} rx={r*.38} ry={r*.56}
           fill={color} transform={`rotate(${(i/5)*360})`}/>)}
-      <circle cx="0" cy="0" r={r*.12} fill={center}/>
+      <circle cx="0" cy="0" r={r*.18} fill={center}/>
     </svg>;
   }
 
-  if(type===4) { // cosmos — 8 pointed petals clearly radiating
+  if(type===4) { // tulip — solid cupped blob with inner highlight
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-      {Array.from({length:8}).map((_,i)=>{
-        const a=(i/8)*Math.PI*2;
-        const ox=Math.cos(a)*r*.44, oy=Math.sin(a)*r*.44;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.17} ry={r*.44}
-          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
-      })}
-      <circle cx="0" cy="0" r={r*.16} fill={center}/>
+      <path d={`M 0 ${-r*.92} C ${r*.5} ${-r*.55} ${r*.85} ${-r*.05} ${r*.52} ${r*.62}
+        C ${r*.22} ${r*.92} ${-r*.22} ${r*.92} ${-r*.52} ${r*.62}
+        C ${-r*.85} ${-r*.05} ${-r*.5} ${-r*.55} 0 ${-r*.92} Z`} fill={color}/>
+      <ellipse cx="0" cy={r*.05} rx={r*.28} ry={r*.38} fill={center}/>
     </svg>;
   }
 
-  if(type===5) { // cherry blossom — 5 rounded offset petals
+  if(type===5) { // cherry blossom — 5 petals offset from centre
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:5}).map((_,i)=>{
         const a=(i/5)*Math.PI*2;
-        const ox=Math.cos(a)*r*.32, oy=Math.sin(a)*r*.32;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.30} ry={r*.44}
+        const ox=Math.cos(a)*r*.28, oy=Math.sin(a)*r*.28;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.32} ry={r*.46}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.16} fill={center}/>
+      <circle cx="0" cy="0" r={r*.22} fill={center}/>
+      <circle cx="0" cy="0" r={r*.1}  fill={color}/>
     </svg>;
   }
 
-  // type 6: anemone — 6 wide petals, very clear flower shape
+  // type 6: anemone — 6 wide petals
   return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
     {Array.from({length:6}).map((_,i)=>{
       const a=(i/6)*Math.PI*2;
@@ -113,7 +113,7 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
       return <ellipse key={i} cx={ox} cy={oy} rx={r*.36} ry={r*.52}
         fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
     })}
-    <circle cx="0" cy="0" r={r*.18} fill={center}/>
+    <circle cx="0" cy="0" r={r*.2} fill={center}/>
   </svg>;
 }
 
@@ -128,20 +128,20 @@ function HeroFlowers({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
 
   // Each hero flower has a "direction" it flies toward when scrolling
   const heroFlowers = [
-    // FRONT large
-    {type:0, r:280, color:"#F9C846", center:"#c8900a", cx:0.0,  cy:0.08, dx:-1,  dy:-1, dur:"75s",  delay:"0s",   depth:.055},
+    // FRONT large — types 2,3,5,6 on left; any on right/bottom
+    {type:2, r:280, color:"#F9C846", center:"#c8900a", cx:0.0,  cy:0.08, dx:-1,  dy:-1, dur:"75s",  delay:"0s",   depth:.055},
     {type:3, r:260, color:"#4BAF7E", center:"#2c7a50", cx:1.0,  cy:0.05, dx:1,   dy:-1, dur:"88s",  delay:"-12s", depth:.048},
     {type:5, r:300, color:"#E8435A", center:"#b82040", cx:-0.02,cy:0.65, dx:-1,  dy:0,  dur:"70s",  delay:"-25s", depth:.060},
-    {type:4, r:270, color:"#8B6EE8", center:"#5230c8", cx:1.02, cy:0.68, dx:1,   dy:0,  dur:"82s",  delay:"-40s", depth:.052},
-    {type:6, r:320, color:"#F07048", center:"#c0400a", cx:0.48, cy:1.02, dx:0,   dy:1,  dur:"78s",  delay:"-18s", depth:.058},
-    {type:1, r:240, color:"#2EBFAC", center:"#1a7a6e", cx:0.20, cy:0.95, dx:-1,  dy:1,  dur:"92s",  delay:"-55s", depth:.045},
-    {type:5, r:255, color:"#F9C846", center:"#c8900a", cx:0.80, cy:0.92, dx:1,   dy:1,  dur:"85s",  delay:"-30s", depth:.050},
+    {type:6, r:270, color:"#8B6EE8", center:"#5230c8", cx:1.02, cy:0.68, dx:1,   dy:0,  dur:"82s",  delay:"-40s", depth:.052},
+    {type:0, r:320, color:"#F07048", center:"#c0400a", cx:0.48, cy:1.02, dx:0,   dy:1,  dur:"78s",  delay:"-18s", depth:.058},
+    {type:5, r:240, color:"#2EBFAC", center:"#1a7a6e", cx:0.20, cy:0.95, dx:-1,  dy:1,  dur:"92s",  delay:"-55s", depth:.045},
+    {type:2, r:255, color:"#F9C846", center:"#c8900a", cx:0.80, cy:0.92, dx:1,   dy:1,  dur:"85s",  delay:"-30s", depth:.050},
     // MID
-    {type:4, r:130, color:"#F9C846", center:"#c8900a", cx:0.78, cy:0.20, dx:1,   dy:-1, dur:"90s",  delay:"-15s", depth:.022},
+    {type:1, r:130, color:"#F9C846", center:"#c8900a", cx:0.78, cy:0.20, dx:1,   dy:-1, dur:"90s",  delay:"-15s", depth:.022},
     {type:6, r:120, color:"#4BAF7E", center:"#2c7a50", cx:0.10, cy:0.70, dx:-1,  dy:1,  dur:"100s", delay:"-55s", depth:.018},
     {type:3, r:110, color:"#8B6EE8", center:"#5230c8", cx:0.55, cy:0.65, dx:0,   dy:1,  dur:"110s", delay:"-40s", depth:.020},
     {type:1, r:105, color:"#F07048", center:"#c0400a", cx:0.30, cy:0.10, dx:-1,  dy:-1, dur:"95s",  delay:"-70s", depth:.019},
-    {type:0, r:115, color:"#2EBFAC", center:"#1a7a6e", cx:0.88, cy:0.50, dx:1,   dy:0,  dur:"105s", delay:"-25s", depth:.021},
+    {type:2, r:115, color:"#2EBFAC", center:"#1a7a6e", cx:0.88, cy:0.50, dx:1,   dy:0,  dur:"105s", delay:"-25s", depth:.021},
   ];
 
   const DISPERSE_DIST = 80; // vw/vh units to fly off screen
@@ -185,38 +185,45 @@ function HeroFlowers({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
 /* ─────────────────────────────────────────
    AMBIENT FLOWERS — small, fixed positions
    scattered throughout the whole document
-   (visible only after hero, faint on light bg)
+   Only types 3,4,5,6 — clearly petal-shaped on light bg
 ───────────────────────────────────────── */
 function AmbientFlowers() {
   const smalls = [
-    // Work section area
-    {type:0, r:52, color:"#F9C846",center:"#c8900a", left:"2%",   top:"130vh", dur:"100s",delay:"0s"},
-    {type:5, r:44, color:"#E8435A",center:"#b82040", left:"97%",  top:"150vh", dur:"120s",delay:"-20s"},
-    {type:3, r:48, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"195vh", dur:"90s", delay:"-35s"},
-    {type:6, r:42, color:"#8B6EE8",center:"#5230c8", left:"98%",  top:"240vh", dur:"130s",delay:"-10s"},
-    {type:4, r:56, color:"#2EBFAC",center:"#1a7a6e", left:"2%",   top:"285vh", dur:"110s",delay:"-55s"},
-    {type:1, r:46, color:"#F07048",center:"#c0400a", left:"97%",  top:"330vh", dur:"140s",delay:"-40s"},
-    // Internships area
-    {type:5, r:50, color:"#F9C846",center:"#c8900a", left:"2%",   top:"375vh", dur:"95s", delay:"-15s"},
-    {type:0, r:44, color:"#E8435A",center:"#b82040", left:"97%",  top:"420vh", dur:"115s",delay:"-70s"},
-    {type:6, r:54, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"460vh", dur:"105s",delay:"-30s"},
-    {type:3, r:46, color:"#F07048",center:"#c0400a", left:"98%",  top:"505vh", dur:"125s",delay:"-50s"},
-    // Volunteering / Education area
-    {type:4, r:52, color:"#8B6EE8",center:"#5230c8", left:"2%",   top:"545vh", dur:"88s", delay:"-8s"},
-    {type:1, r:48, color:"#2EBFAC",center:"#1a7a6e", left:"97%",  top:"590vh", dur:"135s",delay:"-45s"},
-    {type:5, r:44, color:"#F9C846",center:"#c8900a", left:"2%",   top:"635vh", dur:"108s",delay:"-22s"},
-    {type:0, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"675vh", dur:"118s",delay:"-60s"},
-    // Skills / Languages area
-    {type:6, r:46, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"715vh", dur:"92s", delay:"-33s"},
-    {type:3, r:54, color:"#8B6EE8",center:"#5230c8", left:"97%",  top:"755vh", dur:"128s",delay:"-17s"},
-    {type:4, r:48, color:"#F07048",center:"#c0400a", left:"2%",   top:"795vh", dur:"102s",delay:"-48s"},
-    {type:1, r:52, color:"#2EBFAC",center:"#1a7a6e", left:"98%",  top:"835vh", dur:"138s",delay:"-28s"},
-    // Extra scatter in middle columns (not just edges)
-    {type:5, r:38, color:"#F9C846",center:"#c8900a", left:"88%",  top:"170vh", dur:"112s",delay:"-42s"},
-    {type:0, r:36, color:"#8B6EE8",center:"#5230c8", left:"10%",  top:"310vh", dur:"95s", delay:"-65s"},
-    {type:3, r:40, color:"#E8435A",center:"#b82040", left:"90%",  top:"490vh", dur:"122s",delay:"-18s"},
-    {type:6, r:36, color:"#2EBFAC",center:"#1a7a6e", left:"9%",   top:"620vh", dur:"108s",delay:"-38s"},
-    {type:4, r:38, color:"#F07048",center:"#c0400a", left:"89%",  top:"750vh", dur:"96s", delay:"-55s"},
+    // Work section — edges
+    {type:5, r:58, color:"#F9C846",center:"#c8900a", left:"1%",   top:"130vh", dur:"100s",delay:"0s"},
+    {type:3, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"152vh", dur:"120s",delay:"-20s"},
+    {type:6, r:54, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"198vh", dur:"90s", delay:"-35s"},
+    {type:4, r:48, color:"#8B6EE8",center:"#5230c8", left:"98%",  top:"242vh", dur:"130s",delay:"-10s"},
+    {type:5, r:62, color:"#2EBFAC",center:"#1a7a6e", left:"1%",   top:"288vh", dur:"110s",delay:"-55s"},
+    {type:6, r:52, color:"#F07048",center:"#c0400a", left:"98%",  top:"332vh", dur:"140s",delay:"-40s"},
+    // Work section — inner scatter
+    {type:3, r:44, color:"#F9C846",center:"#c8900a", left:"91%",  top:"168vh", dur:"112s",delay:"-42s"},
+    {type:4, r:40, color:"#4BAF7E",center:"#2c7a50", left:"8%",   top:"265vh", dur:"95s", delay:"-65s"},
+    {type:6, r:46, color:"#E8435A",center:"#b82040", left:"92%",  top:"310vh", dur:"122s",delay:"-18s"},
+    // Internships area — edges
+    {type:5, r:56, color:"#F9C846",center:"#c8900a", left:"1%",   top:"378vh", dur:"95s", delay:"-15s"},
+    {type:3, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"422vh", dur:"115s",delay:"-70s"},
+    {type:4, r:60, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"462vh", dur:"105s",delay:"-30s"},
+    {type:6, r:52, color:"#F07048",center:"#c0400a", left:"98%",  top:"508vh", dur:"125s",delay:"-50s"},
+    // Internships — inner
+    {type:5, r:42, color:"#8B6EE8",center:"#5230c8", left:"9%",   top:"445vh", dur:"108s",delay:"-22s"},
+    {type:4, r:44, color:"#2EBFAC",center:"#1a7a6e", left:"90%",  top:"490vh", dur:"118s",delay:"-38s"},
+    // Volunteering / Education — edges
+    {type:3, r:54, color:"#8B6EE8",center:"#5230c8", left:"1%",   top:"548vh", dur:"88s", delay:"-8s"},
+    {type:6, r:48, color:"#2EBFAC",center:"#1a7a6e", left:"98%",  top:"592vh", dur:"135s",delay:"-45s"},
+    {type:5, r:56, color:"#F9C846",center:"#c8900a", left:"1%",   top:"638vh", dur:"108s",delay:"-22s"},
+    {type:4, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"678vh", dur:"118s",delay:"-60s"},
+    // Volunteering / Education — inner
+    {type:6, r:40, color:"#F07048",center:"#c0400a", left:"91%",  top:"568vh", dur:"96s", delay:"-55s"},
+    {type:3, r:42, color:"#4BAF7E",center:"#2c7a50", left:"8%",   top:"618vh", dur:"128s",delay:"-32s"},
+    // Skills / Languages — edges
+    {type:5, r:52, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"718vh", dur:"92s", delay:"-33s"},
+    {type:6, r:60, color:"#8B6EE8",center:"#5230c8", left:"98%",  top:"758vh", dur:"128s",delay:"-17s"},
+    {type:3, r:54, color:"#F07048",center:"#c0400a", left:"1%",   top:"798vh", dur:"102s",delay:"-48s"},
+    {type:4, r:58, color:"#2EBFAC",center:"#1a7a6e", left:"98%",  top:"838vh", dur:"138s",delay:"-28s"},
+    // Skills — inner
+    {type:6, r:42, color:"#F9C846",center:"#c8900a", left:"9%",   top:"740vh", dur:"115s",delay:"-50s"},
+    {type:5, r:44, color:"#E8435A",center:"#b82040", left:"90%",  top:"778vh", dur:"105s",delay:"-25s"},
   ];
 
   return (
@@ -227,7 +234,7 @@ function AmbientFlowers() {
           left:f.left, top:f.top,
           transform:"translate(-50%,-50%)",
           width:f.r*2, height:f.r*2,
-          opacity:0.7,
+          opacity:0.72,
           animation:`frot ${f.dur} linear infinite`,
           animationDelay:f.delay,
         }}>
@@ -482,9 +489,9 @@ export default function Home() {
       .ct::before{background:linear-gradient(90deg,var(--teal),var(--sage));}
 
       .card-full{grid-column:1/-1;}
-      .card-flores{background:rgba(240,236,255,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:rgba(139,110,232,.28);}
-      .card-flores .feat-badge{background:rgba(139,110,232,.14);border:1.5px solid rgba(139,110,232,.28);color:#5230c8;}
-      .card-flores .bdot{background:var(--lav);}
+      .card-flores{background:rgba(237,255,246,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:rgba(75,175,126,.25);}
+      .card-flores .feat-badge{background:rgba(75,175,126,.14);border:1.5px solid rgba(75,175,126,.28);color:#2c7a50;}
+      .card-flores .bdot{background:var(--sage);}
       .card-gold{background:rgba(255,250,235,.9);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:rgba(200,144,10,.22);}
 
       .feat-badge{display:inline-flex;align-items:center;gap:7px;border-radius:100px;padding:5px 14px;font-size:11px;font-family:'DM Mono',monospace;margin-bottom:14px;}
@@ -492,15 +499,15 @@ export default function Home() {
       .feat-inner{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:start;}
 
       .site-links{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0;}
-      .site-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-family:'DM Mono',monospace;color:#5230c8;background:rgba(139,110,232,.1);border:1.5px solid rgba(139,110,232,.25);border-radius:100px;padding:5px 12px;text-decoration:none;transition:transform .2s,background .2s;}
-      .site-link:hover{transform:translateY(-2px);background:rgba(139,110,232,.18);}
+      .site-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-family:'DM Mono',monospace;color:#2c7a50;background:rgba(75,175,126,.1);border:1.5px solid rgba(75,175,126,.28);border-radius:100px;padding:5px 12px;text-decoration:none;transition:transform .2s,background .2s;}
+      .site-link:hover{transform:translateY(-2px);background:rgba(75,175,126,.2);}
 
-      .flores-vis{width:100px;height:100px;border-radius:20px;background:linear-gradient(135deg,#eceaff,#ddd8ff);border:1.5px solid rgba(139,110,232,.25);display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:fbounce 5s ease-in-out infinite;}
+      .flores-vis{width:100px;height:100px;border-radius:20px;background:linear-gradient(135deg,#d4f7e5,#a8edcc);border:1.5px solid rgba(75,175,126,.28);display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:fbounce 5s ease-in-out infinite;}
       @keyframes fbounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-9px) rotate(4deg)}}
 
       .tech-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:7px;}
       .tech-list li{font-size:13px;line-height:1.6;color:var(--textd);padding-left:16px;position:relative;font-weight:400;}
-      .tech-list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--lav);}
+      .tech-list li::before{content:'';position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--sage);}
 
       .vol-thumb{width:176px;height:176px;flex-shrink:0;border-radius:18px;overflow:hidden;background:linear-gradient(135deg,#fdecc8,#fce4b0);display:flex;align-items:center;justify-content:center;}
       .vol-thumb img{width:100%;height:100%;object-fit:cover;}
@@ -673,11 +680,11 @@ export default function Home() {
       <div className="sec-label rev">career</div>
       <div className="grid2">
 
-        <div className="card card-full card-flores ca" data-d="0">
+        <div className="card card-full card-flores cg" data-d="0">
           <div className="feat-badge"><div className="bdot"/>Latest venture</div>
           <div className="feat-inner">
             <div>
-              <div className="wy"><div className="wdot" style={{background:"var(--lav)"}}/><span style={{color:"var(--lav)"}}>2025 to Present</span></div>
+              <div className="wy"><div className="wdot" style={{background:"var(--sage)"}}/><span style={{color:"var(--sage)"}}>2025 to Present</span></div>
               <div className="wrole">Co-Founder</div>
               <div className="worg">Flores à Beira-Rio</div>
               <div className="site-links">
@@ -698,20 +705,20 @@ export default function Home() {
                 <li>Manages version control with <b>GitHub</b> and automated deployments via <b>Vercel CI/CD</b>.</li>
               </ul>
               <div className="wtags">
-                <span className="tag tl">Entrepreneurship</span>
+                <span className="tag tg">Entrepreneurship</span>
                 <span className="tag tt">Web Dev</span>
-                <span className="tag tl">AI Prototyping</span>
+                <span className="tag tg">AI Prototyping</span>
                 <span className="tag ts">GitHub / Vercel</span>
-                <span className="tag tl">Creative Direction</span>
+                <span className="tag tg">Creative Direction</span>
               </div>
             </div>
             <div className="flores-vis">
               <svg viewBox="0 0 60 60" width="56" height="56">
-                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#8B6EE8" opacity=".9"/>
-                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#4B9FE0" opacity=".85" transform="rotate(72 30 30)"/>
-                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#8B6EE8" opacity=".9" transform="rotate(144 30 30)"/>
-                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#4B9FE0" opacity=".85" transform="rotate(216 30 30)"/>
-                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#8B6EE8" opacity=".9" transform="rotate(288 30 30)"/>
+                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#4BAF7E" opacity=".9"/>
+                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#2EBFAC" opacity=".85" transform="rotate(72 30 30)"/>
+                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#4BAF7E" opacity=".9"  transform="rotate(144 30 30)"/>
+                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#2EBFAC" opacity=".85" transform="rotate(216 30 30)"/>
+                <ellipse cx="30" cy="13" rx="8" ry="13" fill="#4BAF7E" opacity=".9"  transform="rotate(288 30 30)"/>
                 <circle cx="30" cy="30" r="8" fill="white" opacity=".9"/>
                 <circle cx="30" cy="30" r="4" fill="#F9C846" opacity=".9"/>
               </svg>
