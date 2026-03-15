@@ -31,39 +31,23 @@ const SKILL_SECTIONS = [
 ];
 
 /* ─────────────────────────────────────────
-   FLOWER SVGs — types 1,2,3,5,6 good; 
-   0=starburst(many thin petals no centre fill), 4=cosmos(8 pointed)
-   NO concentric circles, NO egg shapes
+   FLOWER SVGs — 4 types only
+   0=daisy, 1=rose, 2=hibiscus, 3=cosmos
 ───────────────────────────────────────── */
 function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;center:string}) {
   const vb=`${-r} ${-r} ${r*2} ${r*2}`;
   const S={overflow:"visible" as const};
 
-  if(type===0) { // magnolia — 8 large rounded petals, single small centre, NO concentric rings
+  if(type===0) { // daisy — 14 thin petals, single centre
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-      {Array.from({length:8}).map((_,i)=>{
-        const a=(i/8)*Math.PI*2;
-        const ox=Math.cos(a)*r*.32, oy=Math.sin(a)*r*.32;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.34} ry={r*.5}
-          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
-      })}
-      <circle cx="0" cy="0" r={r*.18} fill={center}/>
+      {Array.from({length:14}).map((_,i)=>
+        <ellipse key={i} cx="0" cy={-(r*.42+r*.3)} rx={r*.1} ry={r*.34}
+          fill={color} transform={`rotate(${(i/14)*360})`}/>)}
+      <circle cx="0" cy="0" r={r*.2} fill={center}/>
     </svg>;
   }
 
-  if(type===1) { // sunflower — 16 petals, ONE solid centre, NO dark inner ring
-    return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-      {Array.from({length:16}).map((_,i)=>{
-        const a=(i/16)*Math.PI*2;
-        const ox=Math.cos(a)*r*.5, oy=Math.sin(a)*r*.5;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.16} ry={r*.38}
-          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
-      })}
-      <circle cx="0" cy="0" r={r*.28} fill={center}/>
-    </svg>;
-  }
-
-  if(type===2) { // rose — 7 fat overlapping petals
+  if(type===1) { // rose — 7 fat overlapping petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:7}).map((_,i)=>{
         const a=(i/7)*Math.PI*2;
@@ -71,52 +55,28 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
         return <ellipse key={i} cx={ox} cy={oy} rx={r*.48} ry={r*.28}
           fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
       })}
-      <circle cx="0" cy="0" r={r*.24} fill={center}/>
+      <circle cx="0" cy="0" r={r*.22} fill={center}/>
     </svg>;
   }
 
-  if(type===3) { // hibiscus — 5 wide fan petals
+  if(type===2) { // hibiscus — 5 wide fan petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:5}).map((_,i)=>
         <ellipse key={i} cx="0" cy={-r*.44} rx={r*.38} ry={r*.56}
           fill={color} transform={`rotate(${(i/5)*360})`}/>)}
-      <circle cx="0" cy="0" r={r*.18} fill={center}/>
+      <circle cx="0" cy="0" r={r*.16} fill={center}/>
     </svg>;
   }
 
-  if(type===4) { // cosmos — 8 pointed petals, clearly a star-flower
-    return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-      {Array.from({length:8}).map((_,i)=>{
-        const a=(i/8)*Math.PI*2;
-        const ox=Math.cos(a)*r*.45, oy=Math.sin(a)*r*.45;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.18} ry={r*.46}
-          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
-      })}
-      <circle cx="0" cy="0" r={r*.2} fill={center}/>
-    </svg>;
-  }
-
-  if(type===5) { // cherry blossom — 5 petals offset from centre, ONE centre circle
-    return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-      {Array.from({length:5}).map((_,i)=>{
-        const a=(i/5)*Math.PI*2;
-        const ox=Math.cos(a)*r*.28, oy=Math.sin(a)*r*.28;
-        return <ellipse key={i} cx={ox} cy={oy} rx={r*.32} ry={r*.46}
-          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
-      })}
-      <circle cx="0" cy="0" r={r*.2} fill={center}/>
-    </svg>;
-  }
-
-  // type 6: anemone — 6 wide rounded petals
+  // type===3: cosmos — 8 pointed petals
   return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-    {Array.from({length:6}).map((_,i)=>{
-      const a=(i/6)*Math.PI*2;
-      const ox=Math.cos(a)*r*.28, oy=Math.sin(a)*r*.28;
-      return <ellipse key={i} cx={ox} cy={oy} rx={r*.36} ry={r*.52}
+    {Array.from({length:8}).map((_,i)=>{
+      const a=(i/8)*Math.PI*2;
+      const ox=Math.cos(a)*r*.45, oy=Math.sin(a)*r*.45;
+      return <ellipse key={i} cx={ox} cy={oy} rx={r*.18} ry={r*.46}
         fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
     })}
-    <circle cx="0" cy="0" r={r*.2} fill={center}/>
+    <circle cx="0" cy="0" r={r*.18} fill={center}/>
   </svg>;
 }
 
@@ -129,30 +89,30 @@ function HeroFlowers({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
   const H=typeof window!=="undefined"?window.innerHeight:900;
   const pxN=mx/W-.5, pyN=my/H-.5;
 
-  // Hero flowers — 4 depth layers for near/far feel, NO type 0 or 4
+  // Hero flowers — only daisy(0), rose(1), hibiscus(2), cosmos(3)
   const heroFlowers = [
-    // ── FAR (tiny, slow parallax — stay visible longest after scroll) ──
-    {type:5, r: 60, color:"#F9C846",center:"#c8900a", cx:.22, cy:.15, dx:-1, dy:-1, dur:"120s",delay:"0s",   depth:.006, linger:true},
-    {type:3, r: 55, color:"#4BAF7E",center:"#2c7a50", cx:.68, cy:.10, dx: 1, dy:-1, dur:"140s",delay:"-20s", depth:.005, linger:true},
-    {type:6, r: 50, color:"#8B6EE8",center:"#5230c8", cx:.40, cy:.60, dx: 0, dy: 1, dur:"130s",delay:"-40s", depth:.006, linger:true},
-    {type:2, r: 65, color:"#2EBFAC",center:"#1a7a6e", cx:.82, cy:.55, dx: 1, dy: 0, dur:"150s",delay:"-60s", depth:.005, linger:true},
-    {type:5, r: 52, color:"#E8435A",center:"#b82040", cx:.12, cy:.82, dx:-1, dy: 1, dur:"160s",delay:"-30s", depth:.006, linger:true},
-    // ── MID-SMALL ──
-    {type:6, r:120, color:"#4BAF7E",center:"#2c7a50", cx:.10, cy:.68, dx:-1, dy: 1, dur:"100s",delay:"-55s", depth:.018, linger:true},
+    // FAR — tiny, linger after scroll
+    {type:0, r: 60, color:"#F9C846",center:"#c8900a", cx:.22, cy:.15, dx:-1, dy:-1, dur:"120s",delay:"0s",   depth:.006, linger:true},
+    {type:2, r: 55, color:"#4BAF7E",center:"#2c7a50", cx:.68, cy:.10, dx: 1, dy:-1, dur:"140s",delay:"-20s", depth:.005, linger:true},
+    {type:3, r: 50, color:"#8B6EE8",center:"#5230c8", cx:.40, cy:.60, dx: 0, dy: 1, dur:"130s",delay:"-40s", depth:.006, linger:true},
+    {type:1, r: 65, color:"#2EBFAC",center:"#1a7a6e", cx:.82, cy:.55, dx: 1, dy: 0, dur:"150s",delay:"-60s", depth:.005, linger:true},
+    {type:0, r: 52, color:"#E8435A",center:"#b82040", cx:.12, cy:.82, dx:-1, dy: 1, dur:"160s",delay:"-30s", depth:.006, linger:true},
+    // MID-SMALL
+    {type:2, r:120, color:"#4BAF7E",center:"#2c7a50", cx:.10, cy:.68, dx:-1, dy: 1, dur:"100s",delay:"-55s", depth:.018, linger:true},
     {type:3, r:110, color:"#8B6EE8",center:"#5230c8", cx:.55, cy:.62, dx: 0, dy: 1, dur:"110s",delay:"-40s", depth:.020, linger:true},
-    {type:1, r:105, color:"#F07048",center:"#c0400a", cx:.30, cy:.10, dx:-1, dy:-1, dur:"95s", delay:"-70s", depth:.019, linger:false},
+    {type:0, r:105, color:"#F07048",center:"#c0400a", cx:.30, cy:.10, dx:-1, dy:-1, dur:"95s", delay:"-70s", depth:.019, linger:false},
     {type:1, r:130, color:"#F9C846",center:"#c8900a", cx:.78, cy:.22, dx: 1, dy:-1, dur:"90s", delay:"-15s", depth:.022, linger:false},
-    // ── MID-LARGE ──
-    {type:2, r:200, color:"#2EBFAC",center:"#1a7a6e", cx:.88, cy:.50, dx: 1, dy: 0, dur:"105s",delay:"-25s", depth:.030, linger:false},
+    // MID-LARGE
+    {type:1, r:200, color:"#2EBFAC",center:"#1a7a6e", cx:.88, cy:.50, dx: 1, dy: 0, dur:"105s",delay:"-25s", depth:.030, linger:false},
     {type:3, r:190, color:"#F9C846",center:"#c8900a", cx:.10, cy:.30, dx:-1, dy:-1, dur:"95s", delay:"-45s", depth:.028, linger:false},
-    // ── FRONT large — bleed off edges ──
-    {type:2, r:280, color:"#F9C846",center:"#c8900a", cx: 0.0, cy:.08, dx:-1, dy:-1, dur:"75s", delay:"0s",   depth:.055, linger:false},
-    {type:3, r:260, color:"#4BAF7E",center:"#2c7a50", cx: 1.0, cy:.05, dx: 1, dy:-1, dur:"88s", delay:"-12s", depth:.048, linger:false},
-    {type:5, r:300, color:"#E8435A",center:"#b82040", cx:-0.02,cy:.65, dx:-1, dy: 0, dur:"70s", delay:"-25s", depth:.060, linger:false},
-    {type:6, r:270, color:"#8B6EE8",center:"#5230c8", cx: 1.02,cy:.68, dx: 1, dy: 0, dur:"82s", delay:"-40s", depth:.052, linger:false},
-    {type:3, r:320, color:"#F07048",center:"#c0400a", cx:.48,  cy:1.02,dx: 0, dy: 1, dur:"78s", delay:"-18s", depth:.058, linger:false},
-    {type:5, r:240, color:"#2EBFAC",center:"#1a7a6e", cx:.20,  cy:.95, dx:-1, dy: 1, dur:"92s", delay:"-55s", depth:.045, linger:false},
-    {type:2, r:255, color:"#F9C846",center:"#c8900a", cx:.80,  cy:.92, dx: 1, dy: 1, dur:"85s", delay:"-30s", depth:.050, linger:false},
+    // FRONT large
+    {type:1, r:280, color:"#F9C846",center:"#c8900a", cx: 0.0, cy:.08, dx:-1, dy:-1, dur:"75s", delay:"0s",   depth:.055, linger:false},
+    {type:2, r:260, color:"#4BAF7E",center:"#2c7a50", cx: 1.0, cy:.05, dx: 1, dy:-1, dur:"88s", delay:"-12s", depth:.048, linger:false},
+    {type:0, r:300, color:"#E8435A",center:"#b82040", cx:-0.02,cy:.65, dx:-1, dy: 0, dur:"70s", delay:"-25s", depth:.060, linger:false},
+    {type:3, r:270, color:"#8B6EE8",center:"#5230c8", cx: 1.02,cy:.68, dx: 1, dy: 0, dur:"82s", delay:"-40s", depth:.052, linger:false},
+    {type:2, r:320, color:"#F07048",center:"#c0400a", cx:.48,  cy:1.02,dx: 0, dy: 1, dur:"78s", delay:"-18s", depth:.058, linger:false},
+    {type:0, r:240, color:"#2EBFAC",center:"#1a7a6e", cx:.20,  cy:.95, dx:-1, dy: 1, dur:"92s", delay:"-55s", depth:.045, linger:false},
+    {type:1, r:255, color:"#F9C846",center:"#c8900a", cx:.80,  cy:.92, dx: 1, dy: 1, dur:"85s", delay:"-30s", depth:.050, linger:false},
   ];
 
   const DISPERSE_DIST = 80;
@@ -205,40 +165,40 @@ function HeroFlowers({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
 function AmbientFlowers() {
   const smalls = [
     // Work section — edges
-    {type:5, r:58, color:"#F9C846",center:"#c8900a", left:"1%",   top:"130vh", dur:"100s",delay:"0s"},
-    {type:3, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"152vh", dur:"120s",delay:"-20s"},
-    {type:6, r:54, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"198vh", dur:"90s", delay:"-35s"},
-    {type:2, r:48, color:"#8B6EE8",center:"#5230c8", left:"98%",  top:"242vh", dur:"130s",delay:"-10s"},
-    {type:5, r:62, color:"#2EBFAC",center:"#1a7a6e", left:"1%",   top:"288vh", dur:"110s",delay:"-55s"},
-    {type:6, r:52, color:"#F07048",center:"#c0400a", left:"98%",  top:"332vh", dur:"140s",delay:"-40s"},
-    // Work section — inner scatter
+    {type:0, r:58, color:"#F9C846",center:"#c8900a", left:"1%",   top:"130vh", dur:"100s",delay:"0s"},
+    {type:2, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"152vh", dur:"120s",delay:"-20s"},
+    {type:1, r:54, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"198vh", dur:"90s", delay:"-35s"},
+    {type:3, r:48, color:"#8B6EE8",center:"#5230c8", left:"98%",  top:"242vh", dur:"130s",delay:"-10s"},
+    {type:0, r:62, color:"#2EBFAC",center:"#1a7a6e", left:"1%",   top:"288vh", dur:"110s",delay:"-55s"},
+    {type:2, r:52, color:"#F07048",center:"#c0400a", left:"98%",  top:"332vh", dur:"140s",delay:"-40s"},
+    // Work — inner
     {type:3, r:44, color:"#F9C846",center:"#c8900a", left:"91%",  top:"168vh", dur:"112s",delay:"-42s"},
-    {type:6, r:40, color:"#4BAF7E",center:"#2c7a50", left:"8%",   top:"265vh", dur:"95s", delay:"-65s"},
-    {type:2, r:46, color:"#E8435A",center:"#b82040", left:"92%",  top:"310vh", dur:"122s",delay:"-18s"},
-    // Internships area — edges
-    {type:5, r:56, color:"#F9C846",center:"#c8900a", left:"1%",   top:"378vh", dur:"95s", delay:"-15s"},
+    {type:1, r:40, color:"#4BAF7E",center:"#2c7a50", left:"8%",   top:"265vh", dur:"95s", delay:"-65s"},
+    {type:0, r:46, color:"#E8435A",center:"#b82040", left:"92%",  top:"310vh", dur:"122s",delay:"-18s"},
+    // Internships — edges
+    {type:1, r:56, color:"#F9C846",center:"#c8900a", left:"1%",   top:"378vh", dur:"95s", delay:"-15s"},
     {type:3, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"422vh", dur:"115s",delay:"-70s"},
-    {type:6, r:60, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"462vh", dur:"105s",delay:"-30s"},
-    {type:2, r:52, color:"#F07048",center:"#c0400a", left:"98%",  top:"508vh", dur:"125s",delay:"-50s"},
+    {type:2, r:60, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"462vh", dur:"105s",delay:"-30s"},
+    {type:0, r:52, color:"#F07048",center:"#c0400a", left:"98%",  top:"508vh", dur:"125s",delay:"-50s"},
     // Internships — inner
-    {type:5, r:42, color:"#8B6EE8",center:"#5230c8", left:"9%",   top:"445vh", dur:"108s",delay:"-22s"},
+    {type:2, r:42, color:"#8B6EE8",center:"#5230c8", left:"9%",   top:"445vh", dur:"108s",delay:"-22s"},
     {type:3, r:44, color:"#2EBFAC",center:"#1a7a6e", left:"90%",  top:"490vh", dur:"118s",delay:"-38s"},
     // Volunteering / Education — edges
-    {type:6, r:54, color:"#8B6EE8",center:"#5230c8", left:"1%",   top:"548vh", dur:"88s", delay:"-8s"},
-    {type:5, r:48, color:"#2EBFAC",center:"#1a7a6e", left:"98%",  top:"592vh", dur:"135s",delay:"-45s"},
+    {type:1, r:54, color:"#8B6EE8",center:"#5230c8", left:"1%",   top:"548vh", dur:"88s", delay:"-8s"},
+    {type:0, r:48, color:"#2EBFAC",center:"#1a7a6e", left:"98%",  top:"592vh", dur:"135s",delay:"-45s"},
     {type:3, r:56, color:"#F9C846",center:"#c8900a", left:"1%",   top:"638vh", dur:"108s",delay:"-22s"},
-    {type:6, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"678vh", dur:"118s",delay:"-60s"},
+    {type:2, r:50, color:"#E8435A",center:"#b82040", left:"98%",  top:"678vh", dur:"118s",delay:"-60s"},
     // Volunteering / Education — inner
-    {type:2, r:40, color:"#F07048",center:"#c0400a", left:"91%",  top:"568vh", dur:"96s", delay:"-55s"},
-    {type:5, r:42, color:"#4BAF7E",center:"#2c7a50", left:"8%",   top:"618vh", dur:"128s",delay:"-32s"},
+    {type:0, r:40, color:"#F07048",center:"#c0400a", left:"91%",  top:"568vh", dur:"96s", delay:"-55s"},
+    {type:1, r:42, color:"#4BAF7E",center:"#2c7a50", left:"8%",   top:"618vh", dur:"128s",delay:"-32s"},
     // Skills / Languages — edges
     {type:3, r:52, color:"#4BAF7E",center:"#2c7a50", left:"1%",   top:"718vh", dur:"92s", delay:"-33s"},
-    {type:6, r:60, color:"#8B6EE8",center:"#5230c8", left:"98%",  top:"758vh", dur:"128s",delay:"-17s"},
-    {type:5, r:54, color:"#F07048",center:"#c0400a", left:"1%",   top:"798vh", dur:"102s",delay:"-48s"},
-    {type:2, r:58, color:"#2EBFAC",center:"#1a7a6e", left:"98%",  top:"838vh", dur:"138s",delay:"-28s"},
+    {type:1, r:60, color:"#8B6EE8",center:"#5230c8", left:"98%",  top:"758vh", dur:"128s",delay:"-17s"},
+    {type:2, r:54, color:"#F07048",center:"#c0400a", left:"1%",   top:"798vh", dur:"102s",delay:"-48s"},
+    {type:0, r:58, color:"#2EBFAC",center:"#1a7a6e", left:"98%",  top:"838vh", dur:"138s",delay:"-28s"},
     // Skills — inner
-    {type:6, r:42, color:"#F9C846",center:"#c8900a", left:"9%",   top:"740vh", dur:"115s",delay:"-50s"},
-    {type:3, r:44, color:"#E8435A",center:"#b82040", left:"90%",  top:"778vh", dur:"105s",delay:"-25s"},
+    {type:3, r:42, color:"#F9C846",center:"#c8900a", left:"9%",   top:"740vh", dur:"115s",delay:"-50s"},
+    {type:2, r:44, color:"#E8435A",center:"#b82040", left:"90%",  top:"778vh", dur:"105s",delay:"-25s"},
   ];
 
   return (
