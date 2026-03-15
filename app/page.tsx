@@ -62,7 +62,6 @@ const HERO_DEF=[
   {type:1,r:250,color:"#2EBFAC",center:"#1a7a6e",cx:0.18, cy:0.98, dx:-1,dy:1, dur:"90s", delay:"-50s", depth:.045,linger:false},
   {type:1,r:260,color:"#F9C846",center:"#c8900a",cx:0.82, cy:0.95, dx:1, dy:1, dur:"86s", delay:"-30s", depth:.050,linger:false},
   {type:3,r: 60,color:"#E8435A",center:"#b82040",cx:0.68, cy:0.72, dx:1, dy:1, dur:"125s",delay:"-62s", depth:.006,linger:true},
-  /* extra upper-area flowers */
   {type:2,r: 80,color:"#F9C846",center:"#c8900a",cx:0.25, cy:-0.08,dx:0, dy:-1,dur:"110s",delay:"-30s", depth:.010,linger:false},
   {type:1,r: 52,color:"#E8435A",center:"#b82040",cx:0.76, cy:-0.06,dx:1, dy:-1,dur:"125s",delay:"-45s", depth:.007,linger:false},
   {type:0,r: 70,color:"#8B6EE8",center:"#5230c8",cx:0.50, cy:-0.12,dx:0, dy:-1,dur:"95s", delay:"-20s", depth:.009,linger:false},
@@ -260,7 +259,6 @@ export default function Home(){
       .cursor-blink{display:inline-block;width:.07em;height:.85em;background:var(--rose);margin-left:3px;vertical-align:-.04em;animation:cblink .75s step-end infinite;}
       .cursor-blink.done{animation:none;opacity:0;}
 
-      /* Individual liquid-glass links — NO wrapper panel */
       .hero-links{display:flex;gap:10px;flex-wrap:wrap;animation:fadeUp .8s ease .35s both;}
       .hl{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:100px;font-size:13px;font-family:'DM Mono',monospace;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .2s;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
       .hl:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3);}
@@ -383,14 +381,8 @@ export default function Home(){
       .rev{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
       .rev.in{opacity:1;transform:translateY(0);}
 
-      /* TABLET */
       @media(max-width:960px){
-        .hero{
-          grid-template-columns:1fr;
-          min-height:100vh;min-height:100dvh;
-          padding:0 40px;gap:0;
-          display:flex;flex-direction:column;justify-content:center;
-        }
+        .hero{grid-template-columns:1fr;min-height:100vh;min-height:100dvh;padding:0 40px;gap:0;display:flex;flex-direction:column;justify-content:center;}
         .hero-right{display:none;}
         .hero-name{font-size:clamp(44px,9vw,78px);line-height:1.15;margin-bottom:24px;}
         .hero-links{gap:8px;}
@@ -403,12 +395,8 @@ export default function Home(){
         .div-word{letter-spacing:-2px;}
         .contact{padding:72px 32px;}
       }
-      /* MOBILE */
       @media(max-width:600px){
-        .hero{
-          padding:0 24px;
-          min-height:100vh;min-height:100dvh;
-        }
+        .hero{padding:0 24px;min-height:100vh;min-height:100dvh;}
         .status{font-size:11px;padding:6px 14px;margin-bottom:18px;}
         .hero-name{font-size:clamp(40px,11.5vw,62px);line-height:1.15;letter-spacing:-1.5px;margin-bottom:22px;}
         .hero-links{gap:8px;}
@@ -597,9 +585,9 @@ export default function Home(){
             <div className="feat-inner">
               <div>
                 <div className="wy"><div className="wdot" style={{background:"#c8900a"}}/><span style={{color:"#8a6000"}}>2024 · Bulgaria</span></div>
-                <div className="wrole">Summer Activities Creator</div><div className="worg">SOS Children's Villages · Future World Association</div>
-                <p className="wdesc">Created and led <b>summer activities for children</b> at SOS Children's Villages, bringing creativity, play, and warmth through hands-on projects and joyful learning.</p>
-                <div className="wtags"><span className="tag ty">Children's Activities</span><span className="tag tp">Community Care</span><span className="tag tr">Creative Workshops</span></div>
+                <div className="wrole">Summer Activities Creator</div><div className="worg">SOS Children&apos;s Villages · Future World Association</div>
+                <p className="wdesc">Created and led <b>summer activities for children</b> at SOS Children&apos;s Villages, bringing creativity, play, and warmth through hands-on projects and joyful learning.</p>
+                <div className="wtags"><span className="tag ty">Children&apos;s Activities</span><span className="tag tp">Community Care</span><span className="tag tr">Creative Workshops</span></div>
               </div>
               <div className="vol-thumb">
                 <img src="/bulgaria.webp" alt="Volunteering in Bulgaria" onError={(e)=>{(e.target as HTMLImageElement).style.display="none";const ph=(e.target as HTMLImageElement).nextElementSibling as HTMLElement;if(ph)ph.style.display="flex";}}/>
@@ -667,16 +655,19 @@ export default function Home(){
 
     <div className="contact">
       <div className="c-big rev"><span className="cw1">The</span><span className="cw2">best</span><span className="cw3">projects</span><span className="cw4">start</span><span className="cw5">with</span><span className="cw1">a</span><span className="cw6">conversation.</span></div>
-      <p className="c-sub-text rev">Let's make something you'll be proud of.</p>
+      <p className="c-sub-text rev" style={{visibility:"hidden"}}>placeholder</p>
       <a href="mailto:mariajgbrito@hotmail.com" className="cbtn rev">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="#0a0912" strokeWidth="1.5"/><path d="M1 5l7 5 7-5" stroke="#0a0912" strokeWidth="1.5"/></svg>
-        Get in touch
+        Let&apos;s talk
       </a>
       <div className="c-links">
         mariajgbrito@hotmail.com &nbsp;&middot;&nbsp;
         <a href="https://www.linkedin.com/in/mariajbrito/" target="_blank" rel="noreferrer" style={{color:"var(--sky)"}}>linkedin.com/in/mariajbrito</a>
         &nbsp;&middot;&nbsp;
         <a href="https://floresabeirario.pt" target="_blank" rel="noreferrer" style={{color:"var(--sage)"}}>floresabeirario.pt</a>
+      </div>
+      <div style={{marginTop:"52px",fontSize:"11px",fontFamily:"'DM Mono',monospace",color:"rgba(255,255,255,.2)",position:"relative",zIndex:1,lineHeight:2}}>
+        Designed &amp; vibe-coded by Maria Brito &nbsp;&middot;&nbsp; Built with Claude &nbsp;&middot;&nbsp; Deployed on Vercel
       </div>
     </div>
   </>);
