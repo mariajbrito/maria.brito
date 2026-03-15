@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /* ─────────────────────────────────────────
    SKILL SECTIONS
@@ -31,30 +31,38 @@ const SKILL_SECTIONS = [
 ];
 
 /* ─────────────────────────────────────────
-   FLOWER SVGs — fully solid
+   FLOWER SVGs — solid, no circles/ovals
+   Types kept: 0=daisy, 2=rose, 3=hibiscus, 5=cherry
+   New type 1=sunflower (thin petals), type 4=cosmos (8 pointed petals)
 ───────────────────────────────────────── */
 function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;center:string}) {
   const vb=`${-r} ${-r} ${r*2} ${r*2}`;
   const S={overflow:"visible" as const};
 
-  if(type===0) { // daisy
+  if(type===0) { // daisy — 12 thin petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:12}).map((_,i)=>
-        <ellipse key={i} cx="0" cy={-(r*0.32+r*0.36)} rx={r*0.13} ry={r*0.38}
+        <ellipse key={i} cx="0" cy={-(r*.32+r*.36)} rx={r*.12} ry={r*.38}
           fill={color} transform={`rotate(${(i/12)*360})`}/>)}
-      <circle cx="0" cy="0" r={r*0.3} fill={center}/>
-      <circle cx="0" cy="0" r={r*0.17} fill={color}/>
+      <circle cx="0" cy="0" r={r*.28} fill={center}/>
+      <circle cx="0" cy="0" r={r*.15} fill={color}/>
     </svg>;
   }
-  if(type===1) { // poppy
-    const off:number[][] = [[r*.18,0],[-r*.18,0],[0,r*.18],[0,-r*.18]];
+
+  if(type===1) { // sunflower — 16 pointed petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-      {off.map(([ox,oy],i)=><circle key={i} cx={ox} cy={oy} r={r*.62} fill={color}/>)}
-      <circle cx="0" cy="0" r={r*.22} fill="#0a0912"/>
-      <circle cx="0" cy="0" r={r*.1}  fill="white"/>
+      {Array.from({length:16}).map((_,i)=>{
+        const a=(i/16)*Math.PI*2;
+        const ox=Math.cos(a)*r*.5, oy=Math.sin(a)*r*.5;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.16} ry={r*.36}
+          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
+      })}
+      <circle cx="0" cy="0" r={r*.3} fill={center}/>
+      <circle cx="0" cy="0" r={r*.18} fill="#1a0a00"/>
     </svg>;
   }
-  if(type===2) { // rose
+
+  if(type===2) { // rose — 7 fat overlapping petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:7}).map((_,i)=>{
         const a=(i/7)*Math.PI*2;
@@ -65,7 +73,8 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
       <circle cx="0" cy="0" r={r*.24} fill={center}/>
     </svg>;
   }
-  if(type===3) { // hibiscus
+
+  if(type===3) { // hibiscus — 5 fan petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
       {Array.from({length:5}).map((_,i)=>
         <ellipse key={i} cx="0" cy={-r*.44} rx={r*.37} ry={r*.56}
@@ -73,19 +82,24 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
       <circle cx="0" cy="0" r={r*.18} fill={center}/>
     </svg>;
   }
-  if(type===4) { // tulip
+
+  if(type===4) { // cosmos — 8 pointed star petals
     return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
-      <path d={`M 0 ${-r*.92} C ${r*.5} ${-r*.55} ${r*.85} ${-r*.05} ${r*.52} ${r*.62}
-        C ${r*.22} ${r*.92} ${-r*.22} ${r*.92} ${-r*.52} ${r*.62}
-        C ${-r*.85} ${-r*.05} ${-r*.5} ${-r*.55} 0 ${-r*.92} Z`} fill={color}/>
-      <ellipse cx="0" cy={r*.1} rx={r*.28} ry={r*.35} fill={center}/>
+      {Array.from({length:8}).map((_,i)=>{
+        const a=(i/8)*Math.PI*2;
+        const ox=Math.cos(a)*r*.38, oy=Math.sin(a)*r*.38;
+        return <ellipse key={i} cx={ox} cy={oy} rx={r*.2} ry={r*.42}
+          fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
+      })}
+      <circle cx="0" cy="0" r={r*.22} fill={center}/>
     </svg>;
   }
-  // cherry blossom
+
+  // type 5: cherry blossom — 5 rounded petals offset from centre
   return <svg viewBox={vb} width={r*2} height={r*2} style={S}>
     {Array.from({length:5}).map((_,i)=>{
       const a=(i/5)*Math.PI*2;
-      const ox=Math.cos(a)*r*.28,oy=Math.sin(a)*r*.28;
+      const ox=Math.cos(a)*r*.28, oy=Math.sin(a)*r*.28;
       return <ellipse key={i} cx={ox} cy={oy} rx={r*.32} ry={r*.46}
         fill={color} transform={`rotate(${a*180/Math.PI} ${ox} ${oy})`}/>;
     })}
@@ -95,64 +109,61 @@ function FlowerSVG({type,r,color,center}:{type:number;r:number;color:string;cent
 }
 
 /* ─────────────────────────────────────────
-   FLOWER BG — respects scroll-driven opacity
-   scrollPct: 0=hero, 1=past hero
+   HERO FLOWERS — disperse outward on scroll
+   scrollPct 0→1: flowers fly to edges + fade
 ───────────────────────────────────────── */
-function FlowerBg({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
+function HeroFlowers({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
   const W=typeof window!=="undefined"?window.innerWidth:1200;
   const H=typeof window!=="undefined"?window.innerHeight:900;
   const pxN=mx/W-.5, pyN=my/H-.5;
 
-  // scrollPct goes 0→1 as user scrolls one viewport height.
-  // Flowers fade and shrink as you scroll down.
-  const flowerOpacity = Math.max(0, 1 - scrollPct * 1.6);
-  const flowerScale   = Math.max(0.3, 1 - scrollPct * 0.5);
-
-  const flowers = [
-    // BACK — tiny, slow
-    {cx:.25,cy:.18,r:55, color:"#F9C846",center:"#c8900a",type:0,rot:12, dur:"120s",delay:"0s",    depth:.008},
-    {cx:.60,cy:.08,r:48, color:"#4BAF7E",center:"#2c7a50",type:3,rot:30, dur:"140s",delay:"-20s",  depth:.006},
-    {cx:.72,cy:.45,r:60, color:"#4B9FE0",center:"#1558a0",type:5,rot:0,  dur:"130s",delay:"-35s",  depth:.007},
-    {cx:.38,cy:.55,r:44, color:"#F07048",center:"#c0400a",type:2,rot:20, dur:"150s",delay:"-10s",  depth:.009},
-    {cx:.50,cy:.28,r:50, color:"#8B6EE8",center:"#5230c8",type:0,rot:45, dur:"110s",delay:"-45s",  depth:.006},
-    {cx:.15,cy:.42,r:42, color:"#2EBFAC",center:"#1a7a6e",type:3,rot:60, dur:"160s",delay:"-60s",  depth:.008},
-    {cx:.85,cy:.72,r:52, color:"#E8435A",center:"#b82040",type:5,rot:15, dur:"125s",delay:"-80s",  depth:.007},
-    {cx:.42,cy:.82,r:46, color:"#F9C846",center:"#c8900a",type:1,rot:0,  dur:"145s",delay:"-30s",  depth:.009},
-    // MID
-    {cx:.78,cy:.20,r:130,color:"#F9C846",center:"#c8900a",type:2,rot:10, dur:"90s", delay:"-15s",  depth:.022},
-    {cx:.10,cy:.70,r:120,color:"#4BAF7E",center:"#2c7a50",type:5,rot:40, dur:"100s",delay:"-55s",  depth:.018},
-    {cx:.55,cy:.65,r:110,color:"#8B6EE8",center:"#5230c8",type:3,rot:25, dur:"110s",delay:"-40s",  depth:.020},
-    {cx:.30,cy:.10,r:105,color:"#F07048",center:"#c0400a",type:4,rot:55, dur:"95s", delay:"-70s",  depth:.019},
-    {cx:.88,cy:.50,r:115,color:"#2EBFAC",center:"#1a7a6e",type:0,rot:0,  dur:"105s",delay:"-25s",  depth:.021},
-    // FRONT — huge
-    {cx:0,  cy:.08,r:280,color:"#F9C846",center:"#c8900a",type:2,rot:0,  dur:"75s", delay:"0s",    depth:.055},
-    {cx:1,  cy:.05,r:260,color:"#4BAF7E",center:"#2c7a50",type:3,rot:20, dur:"88s", delay:"-12s",  depth:.048},
-    {cx:-.02,cy:.65,r:300,color:"#E8435A",center:"#b82040",type:1,rot:35,dur:"70s", delay:"-25s",  depth:.060},
-    {cx:1.02,cy:.68,r:270,color:"#8B6EE8",center:"#5230c8",type:4,rot:15,dur:"82s", delay:"-40s",  depth:.052},
-    {cx:.48,cy:1.02,r:320,color:"#F07048",center:"#c0400a",type:0,rot:55,dur:"78s", delay:"-18s",  depth:.058},
-    {cx:.20,cy:.95,r:240,color:"#2EBFAC",center:"#1a7a6e",type:5,rot:70, dur:"92s", delay:"-55s",  depth:.045},
-    {cx:.80,cy:.92,r:255,color:"#F9C846",center:"#c8900a",type:3,rot:40, dur:"85s", delay:"-30s",  depth:.050},
+  // Each hero flower has a "direction" it flies toward when scrolling
+  const heroFlowers = [
+    // type, r, color, center, start cx/cy (0–1), disperse direction dx/dy (-1 or 1), dur, delay, depth
+    {type:2, r:280, color:"#F9C846", center:"#c8900a", cx:0.0,  cy:0.08, dx:-1,  dy:-1, dur:"75s",  delay:"0s",   depth:.055},
+    {type:3, r:260, color:"#4BAF7E", center:"#2c7a50", cx:1.0,  cy:0.05, dx:1,   dy:-1, dur:"88s",  delay:"-12s", depth:.048},
+    {type:5, r:300, color:"#E8435A", center:"#b82040", cx:-0.02,cy:0.65, dx:-1,  dy:0,  dur:"70s",  delay:"-25s", depth:.060},
+    {type:4, r:270, color:"#8B6EE8", center:"#5230c8", cx:1.02, cy:0.68, dx:1,   dy:0,  dur:"82s",  delay:"-40s", depth:.052},
+    {type:0, r:320, color:"#F07048", center:"#c0400a", cx:0.48, cy:1.02, dx:0,   dy:1,  dur:"78s",  delay:"-18s", depth:.058},
+    {type:5, r:240, color:"#2EBFAC", center:"#1a7a6e", cx:0.20, cy:0.95, dx:-1,  dy:1,  dur:"92s",  delay:"-55s", depth:.045},
+    {type:2, r:255, color:"#F9C846", center:"#c8900a", cx:0.80, cy:0.92, dx:1,   dy:1,  dur:"85s",  delay:"-30s", depth:.050},
+    // mid
+    {type:0, r:130, color:"#F9C846", center:"#c8900a", cx:0.78, cy:0.20, dx:1,   dy:-1, dur:"90s",  delay:"-15s", depth:.022},
+    {type:5, r:120, color:"#4BAF7E", center:"#2c7a50", cx:0.10, cy:0.70, dx:-1,  dy:1,  dur:"100s", delay:"-55s", depth:.018},
+    {type:3, r:110, color:"#8B6EE8", center:"#5230c8", cx:0.55, cy:0.65, dx:0,   dy:1,  dur:"110s", delay:"-40s", depth:.020},
+    {type:1, r:105, color:"#F07048", center:"#c0400a", cx:0.30, cy:0.10, dx:-1,  dy:-1, dur:"95s",  delay:"-70s", depth:.019},
+    {type:2, r:115, color:"#2EBFAC", center:"#1a7a6e", cx:0.88, cy:0.50, dx:1,   dy:0,  dur:"105s", delay:"-25s", depth:.021},
   ];
 
+  const DISPERSE_DIST = 80; // vw/vh units to fly off screen
+
   return (
-    <div style={{
-      position:"fixed",inset:0,zIndex:0,pointerEvents:"none",overflow:"hidden",
-      opacity:flowerOpacity,
-      transform:`scale(${flowerScale})`,
-      transformOrigin:"center top",
-      transition:"opacity .05s linear, transform .05s linear",
-    }}>
-      {flowers.map((f,i)=>{
-        const x=f.cx*100+pxN*100*f.depth*(i%2===0?1:-1);
-        const y=f.cy*100+pyN*100*f.depth*(i%3===0?1:-.9);
+    <div style={{position:"fixed",inset:0,zIndex:0,pointerEvents:"none",overflow:"hidden"}}>
+      {heroFlowers.map((f,i)=>{
+        // parallax base position
+        const bx = f.cx*100 + pxN*100*f.depth*(i%2===0?1:-1);
+        const by = f.cy*100 + pyN*100*f.depth*(i%3===0?1:-.9);
+        // disperse offset — grows with scrollPct
+        const ease = scrollPct < 0.5 ? scrollPct*2 : 1; // fast in first 50% of scroll
+        const ox = bx + f.dx * DISPERSE_DIST * ease;
+        const oy = by + f.dy * DISPERSE_DIST * ease;
+        const op = Math.max(0, 1 - ease * 1.4);  // fade as they fly
+        // a few stay (odd-indexed mid flowers linger)
+        const linger = (i >= 7) && (i % 3 === 0); // some mid flowers stay longer
+        const finalOp = linger ? Math.max(0, 1 - ease * 0.6) : op;
+        const finalOx = linger ? bx + f.dx * DISPERSE_DIST * ease * 0.3 : ox;
+        const finalOy = linger ? by + f.dy * DISPERSE_DIST * ease * 0.3 : oy;
+
         return (
           <div key={i} style={{
-            position:"absolute",left:`${x}%`,top:`${y}%`,
+            position:"absolute",
+            left:`${finalOx}%`, top:`${finalOy}%`,
             transform:"translate(-50%,-50%)",
-            width:f.r*2,height:f.r*2,
+            width:f.r*2, height:f.r*2,
+            opacity:finalOp,
             animation:`frot ${f.dur} linear infinite`,
             animationDelay:f.delay,
-            transition:"left .5s ease-out, top .5s ease-out",
+            transition:"left .12s ease-out, top .12s ease-out, opacity .12s ease-out",
           }}>
             <FlowerSVG type={f.type} r={f.r} color={f.color} center={f.center}/>
           </div>
@@ -163,12 +174,53 @@ function FlowerBg({mx,my,scrollPct}:{mx:number;my:number;scrollPct:number}) {
 }
 
 /* ─────────────────────────────────────────
+   AMBIENT FLOWERS — small, fixed positions
+   scattered throughout the whole document
+   (visible only after hero, faint on light bg)
+───────────────────────────────────────── */
+function AmbientFlowers() {
+  // positions in document %, fixed left/right margins
+  // using position:absolute on a tall wrapper so they scroll with content
+  const smalls = [
+    {type:0, r:38, color:"#F9C846",center:"#c8900a", left:"4%",  top:"140vh", dur:"100s",delay:"0s"},
+    {type:5, r:32, color:"#E8435A",center:"#b82040", left:"94%", top:"165vh", dur:"120s",delay:"-20s"},
+    {type:2, r:42, color:"#4BAF7E",center:"#2c7a50", left:"2%",  top:"220vh", dur:"90s", delay:"-35s"},
+    {type:3, r:36, color:"#8B6EE8",center:"#5230c8", left:"96%", top:"280vh", dur:"130s",delay:"-10s"},
+    {type:4, r:40, color:"#2EBFAC",center:"#1a7a6e", left:"3%",  top:"340vh", dur:"110s",delay:"-55s"},
+    {type:0, r:34, color:"#F07048",center:"#c0400a", left:"95%", top:"400vh", dur:"140s",delay:"-40s"},
+    {type:5, r:38, color:"#F9C846",center:"#c8900a", left:"5%",  top:"460vh", dur:"95s", delay:"-15s"},
+    {type:2, r:36, color:"#E8435A",center:"#b82040", left:"93%", top:"520vh", dur:"115s",delay:"-70s"},
+    {type:1, r:42, color:"#4BAF7E",center:"#2c7a50", left:"3%",  top:"580vh", dur:"105s",delay:"-30s"},
+    {type:3, r:34, color:"#F07048",center:"#c0400a", left:"96%", top:"640vh", dur:"125s",delay:"-50s"},
+    {type:4, r:40, color:"#8B6EE8",center:"#5230c8", left:"4%",  top:"700vh", dur:"88s", delay:"-8s"},
+    {type:0, r:36, color:"#2EBFAC",center:"#1a7a6e", left:"94%", top:"760vh", dur:"135s",delay:"-45s"},
+  ];
+
+  return (
+    <div style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:0,overflow:"visible"}}>
+      {smalls.map((f,i)=>(
+        <div key={i} style={{
+          position:"absolute",
+          left:f.left, top:f.top,
+          transform:"translate(-50%,-50%)",
+          width:f.r*2, height:f.r*2,
+          opacity:0.65,
+          animation:`frot ${f.dur} linear infinite`,
+          animationDelay:f.delay,
+        }}>
+          <FlowerSVG type={f.type} r={f.r} color={f.color} center={f.center}/>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ─────────────────────────────────────────
    MAIN PAGE
 ───────────────────────────────────────── */
 export default function Home() {
   const curRef    = useRef<HTMLDivElement>(null);
   const ringRef   = useRef<HTMLDivElement>(null);
-  const overlayRef= useRef<HTMLDivElement>(null);
   const [typed, setTyped] = useState("");
   const [phase, setPhase] = useState<"typing"|"done">("typing");
   const [mouse, setMouse] = useState({x:600,y:400});
@@ -188,25 +240,21 @@ export default function Home() {
     return ()=>window.removeEventListener("mousemove",mm);
   },[]);
 
-  /* ── SCROLL: drives both bg gradient & flower fade ── */
+  /* ── SCROLL: bg dark→light rapidly, drives flower disperse ── */
   useEffect(()=>{
     const onScroll=()=>{
-      const pct=Math.min(window.scrollY/window.innerHeight,1);
+      const raw = window.scrollY / window.innerHeight;
+      const pct = Math.min(raw, 1);
       setScrollPct(pct);
 
-      // Body background: interpolate dark→light
-      // dark: #0a0912   light: #FAF6EF
+      // Fast transition: fully light by 40% of viewport scroll
+      const bgPct = Math.min(raw / 0.4, 1);
       const lerp=(a:number,b:number,t:number)=>Math.round(a+(b-a)*t);
-      const r=lerp(10,250,pct), g=lerp(9,246,pct), b=lerp(18,239,pct);
+      const r=lerp(10,250,bgPct), g=lerp(9,246,bgPct), b=lerp(18,239,bgPct);
       document.body.style.background=`rgb(${r},${g},${b})`;
-
-      // The hero overlay lightens as you scroll
-      if(overlayRef.current){
-        overlayRef.current.style.opacity=String(pct);
-      }
     };
     window.addEventListener("scroll",onScroll,{passive:true});
-    onScroll(); // init
+    onScroll();
     return ()=>window.removeEventListener("scroll",onScroll);
   },[]);
 
@@ -253,9 +301,6 @@ export default function Home() {
     return ()=>io.disconnect();
   },[]);
 
-  /* hero text color: white when dark, black when light */
-  const heroTextColor = scrollPct < 0.4 ? "rgba(255,255,255,1)" : `rgba(26,20,16,${Math.min(1,(scrollPct-.4)*5)})`;
-
   return (<>
     <style>{`
       @import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
@@ -290,19 +335,15 @@ export default function Home() {
         display: grid; grid-template-columns: 1fr 1fr;
         align-items: center;
         padding: 80px 72px; gap: 48px; overflow: hidden;
+        /* Radial colour gradient like the footer — gives depth and drama */
+        background:
+          radial-gradient(ellipse 60% 80% at 10% 50%,rgba(232,67,90,.28) 0%,transparent 65%),
+          radial-gradient(ellipse 50% 70% at 90% 50%,rgba(139,110,232,.28) 0%,transparent 65%),
+          radial-gradient(ellipse 40% 55% at 50% 10%,rgba(245,196,48,.18) 0%,transparent 60%),
+          radial-gradient(ellipse 35% 50% at 50% 90%,rgba(46,191,172,.18) 0%,transparent 60%);
       }
 
-      /* Gradient overlay that fades IN as user scrolls —
-         creates the "brightening" effect over the dark hero */
-      .hero-overlay {
-        position: absolute; inset: 0; z-index: 1;
-        background: linear-gradient(180deg, #FAF6EF 0%, transparent 100%);
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity .02s linear;
-      }
-
-      /* Hero left — NO BOX, just text directly on the dark bg */
+      /* Hero left — NO BOX */
       .hero-left { position: relative; z-index: 10; }
 
       /* Status badge adapts to scroll */
@@ -537,18 +578,19 @@ export default function Home() {
     <div ref={curRef}  className="cur" />
     <div ref={ringRef} className="cur-ring" />
 
-    {/* Flowers fixed behind everything — fade+shrink on scroll */}
-    <FlowerBg mx={mouse.x} my={mouse.y} scrollPct={scrollPct} />
+    {/* Hero flowers — fixed, disperse on scroll */}
+    <HeroFlowers mx={mouse.x} my={mouse.y} scrollPct={scrollPct} />
+
+    {/* Ambient small flowers — absolute, scroll with page */}
+    <div style={{position:"relative"}}>
+      <AmbientFlowers />
 
     {/* ══ HERO ══ */}
     <div className="hero">
-      {/* This overlay fades in on scroll, brightening the hero as user scrolls */}
-      <div ref={overlayRef} className="hero-overlay" />
-
       {/* LEFT — no box */}
       <div className="hero-left">
         <div className="status"><div className="sdot"/>open to opportunities</div>
-        <h1 className="hero-name" style={{color: scrollPct < 0.3 ? "white" : `rgb(${Math.round(255-(255-26)*Math.min(1,(scrollPct-.3)*4))},${Math.round(255-(255-20)*Math.min(1,(scrollPct-.3)*4))},${Math.round(255-(255-16)*Math.min(1,(scrollPct-.3)*4))})` }}>
+        <h1 className="hero-name" style={{color:"white"}}>
           {typed}<span className={`cursor-blink${phase==="done"?" done":""}`}/>
         </h1>
         <div className="hero-links">
@@ -815,6 +857,7 @@ export default function Home() {
     </section>
 
     {/* CONTACT */}
+    </div>{/* end ambient wrapper */}
     <div className="contact">
       <div className="c-big rev">
         <span className="cw1">The</span>
