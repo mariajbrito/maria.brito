@@ -241,20 +241,21 @@ export default function Home(){
       @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
       @keyframes cblink{0%,100%{opacity:1}50%{opacity:0}}
 
-      .hero{min-height:100vh;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 72px;gap:48px;overflow:hidden;background:radial-gradient(ellipse 60% 80% at 10% 50%,rgba(232,67,90,.28) 0%,transparent 65%),radial-gradient(ellipse 50% 70% at 90% 50%,rgba(139,110,232,.28) 0%,transparent 65%),radial-gradient(ellipse 40% 55% at 50% 10%,rgba(245,196,48,.18) 0%,transparent 60%),radial-gradient(ellipse 35% 50% at 50% 90%,rgba(46,191,172,.18) 0%,transparent 60%);}
+      .hero{min-height:100vh;min-height:100dvh;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 72px;gap:48px;overflow:hidden;background:radial-gradient(ellipse 60% 80% at 10% 50%,rgba(232,67,90,.28) 0%,transparent 65%),radial-gradient(ellipse 50% 70% at 90% 50%,rgba(139,110,232,.28) 0%,transparent 65%),radial-gradient(ellipse 40% 55% at 50% 10%,rgba(245,196,48,.18) 0%,transparent 60%),radial-gradient(ellipse 35% 50% at 50% 90%,rgba(46,191,172,.18) 0%,transparent 60%);}
       .hero-left{position:relative;z-index:10;}
       .status{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(75,175,126,.5);border-radius:100px;padding:7px 18px;font-size:12px;font-family:'DM Mono',monospace;color:#6dcf9e;background:rgba(75,175,126,.15);margin-bottom:24px;animation:fadeUp .8s ease .2s both;}
       .sdot{width:7px;height:7px;background:#6dcf9e;border-radius:50%;animation:blink 2s ease infinite;flex-shrink:0;}
-      .hero-name{font-family:'Boldonse',cursive;font-size:clamp(48px,7.5vw,108px);line-height:1.0;letter-spacing:-2px;color:white;margin-bottom:32px;word-break:break-word;}
+      .hero-name{font-family:'Boldonse',cursive;font-size:clamp(48px,7.5vw,108px);line-height:1.15;letter-spacing:-2px;color:white;margin-bottom:32px;word-break:break-word;}
       .cursor-blink{display:inline-block;width:.07em;height:.85em;background:var(--rose);margin-left:3px;vertical-align:-.04em;animation:cblink .75s step-end infinite;}
       .cursor-blink.done{animation:none;opacity:0;}
 
-      .hero-links{display:flex;gap:10px;flex-wrap:wrap;animation:fadeUp .8s ease .35s both;background:rgba(255,255,255,.08);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.18);border-radius:20px;padding:14px 18px;width:fit-content;max-width:100%;}
-      .hl{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:100px;font-size:13px;font-family:'DM Mono',monospace;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .2s;}
-      .hl:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.25);}
-      .hl-email{background:var(--rose);color:white;}
-      .hl-li{background:rgba(75,159,224,.18);border:1.5px solid rgba(75,159,224,.4);color:#90c8f8;}
-      .hl-flores{background:rgba(75,175,126,.15);border:1.5px solid rgba(75,175,126,.4);color:#6dcf9e;}
+      /* Individual liquid-glass links — NO wrapper panel */
+      .hero-links{display:flex;gap:10px;flex-wrap:wrap;animation:fadeUp .8s ease .35s both;}
+      .hl{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:100px;font-size:13px;font-family:'DM Mono',monospace;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .2s;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
+      .hl:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3);}
+      .hl-email{background:rgba(232,67,90,.75);border:1px solid rgba(232,67,90,.5);color:white;}
+      .hl-li{background:rgba(75,159,224,.18);border:1px solid rgba(75,159,224,.35);color:#90c8f8;}
+      .hl-flores{background:rgba(75,175,126,.18);border:1px solid rgba(75,175,126,.35);color:#6dcf9e;}
       .ico{width:14px;height:14px;flex-shrink:0;display:block;}
 
       .hero-right{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;}
@@ -373,11 +374,16 @@ export default function Home(){
 
       /* TABLET */
       @media(max-width:960px){
-        .hero{grid-template-columns:1fr;padding:60px 32px 52px;gap:0;min-height:auto;}
+        .hero{
+          grid-template-columns:1fr;
+          min-height:100vh;min-height:100dvh;
+          padding:0 40px;gap:0;
+          display:flex;flex-direction:column;justify-content:center;
+        }
         .hero-right{display:none;}
-        .hero-name{font-size:clamp(46px,10vw,80px);margin-bottom:24px;}
-        .hero-links{padding:12px 14px;gap:8px;}
-        .hl{font-size:12px;padding:8px 14px;}
+        .hero-name{font-size:clamp(44px,9vw,78px);line-height:1.15;margin-bottom:24px;}
+        .hero-links{gap:8px;}
+        .hl{font-size:12px;padding:9px 16px;}
         .sec,.div-wrap{padding:60px 32px;}
         .grid2{grid-template-columns:1fr;}
         .feat-inner{grid-template-columns:1fr;}
@@ -388,11 +394,14 @@ export default function Home(){
       }
       /* MOBILE */
       @media(max-width:600px){
-        .hero{padding:48px 20px 40px;}
+        .hero{
+          padding:0 24px;
+          min-height:100vh;min-height:100dvh;
+        }
         .status{font-size:11px;padding:6px 14px;margin-bottom:18px;}
-        .hero-name{font-size:clamp(38px,12vw,60px);letter-spacing:-1px;margin-bottom:20px;}
-        .hero-links{padding:10px 12px;gap:6px;border-radius:16px;}
-        .hl{font-size:11px;padding:7px 12px;}
+        .hero-name{font-size:clamp(40px,11.5vw,62px);line-height:1.15;letter-spacing:-1.5px;margin-bottom:22px;}
+        .hero-links{gap:8px;}
+        .hl{font-size:11px;padding:8px 14px;}
         .hl-email{display:none;}
         .mq-item{font-size:16px;padding:0 28px;}
         .sec,.div-wrap{padding:40px 20px;}
@@ -420,7 +429,7 @@ export default function Home(){
         .skill-section-label{font-size:18px;}
       }
       @media(max-width:380px){
-        .hero-name{font-size:36px;}
+        .hero-name{font-size:clamp(36px,10.5vw,52px);}
         .hl-li{display:none;}
       }
     `}</style>
