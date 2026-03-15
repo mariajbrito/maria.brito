@@ -62,6 +62,12 @@ const HERO_DEF=[
   {type:1,r:250,color:"#2EBFAC",center:"#1a7a6e",cx:0.18, cy:0.98, dx:-1,dy:1, dur:"90s", delay:"-50s", depth:.045,linger:false},
   {type:1,r:260,color:"#F9C846",center:"#c8900a",cx:0.82, cy:0.95, dx:1, dy:1, dur:"86s", delay:"-30s", depth:.050,linger:false},
   {type:3,r: 60,color:"#E8435A",center:"#b82040",cx:0.68, cy:0.72, dx:1, dy:1, dur:"125s",delay:"-62s", depth:.006,linger:true},
+  /* extra upper-area flowers */
+  {type:2,r: 80,color:"#F9C846",center:"#c8900a",cx:0.25, cy:-0.08,dx:0, dy:-1,dur:"110s",delay:"-30s", depth:.010,linger:false},
+  {type:1,r: 52,color:"#E8435A",center:"#b82040",cx:0.76, cy:-0.06,dx:1, dy:-1,dur:"125s",delay:"-45s", depth:.007,linger:false},
+  {type:0,r: 70,color:"#8B6EE8",center:"#5230c8",cx:0.50, cy:-0.12,dx:0, dy:-1,dur:"95s", delay:"-20s", depth:.009,linger:false},
+  {type:3,r: 44,color:"#2EBFAC",center:"#1a7a6e",cx:0.62, cy:-0.04,dx:1, dy:-1,dur:"138s",delay:"-58s", depth:.005,linger:false},
+  {type:2,r: 60,color:"#F07048",center:"#c0400a",cx:0.12, cy:-0.10,dx:-1,dy:-1,dur:"102s",delay:"-14s", depth:.008,linger:false},
 ];
 
 function HeroFlowers({scrollPct}:{scrollPct:number}) {
@@ -164,6 +170,11 @@ export default function Home(){
   const [scrollPct,setScrollPct]=useState(0);
 
   useEffect(()=>{
+    if("scrollRestoration" in history){history.scrollRestoration="manual";}
+    window.scrollTo(0,0);
+  },[]);
+
+  useEffect(()=>{
     const name="Maria Brito";let i=0;
     const t=setInterval(()=>{i++;setTyped(name.slice(0,i));if(i>=name.length){clearInterval(t);setPhase("done");}},80);
     return()=>clearInterval(t);
@@ -241,7 +252,7 @@ export default function Home(){
       @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
       @keyframes cblink{0%,100%{opacity:1}50%{opacity:0}}
 
-      .hero{min-height:100vh;min-height:100dvh;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 72px;gap:48px;overflow:hidden;background:radial-gradient(ellipse 60% 80% at 10% 50%,rgba(232,67,90,.28) 0%,transparent 65%),radial-gradient(ellipse 50% 70% at 90% 50%,rgba(139,110,232,.28) 0%,transparent 65%),radial-gradient(ellipse 40% 55% at 50% 10%,rgba(245,196,48,.18) 0%,transparent 60%),radial-gradient(ellipse 35% 50% at 50% 90%,rgba(46,191,172,.18) 0%,transparent 60%);}
+      .hero{min-height:100vh;min-height:100dvh;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 72px;gap:48px;overflow:hidden;max-width:1240px;margin:0 auto;background:radial-gradient(ellipse 60% 80% at 10% 50%,rgba(232,67,90,.28) 0%,transparent 65%),radial-gradient(ellipse 50% 70% at 90% 50%,rgba(139,110,232,.28) 0%,transparent 65%),radial-gradient(ellipse 40% 55% at 50% 10%,rgba(245,196,48,.18) 0%,transparent 60%),radial-gradient(ellipse 35% 50% at 50% 90%,rgba(46,191,172,.18) 0%,transparent 60%);}
       .hero-left{position:relative;z-index:10;}
       .status{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(75,175,126,.5);border-radius:100px;padding:7px 18px;font-size:12px;font-family:'DM Mono',monospace;color:#6dcf9e;background:rgba(75,175,126,.15);margin-bottom:24px;animation:fadeUp .8s ease .2s both;}
       .sdot{width:7px;height:7px;background:#6dcf9e;border-radius:50%;animation:blink 2s ease infinite;flex-shrink:0;}
