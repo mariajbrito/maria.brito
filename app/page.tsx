@@ -251,7 +251,36 @@ export default function Home(){
       @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
       @keyframes cblink{0%,100%{opacity:1}50%{opacity:0}}
 
-      .hero{min-height:100vh;min-height:100dvh;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 72px;gap:48px;overflow:hidden;max-width:1240px;margin:0 auto;background:radial-gradient(ellipse 60% 80% at 10% 50%,rgba(232,67,90,.28) 0%,transparent 65%),radial-gradient(ellipse 50% 70% at 90% 50%,rgba(139,110,232,.28) 0%,transparent 65%),radial-gradient(ellipse 40% 55% at 50% 10%,rgba(245,196,48,.18) 0%,transparent 60%),radial-gradient(ellipse 35% 50% at 50% 90%,rgba(46,191,172,.18) 0%,transparent 60%);}
+      /* ── HERO: gradient on full-width wrapper, layout on inner ── */
+      .hero-bg{
+        width:100%;
+        min-height:100vh;
+        min-height:100dvh;
+        position:relative;
+        z-index:1;
+        /* gradient lives HERE — stretches edge to edge */
+        background:
+          radial-gradient(ellipse 55% 80% at 8% 50%,  rgba(232,67,90,.28)   0%,transparent 65%),
+          radial-gradient(ellipse 45% 70% at 92% 50%, rgba(139,110,232,.28) 0%,transparent 65%),
+          radial-gradient(ellipse 38% 55% at 50% 8%,  rgba(245,196,48,.18)  0%,transparent 60%),
+          radial-gradient(ellipse 32% 50% at 50% 92%, rgba(46,191,172,.18)  0%,transparent 60%);
+        overflow:hidden;
+      }
+      .hero{
+        min-height:100vh;
+        min-height:100dvh;
+        position:relative;
+        z-index:1;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        align-items:center;
+        padding:80px 72px;
+        gap:48px;
+        /* max-width centering for content only — no background here */
+        max-width:1240px;
+        margin:0 auto;
+      }
+
       .hero-left{position:relative;z-index:10;}
       .status{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(75,175,126,.5);border-radius:100px;padding:7px 18px;font-size:12px;font-family:'DM Mono',monospace;color:#6dcf9e;background:rgba(75,175,126,.15);margin-bottom:24px;animation:fadeUp .8s ease .2s both;}
       .sdot{width:7px;height:7px;background:#6dcf9e;border-radius:50%;animation:blink 2s ease infinite;flex-shrink:0;}
@@ -382,6 +411,7 @@ export default function Home(){
       .rev.in{opacity:1;transform:translateY(0);}
 
       @media(max-width:960px){
+        .hero-bg{min-height:100vh;min-height:100dvh;}
         .hero{grid-template-columns:1fr;min-height:100vh;min-height:100dvh;padding:0 40px;gap:0;display:flex;flex-direction:column;justify-content:center;}
         .hero-right{display:none;}
         .hero-name{font-size:clamp(44px,9vw,78px);line-height:1.15;margin-bottom:24px;}
@@ -440,39 +470,42 @@ export default function Home(){
     <div style={{position:"relative"}}>
       <AmbientFlowers/>
 
-      <div className="hero">
-        <div className="hero-left">
-          <div className="status"><div className="sdot"/>open to opportunities</div>
-          <h1 className="hero-name">{typed}<span className={`cursor-blink${phase==="done"?" done":""}`}/></h1>
-          <div className="hero-links">
-            <a href="mailto:mariajgbrito@hotmail.com" className="hl hl-email">
-              <svg className="ico" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="white" strokeWidth="1.4"/><path d="M1 5l7 5 7-5" stroke="white" strokeWidth="1.4"/></svg>
-              mariajgbrito@hotmail.com
-            </a>
-            <a href="https://www.linkedin.com/in/mariajbrito/" target="_blank" rel="noreferrer" className="hl hl-li">
-              <svg className="ico" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="3" stroke="currentColor" strokeWidth="1.3"/><circle cx="5" cy="5.5" r="1" fill="currentColor"/><path d="M5 8v4M8.5 12V9.5c0-1 .7-1.5 1.5-1.5s1.5.5 1.5 1.5V12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>
-              LinkedIn
-            </a>
-            <a href="https://floresabeirario.pt" target="_blank" rel="noreferrer" className="hl hl-flores">
-              <svg className="ico" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.4"/><path d="M8 4c-1 1.5-1 5 0 8M8 4c1 1.5 1 5 0 8M4 8h8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>
-              floresabeirario.pt
-            </a>
-          </div>
-        </div>
-        <div className="hero-right">
-          <div className="orbit-container">
-            <div className="orbit-ring-el"/>
-            <div className="pill-wrap">
-              <div className="opill">Educator</div>
-              <div className="opill">Designer</div>
-              <div className="opill">Co-founder</div>
-              <div className="opill">Tech Enthusiast</div>
+      {/* ── FIXED: gradient wrapper is full-width; hero is layout-only ── */}
+      <div className="hero-bg">
+        <div className="hero">
+          <div className="hero-left">
+            <div className="status"><div className="sdot"/>open to opportunities</div>
+            <h1 className="hero-name">{typed}<span className={`cursor-blink${phase==="done"?" done":""}`}/></h1>
+            <div className="hero-links">
+              <a href="mailto:mariajgbrito@hotmail.com" className="hl hl-email">
+                <svg className="ico" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="white" strokeWidth="1.4"/><path d="M1 5l7 5 7-5" stroke="white" strokeWidth="1.4"/></svg>
+                mariajgbrito@hotmail.com
+              </a>
+              <a href="https://www.linkedin.com/in/mariajbrito/" target="_blank" rel="noreferrer" className="hl hl-li">
+                <svg className="ico" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="3" stroke="currentColor" strokeWidth="1.3"/><circle cx="5" cy="5.5" r="1" fill="currentColor"/><path d="M5 8v4M8.5 12V9.5c0-1 .7-1.5 1.5-1.5s1.5.5 1.5 1.5V12" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>
+                LinkedIn
+              </a>
+              <a href="https://floresabeirario.pt" target="_blank" rel="noreferrer" className="hl hl-flores">
+                <svg className="ico" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.4"/><path d="M8 4c-1 1.5-1 5 0 8M8 4c1 1.5 1 5 0 8M4 8h8" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/></svg>
+                floresabeirario.pt
+              </a>
             </div>
-            <div className="orbit-photo">
-              <div className="photo-ring"/>
-              <div className="photo-inner">
-                <img src="/mj.webp" alt="Maria Brito" onError={(e)=>{(e.target as HTMLImageElement).style.display="none";const ph=(e.target as HTMLImageElement).nextElementSibling as HTMLElement;if(ph)ph.style.display="flex";}}/>
-                <div className="photo-ph" style={{display:"none"}}><div className="photo-ini">MJB</div><span>add mj.webp to public/</span></div>
+          </div>
+          <div className="hero-right">
+            <div className="orbit-container">
+              <div className="orbit-ring-el"/>
+              <div className="pill-wrap">
+                <div className="opill">Educator</div>
+                <div className="opill">Designer</div>
+                <div className="opill">Co-founder</div>
+                <div className="opill">Tech Enthusiast</div>
+              </div>
+              <div className="orbit-photo">
+                <div className="photo-ring"/>
+                <div className="photo-inner">
+                  <img src="/mj.webp" alt="Maria Brito" onError={(e)=>{(e.target as HTMLImageElement).style.display="none";const ph=(e.target as HTMLImageElement).nextElementSibling as HTMLElement;if(ph)ph.style.display="flex";}}/>
+                  <div className="photo-ph" style={{display:"none"}}><div className="photo-ini">MJB</div><span>add mj.webp to public/</span></div>
+                </div>
               </div>
             </div>
           </div>
