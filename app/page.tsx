@@ -522,7 +522,6 @@ export default function Home(){
 
       <div className="div-wrap"><div className="div-word rev">Work</div></div>
       <section className="sec" style={{paddingTop:0}}>
-        <div className="sec-label rev">career</div>
         <div className="grid2">
           <div className="card card-full card-flores cg" data-d="0">
             <div className="feat-badge"><div className="bdot"/>Latest venture</div>
@@ -537,10 +536,10 @@ export default function Home(){
                 </div>
                 <p className="wdesc">Co-founded a flower preservation company and <b>built its entire digital presence from scratch</b>. Leads creative direction, branding, and all technical development.</p>
                 <ul className="tech-list">
-                  <li><b>Built and deployed</b> the brand website and a custom real-time order tracking portal, managing the full development lifecycle end to end.</li>
-                  <li>Designed <b>backend logic using Google Sheets as a dynamic CMS</b> for unique client IDs, private routing, and order statuses.</li>
-                  <li>Uses <b>LLMs (Claude, ChatGPT, Gemini)</b> with advanced prompting techniques to accelerate development and ship production-ready features rapidly.</li>
-                  <li>Manages version control with <b>GitHub</b> and automated deployments via <b>Vercel CI/CD</b>.</li>
+                  <li><b>Built and deployed</b> the brand website and a custom real-time order tracking portal, managing the full development lifecycle.</li>
+                  <li>Designed <b>backend logic using Google Sheets as a dynamic CMS</b> and integrated Monday.com via automated forms, streamlining lead capture and order management (CRM).</li>
+                  <li>Used <b>advanced prompting and LLMs (Claude, Gemini)</b> to accelerate development, ship production-ready features rapidly, and debug complex API interactions.</li>
+                  <li>Managed version control with <b>GitHub</b> and automated deployments via <b>Vercel CI/CD</b>.</li>
                 </ul>
                 <div className="wtags"><span className="tag tg">Entrepreneurship</span><span className="tag tt">Web Dev</span><span className="tag tg">AI Prototyping</span><span className="tag ts">GitHub / Vercel</span><span className="tag tg">Creative Direction</span><span className="tag tr">Floral Art</span><span className="tag tp">Creative Expression</span></div>
               </div>
@@ -565,8 +564,8 @@ export default function Home(){
           <div className="card cl" data-d="200">
             <div className="wy"><div className="wdot" style={{background:"var(--lav)"}}/><span style={{color:"var(--lav)"}}>2023 to 2025</span></div>
             <div className="wrole">Middle School Teacher</div><div className="worg">Colégio de São José · Clonlara Program</div>
-            <p className="wdesc">Taught <b>Mathematics and ICT</b> within a personalised learning programme that fostered authenticity, autonomy, and joy in learning.</p>
-            <div className="wtags"><span className="tag tl">Mathematics</span><span className="tag ts">ICT</span><span className="tag tl">Personalised Learning</span></div>
+            <p className="wdesc">Taught <b>Mathematics and Information and Communication Technologies</b> within a personalised learning programme that fostered authenticity, autonomy, and joy in learning.</p>
+            <div className="wtags"><span className="tag tl">Mathematics</span><span className="tag ts">Information and Communication Technologies</span><span className="tag tl">Personalised Learning</span></div>
           </div>
 
           <div className="card ct" data-d="260">
@@ -580,7 +579,7 @@ export default function Home(){
             <div className="wy"><div className="wdot" style={{background:"var(--sky)"}}/><span style={{color:"var(--sky)"}}>2022 to 2023</span></div>
             <div className="wrole">Middle School Teacher</div><div className="worg">Agrupamento de Escolas Dr. Bissaya Barreto</div>
             <p className="wdesc">Taught <b>Information and Communication Technologies</b> in a public school environment.</p>
-            <div className="wtags"><span className="tag ts">ICT</span></div>
+            <div className="wtags"><span className="tag ts">Information and Communication Technologies</span></div>
           </div>
 
           <div className="card cy card-full" data-d="380">
@@ -594,7 +593,6 @@ export default function Home(){
 
       <div className="div-wrap"><div className="div-word rev">Internships</div></div>
       <section className="sec" style={{paddingTop:0}}>
-        <div className="sec-label rev">experience abroad</div>
         <div className="grid2">
           <div className="card cr" data-d="0">
             <div className="wy"><div className="wdot"/>2021 to 2022 · Paris, France</div>
@@ -613,7 +611,6 @@ export default function Home(){
 
       <div className="div-wrap"><div className="div-word rev">Volunteering</div></div>
       <section className="sec" style={{paddingTop:0}}>
-        <div className="sec-label rev">giving back</div>
         <div className="grid2">
           <div className="card card-full card-gold cy" data-d="0">
             <div className="feat-badge" style={{background:"rgba(200,144,10,.12)",border:"1.5px solid rgba(200,144,10,.3)",color:"#8a6000"}}><div className="bdot" style={{background:"#c8900a"}}/>Volunteer</div>
@@ -635,7 +632,6 @@ export default function Home(){
 
       <div className="div-wrap"><div className="div-word rev">Education</div></div>
       <section className="sec" style={{paddingTop:0}}>
-        <div className="sec-label rev">academia</div>
         <div className="edu-tl">
           {[
             {yr:"2016 to 2019",deg:"Bachelor's Degree in Design and Multimedia",sch:"University of Coimbra · Faculty of Sciences and Technology",c:"var(--rose)"},
@@ -655,7 +651,6 @@ export default function Home(){
 
       <div className="div-wrap"><div className="div-word rev">Skills</div></div>
       <section className="sec" style={{paddingTop:0}}>
-        <div className="sec-label rev">toolkit</div>
         {SKILL_SECTIONS.map(section=>(
           <div key={section.label} className="skill-section">
             <div className="skill-section-label rev" style={{"--accent-color":section.color} as React.CSSProperties}>{section.label}</div>
@@ -669,12 +664,11 @@ export default function Home(){
       </section>
 
       <section className="sec">
-        <div className="sec-label rev">communication</div>
         <div className="div-word rev" style={{marginBottom:"40px"}}>Languages</div>
         <div className="lang-grid">
           {[
             {code:"PT",name:"Portuguese",cert:"Native",     w:100,color:"var(--rose)"},
-            {code:"EN",name:"English",   cert:"Native / C2",w:98, color:"var(--sky)"},
+            {code:"EN",name:"English",   cert:"C2",w:98, color:"var(--sky)"},
           ].map((l,i)=>(
             <div key={l.code} className="lang-card" style={{transitionDelay:`${i*.12}s`}}>
               <div className="llevel" style={{color:l.color}}>{l.code}</div>
