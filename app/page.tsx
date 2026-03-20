@@ -613,7 +613,6 @@ export default function Home(){
       <section className="sec" style={{paddingTop:0}}>
         <div className="grid2">
           <div className="card card-full card-gold cy" data-d="0">
-            <div className="feat-badge" style={{background:"rgba(200,144,10,.12)",border:"1.5px solid rgba(200,144,10,.3)",color:"#8a6000"}}><div className="bdot" style={{background:"#c8900a"}}/>Volunteer</div>
             <div className="feat-inner">
               <div>
                 <div className="wy"><div className="wdot" style={{background:"#c8900a"}}/><span style={{color:"#8a6000"}}>2024 · Bulgaria</span></div>
