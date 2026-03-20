@@ -239,7 +239,7 @@ export default function Home(){
       @import url('https://fonts.googleapis.com/css2?family=Boldonse&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Mono:wght@400;500&display=swap');
       :root{--rose:#E8435A;--peach:#F07048;--sun:#F5C430;--sage:#4BAF7E;--teal:#2EBFAC;--sky:#4B9FE0;--lav:#8B6EE8;--ink:#1A1410;--muted:#9A8C88;--textd:rgba(26,20,16,.72);}
       *{margin:0;padding:0;box-sizing:border-box;}
-      html{scroll-behavior:smooth;}
+      html{scroll-behavior:smooth;background:#0a0912;}
       body{background:#0a0912;color:#1A1410;font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;}
       @media(pointer:fine){
         body{cursor:none;}
