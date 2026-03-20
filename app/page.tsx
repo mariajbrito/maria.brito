@@ -284,7 +284,7 @@ export default function Home(){
       .hero-left{position:relative;z-index:10;}
       .status{display:inline-flex;align-items:center;gap:8px;border:1.5px solid rgba(75,175,126,.5);border-radius:100px;padding:7px 18px;font-size:12px;font-family:'DM Mono',monospace;color:#6dcf9e;background:rgba(75,175,126,.15);margin-bottom:24px;animation:fadeUp .8s ease .2s both;}
       .sdot{width:7px;height:7px;background:#6dcf9e;border-radius:50%;animation:blink 2s ease infinite;flex-shrink:0;}
-      .hero-name{font-family:'Boldonse',cursive;font-size:clamp(48px,7.5vw,108px);line-height:1.15;letter-spacing:-2px;color:white;margin-bottom:32px;word-break:break-word;}
+      .hero-name{font-family:'Boldonse',cursive;font-size:clamp(36px,5.8vw,86px);line-height:1.15;letter-spacing:-2px;color:white;margin-bottom:32px;white-space:nowrap;}
       .cursor-blink{display:inline-block;width:.07em;height:.85em;background:var(--rose);margin-left:3px;vertical-align:-.04em;animation:cblink .75s step-end infinite;}
       .cursor-blink.done{animation:none;opacity:0;}
 
@@ -350,6 +350,7 @@ export default function Home(){
       .site-link{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-family:'DM Mono',monospace;color:#2c7a50;background:rgba(75,175,126,.1);border:1.5px solid rgba(75,175,126,.28);border-radius:100px;padding:5px 12px;text-decoration:none;transition:transform .2s;}
       .site-link:hover{transform:translateY(-2px);}
       .flores-vis{width:100px;height:100px;border-radius:20px;background:linear-gradient(135deg,#d4f7e5,#a8edcc);border:1.5px solid rgba(75,175,126,.28);display:flex;align-items:center;justify-content:center;flex-shrink:0;animation:fbounce 5s ease-in-out infinite;}
+      .fbr-vis{width:160px;height:160px;border-radius:18px;overflow:hidden;flex-shrink:0;animation:fbounce 5s ease-in-out infinite;}
       @keyframes fbounce{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-9px) rotate(4deg)}}
       .tech-list{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:7px;}
       .tech-list li{font-size:13px;line-height:1.6;color:var(--textd);padding-left:16px;position:relative;font-weight:400;}
@@ -414,7 +415,7 @@ export default function Home(){
         .hero-bg{min-height:100vh;min-height:100dvh;}
         .hero{grid-template-columns:1fr;min-height:100vh;min-height:100dvh;padding:0 40px;gap:0;display:flex;flex-direction:column;justify-content:center;}
         .hero-right{display:none;}
-        .hero-name{font-size:clamp(44px,9vw,78px);line-height:1.15;margin-bottom:24px;}
+        .hero-name{font-size:clamp(32px,8vw,64px);white-space:nowrap;margin-bottom:24px;}
         .hero-links{gap:8px;}
         .hl{font-size:12px;padding:9px 16px;}
         .sec,.div-wrap{padding:60px 32px;}
@@ -428,7 +429,7 @@ export default function Home(){
       @media(max-width:600px){
         .hero{padding:0 24px;min-height:100vh;min-height:100dvh;}
         .status{font-size:11px;padding:6px 14px;margin-bottom:18px;}
-        .hero-name{font-size:clamp(40px,11.5vw,62px);line-height:1.15;letter-spacing:-1.5px;margin-bottom:22px;}
+        .hero-name{font-size:clamp(28px,9.5vw,52px);white-space:nowrap;line-height:1.15;letter-spacing:-1.5px;margin-bottom:22px;}
         .hero-links{gap:8px;}
         .hl{font-size:11px;padding:8px 14px;}
         .hl-email{display:none;}
@@ -540,9 +541,9 @@ export default function Home(){
                   <li>Uses <b>LLMs (Claude, ChatGPT, Gemini)</b> with advanced prompting techniques to accelerate development and ship production-ready features rapidly.</li>
                   <li>Manages version control with <b>GitHub</b> and automated deployments via <b>Vercel CI/CD</b>.</li>
                 </ul>
-                <div className="wtags"><span className="tag tg">Entrepreneurship</span><span className="tag tt">Web Dev</span><span className="tag tg">AI Prototyping</span><span className="tag ts">GitHub / Vercel</span><span className="tag tg">Creative Direction</span></div>
+                <div className="wtags"><span className="tag tg">Entrepreneurship</span><span className="tag tt">Web Dev</span><span className="tag tg">AI Prototyping</span><span className="tag ts">GitHub / Vercel</span><span className="tag tg">Creative Direction</span><span className="tag tr">Floral Art</span><span className="tag tp">Creative Expression</span></div>
               </div>
-              <div className="flores-vis"><svg viewBox="0 0 60 60" width="56" height="56"><ellipse cx="30" cy="13" rx="8" ry="13" fill="#4BAF7E" opacity=".9"/><ellipse cx="30" cy="13" rx="8" ry="13" fill="#2EBFAC" opacity=".85" transform="rotate(72 30 30)"/><ellipse cx="30" cy="13" rx="8" ry="13" fill="#4BAF7E" opacity=".9" transform="rotate(144 30 30)"/><ellipse cx="30" cy="13" rx="8" ry="13" fill="#2EBFAC" opacity=".85" transform="rotate(216 30 30)"/><ellipse cx="30" cy="13" rx="8" ry="13" fill="#4BAF7E" opacity=".9" transform="rotate(288 30 30)"/><circle cx="30" cy="30" r="8" fill="white" opacity=".9"/><circle cx="30" cy="30" r="4" fill="#F9C846" opacity=".9"/></svg></div>
+              <div className="fbr-vis"><img src="/fbr.webp" alt="Flores à Beira-Rio" style={{width:"100%",height:"100%",objectFit:"cover",borderRadius:18}}/></div>
             </div>
           </div>
 
