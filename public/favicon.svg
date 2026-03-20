@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-32 -32 64 64" width="64" height="64">
+  <!-- 5-petal orange flower (type 2 from the page) -->
+  <ellipse cx="0" cy="-14" rx="12" ry="18" fill="#F07048" transform="rotate(0)"/>
+  <ellipse cx="0" cy="-14" rx="12" ry="18" fill="#E8435A" transform="rotate(72)"/>
+  <ellipse cx="0" cy="-14" rx="12" ry="18" fill="#F07048" transform="rotate(144)"/>
+  <ellipse cx="0" cy="-14" rx="12" ry="18" fill="#E8435A" transform="rotate(216)"/>
+  <ellipse cx="0" cy="-14" rx="12" ry="18" fill="#F07048" transform="rotate(288)"/>
+  <!-- centre -->
+  <circle cx="0" cy="0" r="8" fill="#F9C846"/>
+  <circle cx="0" cy="0" r="4" fill="#c8900a"/>
+</svg>
