@@ -668,7 +668,7 @@ export default function Home(){
         <div className="lang-grid">
           {[
             {code:"PT",name:"Portuguese",cert:"Native",     w:100,color:"var(--rose)"},
-            {code:"EN",name:"English",   cert:"C2",w:98, color:"var(--sky)"},
+            {code:"EN",name:"English",   cert:"Fluent",w:80, color:"var(--sky)"},
           ].map((l,i)=>(
             <div key={l.code} className="lang-card" style={{transitionDelay:`${i*.12}s`}}>
               <div className="llevel" style={{color:l.color}}>{l.code}</div>
