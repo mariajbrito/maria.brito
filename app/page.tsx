@@ -152,7 +152,7 @@ function AmbientFlowers(){
     {type:3,r:50,color:"#4BAF7E",center:"#2c7a50",left:"3%",  top:"820vh",dur:"125s",delay:"-45s"},
     {type:0,r:56,color:"#8B6EE8",center:"#5230c8",left:"91%", top:"840vh",dur:"95s", delay:"-10s"},
   ];
-  return <div style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:0,overflow:"visible"}}>
+  return <div style={{position:"absolute",top:0,left:0,width:"100%",height:"100%",pointerEvents:"none",zIndex:0,overflow:"clip"}}>
     {smalls.map((f,i)=>(
       <div key={i} style={{position:"absolute",left:f.left,top:f.top,transform:"translate(-50%,-50%)",width:f.r*2,height:f.r*2,opacity:.72,animation:`frot ${f.dur} linear infinite`,animationDelay:f.delay}}>
         <FlowerSVG type={f.type} r={f.r} color={f.color} center={f.center}/>
