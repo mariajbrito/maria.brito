@@ -464,6 +464,7 @@ export default function Home(){
       }
     `}</style>
 
+    <head><link rel="icon" type="image/svg+xml" href="/favicon.svg"/></head>
     <div ref={curRef} className="cur"/>
     <div ref={ringRef} className="cur-ring"/>
     <HeroFlowers scrollPct={scrollPct}/>
