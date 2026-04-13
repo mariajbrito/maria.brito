@@ -533,10 +533,11 @@ export default function Home(){
                 <div className="site-links">
                   <a href="https://floresabeirario.pt" target="_blank" rel="noreferrer" className="site-link"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.5"/><path d="M8 4c-1 1.5-1 5 0 8M8 4c1 1.5 1 5 0 8M4 8h8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>floresabeirario.pt</a>
                   <a href="https://status.floresabeirario.pt/N3F8L2Q7T5R9X1KP" target="_blank" rel="noreferrer" className="site-link"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="2" stroke="currentColor" strokeWidth="1.5"/><path d="M5 8h6M5 5.5h6M5 10.5h3" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>Order Tracking Portal</a>
+                  <a href="https://voucher.floresabeirario.pt/A1B2C3" target="_blank" rel="noreferrer" className="site-link"><svg width="12" height="12" viewBox="0 0 16 16" fill="none"><rect x="2" y="5" width="12" height="9" rx="1.5" stroke="currentColor" strokeWidth="1.5"/><path d="M5 5V3.5a3 3 0 0 1 6 0V5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/><path d="M8 9v2M7 10h2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/></svg>Digital Gift Voucher</a>
                 </div>
                 <p className="wdesc">Co-founded a flower preservation company and <b>built its entire digital presence from scratch</b>. Leads creative direction, branding, and all technical development.</p>
                 <ul className="tech-list">
-                  <li><b>Built and deployed</b> the brand website and a custom real-time order tracking portal, managing the full development lifecycle.</li>
+                  <li><b>Built and deployed</b> the brand website, a custom real-time order tracking portal, and a digital gift voucher system, managing the full development lifecycle.</li>
                   <li>Designed <b>backend logic using Google Sheets as a dynamic CMS</b> and integrated Monday.com via automated forms, streamlining lead capture and order management (CRM).</li>
                   <li>Used <b>advanced prompting and LLMs (Claude, Gemini)</b> to accelerate development, ship production-ready features rapidly, and debug complex API interactions.</li>
                   <li>Managed version control with <b>GitHub</b> and automated deployments via <b>Vercel CI/CD</b>.</li>
