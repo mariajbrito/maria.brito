@@ -582,7 +582,7 @@ export default function Home(){
             <div className="wtags"><span className="tag ts">Information and Communication Technologies</span></div>
           </div>
 
-          <div className="card cy card-full" data-d="380">
+          <div className="card cy" data-d="380">
             <div className="wy"><div className="wdot" style={{background:"var(--sun)"}}/><span style={{color:"#8a6000"}}>2017 to 2018</span></div>
             <div className="wrole">Monitor</div><div className="worg">Universidade de Coimbra</div>
             <p className="wdesc">Served as team monitor for <b>a class of 20 students</b> attending a Design and Multimedia summer course. Responsible for schedules, meals, attendance, and providing support throughout the classes.</p>
