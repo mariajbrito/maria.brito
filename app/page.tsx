@@ -695,8 +695,8 @@ export default function Home(){
         &nbsp;&middot;&nbsp;
         <a href="https://floresabeirario.pt" target="_blank" rel="noreferrer" style={{color:"var(--sage)"}}>floresabeirario.pt</a>
       </div>
-      <div style={{marginTop:"52px",fontSize:"11px",fontFamily:"'DM Mono',monospace",color:"rgba(255,255,255,.2)",position:"relative",zIndex:1,lineHeight:2}}>
-        Designed &amp; vibe-coded by Maria Brito &nbsp;&middot;&nbsp; Built with Claude &nbsp;&middot;&nbsp; Deployed on Vercel
+      <div style={{marginTop:"52px",fontSize:"13px",fontFamily:"'DM Mono',monospace",color:"rgba(255,255,255,.65)",position:"relative",zIndex:1,lineHeight:2,letterSpacing:"0.02em"}}>
+        Designed &amp; vibe-coded by <b style={{color:"rgba(255,255,255,.85)"}}>Maria Brito</b> &nbsp;&middot;&nbsp; Built with <b style={{color:"rgba(255,255,255,.85)"}}>Claude</b> &nbsp;&middot;&nbsp; Deployed on <b style={{color:"rgba(255,255,255,.85)"}}>Vercel</b>
       </div>
     </div>
   </>);
