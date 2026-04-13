@@ -301,7 +301,7 @@ export default function Home(){
       .orbit-ring-el{position:absolute;top:50%;left:50%;width:340px;height:340px;margin-left:-170px;margin-top:-190px;border-radius:50%;border:1.5px dashed rgba(255,255,255,.2);pointer-events:none;animation:spinRingA 22s linear infinite;}
       @keyframes spinRingA{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
       .pill-wrap{position:absolute;top:50%;left:50%;width:340px;height:340px;margin-left:-170px;margin-top:-190px;border-radius:50%;animation:spinRingA 22s linear infinite;z-index:20;pointer-events:none;}
-      .opill{position:absolute;background:rgba(10,9,18,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1.5px solid rgba(255,255,255,.2);border-radius:100px;padding:9px 18px;font-size:12px;font-family:'DM Mono',monospace;box-shadow:0 4px 18px rgba(0,0,0,.4);white-space:nowrap;}
+      .opill{position:absolute;background:rgba(10,9,18,.85);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1.5px solid rgba(255,255,255,.2);border-radius:100px;padding:9px 18px;font-size:clamp(10px,1.2vw,12px);font-family:'DM Mono',monospace;box-shadow:0 4px 18px rgba(0,0,0,.4);white-space:nowrap;}
       .opill:nth-child(1){top:-20px;left:50%;transform:translateX(-50%);animation:counterN 22s linear infinite;color:#f87090;border-color:rgba(232,67,90,.45);}
       .opill:nth-child(2){top:50%;right:-30px;transform:translateY(-50%);animation:counterE 22s linear infinite;color:#f0a080;border-color:rgba(240,112,72,.45);}
       .opill:nth-child(3){bottom:-20px;left:50%;transform:translateX(-50%);animation:counterN 22s linear infinite;color:#6dcf9e;border-color:rgba(75,175,126,.45);}
@@ -332,7 +332,7 @@ export default function Home(){
       .sec-label.rev.in{opacity:1;transform:translateY(0);}
 
       .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-      .card{background:rgba(255,255,255,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,.65);border-radius:24px;padding:32px;position:relative;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.07);opacity:0;transform:translateY(28px);transition:border-color .25s,box-shadow .25s,transform .25s;}
+      .card{background:rgba(255,255,255,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1.5px solid rgba(255,255,255,.65);border-radius:24px;padding:32px;position:relative;overflow:hidden;box-shadow:0 4px 28px rgba(0,0,0,.10);opacity:0;transform:translateY(28px);transition:border-color .25s,box-shadow .25s,transform .25s;}
       .card.in{opacity:1;transform:translateY(0);transition:opacity .6s ease,transform .6s ease,border-color .25s,box-shadow .25s;}
       .card:hover{transform:translateY(-5px)!important;box-shadow:0 20px 50px rgba(0,0,0,.1);border-color:rgba(255,255,255,.9);}
       .card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;opacity:0;transition:opacity .25s;border-radius:24px 24px 0 0;}
@@ -684,7 +684,6 @@ export default function Home(){
 
     <div className="contact">
       <div className="c-big rev"><span className="cw1">The</span><span className="cw2">best</span><span className="cw3">projects</span><span className="cw4">start</span><span className="cw5">with</span><span className="cw1">a</span><span className="cw6">conversation.</span></div>
-      <p className="c-sub-text rev" style={{visibility:"hidden"}}>placeholder</p>
       <a href="mailto:mariajgbrito@hotmail.com" className="cbtn rev">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="#0a0912" strokeWidth="1.5"/><path d="M1 5l7 5 7-5" stroke="#0a0912" strokeWidth="1.5"/></svg>
         Let&apos;s talk
