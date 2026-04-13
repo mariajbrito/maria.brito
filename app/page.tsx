@@ -293,7 +293,7 @@ export default function Home(){
       .hl:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3);}
       .hl-email{background:rgba(232,67,90,.75);border:1px solid rgba(232,67,90,.5);color:white;}
       .hl-li{background:rgba(75,159,224,.18);border:1px solid rgba(75,159,224,.35);color:#90c8f8;}
-      .hl-flores{background:rgba(75,175,126,.18);border:1px solid rgba(75,175,126,.35);color:#6dcf9e;}
+      .hl-flores{background:rgba(46,191,172,.15);border:1px solid rgba(46,191,172,.35);color:#2EBFAC;}
       .ico{width:14px;height:14px;flex-shrink:0;display:block;}
 
       .hero-right{position:relative;z-index:10;display:flex;align-items:center;justify-content:center;}
