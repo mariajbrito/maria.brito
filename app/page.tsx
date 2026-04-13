@@ -684,6 +684,7 @@ export default function Home(){
 
     <div className="contact">
       <div className="c-big rev"><span className="cw1">The</span><span className="cw2">best</span><span className="cw3">projects</span><span className="cw4">start</span><span className="cw5">with</span><span className="cw1">a</span><span className="cw6">conversation.</span></div>
+      <p className="c-sub-text rev" style={{visibility:"hidden"}}>placeholder</p>
       <a href="mailto:mariajgbrito@hotmail.com" className="cbtn rev">
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="#0a0912" strokeWidth="1.5"/><path d="M1 5l7 5 7-5" stroke="#0a0912" strokeWidth="1.5"/></svg>
         Let&apos;s talk
