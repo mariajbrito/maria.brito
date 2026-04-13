@@ -291,7 +291,7 @@ export default function Home(){
       .hero-links{display:flex;gap:10px;flex-wrap:wrap;animation:fadeUp .8s ease .35s both;}
       .hl{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:100px;font-size:13px;font-family:'DM Mono',monospace;text-decoration:none;font-weight:500;transition:transform .2s,box-shadow .2s;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);}
       .hl:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.3);}
-      .hl-email{background:rgba(232,67,90,.75);border:1px solid rgba(232,67,90,.5);color:white;}
+      .hl-email{background:rgba(232,67,90,.18);border:1px solid rgba(232,67,90,.35);color:#f87090;}
       .hl-li{background:rgba(75,159,224,.18);border:1px solid rgba(75,159,224,.35);color:#90c8f8;}
       .hl-flores{background:rgba(46,191,172,.15);border:1px solid rgba(46,191,172,.35);color:#2EBFAC;}
       .ico{width:14px;height:14px;flex-shrink:0;display:block;}
