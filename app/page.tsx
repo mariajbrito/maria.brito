@@ -480,7 +480,7 @@ export default function Home(){
             <h1 className="hero-name">{typed}<span className={`cursor-blink${phase==="done"?" done":""}`}/></h1>
             <div className="hero-links">
               <a href="mailto:mariajgbrito@hotmail.com" className="hl hl-email">
-                <svg className="ico" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="white" strokeWidth="1.4"/><path d="M1 5l7 5 7-5" stroke="white" strokeWidth="1.4"/></svg>
+                <svg className="ico" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" strokeWidth="1.4"/><path d="M1 5l7 5 7-5" stroke="currentColor" strokeWidth="1.4"/></svg>
                 mariajgbrito@hotmail.com
               </a>
               <a href="https://www.linkedin.com/in/mariajbrito/" target="_blank" rel="noreferrer" className="hl hl-li">
